@@ -1,13 +1,20 @@
-import './App.css'
+import React from 'react';
+import Header from '../src/components/Header';
+import Home from '../src/pages/Home';
 
-export default function App() {
+// CSS-Dateien korrekt importieren
+import '../src/styles/base.css';
+import '../src/styles/layout.css';
+import '../src/styles/components.css';
+import '../src/styles/Home.css';
+
+function App() {
   return (
-    <div className="container mt-5">
-      <h1 className="text-primary">Bootstrap funktioniert!</h1>
-      <button className="btn btn-success">Test Button</button>
-    </div>
+    <>
+      <Header />
+      <Home />
+    </>
   );
 }
 
-
-
+export default App;
