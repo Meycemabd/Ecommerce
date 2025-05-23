@@ -102,10 +102,69 @@ nav {
 }
 
 .search-input::placeholder {
-  color: #999999; /* Hellgrauer Placeholder */
+  color: #999999; 
 }
 
 .search-input:focus {
   border-color: var(--main-color);
   outline: none;
 }
+
+.carousel-heading {
+  letter-spacing: 3px;
+  color: #e50010;
+  font-family: Arial, sans-serif;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+}
+
+.carousel-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: none;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.carousel-img {
+  object-fit: cover;
+  height: 370px;
+  border-radius: 0;
+  width: 100%;
+}
+
+.carousel-title {
+  font-size: 1rem;
+  color: #111;
+}
+
+.carousel-price {
+  font-size: 0.9rem;
+  color: #6c757d; /* Bootstrap text-muted */
+  margin-bottom: 0.5rem;
+}
+
+.carousel-btn {
+  border: 1px solid #e50010 !important;  /* kräftiges Rot */
+  background-color: transparent;
+  transition: background-color 0.3s, color 0.3s;
+  padding: 0.75rem 2.5rem;     /* größerer Button */
+  font-size: 1.1rem;           /* größere Schrift */
+  font-weight: 600;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;                 /* volle Breite, wenn gewünscht */
+  max-width: 250px;            /* maximale Breite */
+  margin: 0 auto;              /* zentrieren */
+}
+
+.carousel-btn:hover {
+  background-color: #e50010 !important;
+  color: white;
+  border-color: #e50010 !important;
+}
+

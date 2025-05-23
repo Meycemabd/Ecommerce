@@ -1,5 +1,3 @@
-/* Nur minimale Anpassungen */
-
 .slick-prev:before,
 .slick-next:before {
   color: #e50010;
@@ -12,11 +10,10 @@
 }
 
 .slick-slide > div {
-  outline: none; /* Fokus-Rahmen entfernen */
+  outline: none;
 }
 
 .card {
-  cursor: pointer;
   transition: transform 0.3s ease;
   background: #fff;
   border-radius: 0;
@@ -25,9 +22,4 @@
 .card:hover {
   transform: scale(1.03);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.card-img-top {
-  border-radius: 0;
-  width: 100%;
 }

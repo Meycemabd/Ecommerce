@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <header className="main-header">
       <div className="logo-text">
-        <span className="eyou">Eyou Store</span>
+        Eyou Store
       </div>
 
       <nav>
@@ -28,8 +28,8 @@ export default function Header() {
 
           <li>
             <button
-              onClick={() => setSearchOpen((o) => !o)}
-              className="nav-icon btn-icon"
+              onClick={() => setSearchOpen(prev => !prev)}
+              className="nav-icon"
               aria-label={searchOpen ? "Close search" : "Open search"}
             >
               {searchOpen ? <X size={24} strokeWidth={1.5} /> : <Search size={24} strokeWidth={1.5} />}
