@@ -1,21 +1,111 @@
+:root {
+  --main-color: #111111;         /* Schwarz für Text und Icons */
+  --accent-color: #e50010;       /* H&M Rot */
+  --bg-color: #ffffff;           /* Weißer Hintergrund */
+  --border-color: #e0e0e0;       /* Helles Grau für Linien */
+  --hover-scale: 1.1;            /* Hover Skalierung */
+  --transition-speed: 0.2s;
+}
+
+/* Hauptlayout */
 .main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background: white;
-    border-bottom: 1px solid #eee;
-  }
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-  }
-  .nav-links a:hover {
-    text-decoration: underline;
-  }
-  
+  display: flex;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+}
+
+/* Logo */
+.logo-text {
+  font-family: 'Pacifico', cursive;
+  font-size: 32px;
+  color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Navigation */
+nav {
+  flex-grow: 1; 
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: flex-end; /* Icons rechts */
+  width: 100%;
+  transition: justify-content 0.3s ease;
+}
+
+.nav-links.search-active {
+  justify-content: center; /* Icons mittig bei Suche */
+}
+
+.nav-icon {
+  color: var(--main-color);
+  cursor: pointer;
+  transition: 
+    transform var(--transition-speed) ease,
+    color var(--transition-speed) ease;
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+}
+
+/* Hover: Icons werden größer und Stroke dicker */
+.nav-icon:hover svg {
+  stroke-width: 2.5;
+  color: var(--main-color);
+  transform: scale(var(--hover-scale));
+}
+
+/* Suchfeld Container */
+.search-wrapper {
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  transition: max-width 0.4s ease, opacity 0.4s ease;
+  margin-top: 10px;
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Suchfeld Container wenn aktiv */
+.search-wrapper.active {
+  max-width: 400px;
+  opacity: 1;
+}
+
+/* Suchfeld Input */
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 16px;
+  border-radius: 25px;
+  border: 2px solid var(--border-color);
+  font-size: 1rem;
+  outline-offset: 1px;
+  color: var(--main-color);
+  background-color: var(--bg-color);
+  transition: border-color var(--transition-speed) ease;
+}
+
+.search-input::placeholder {
+  color: #999999; /* Hellgrauer Placeholder */
+}
+
+.search-input:focus {
+  border-color: var(--main-color);
+  outline: none;
+}
