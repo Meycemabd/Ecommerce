@@ -1,12 +1,11 @@
 import React from "react";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "../styles/components.css"; 
 import Header from '../components/Header';
 import Carousel from '../components/Carousel';
 import HeroSection from "../components/HeroSection";
 import NewsletterSection from '../components/NewsletterSection';
 import Footer from '../components/Footer';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 
@@ -30,7 +29,6 @@ export default function Home() {
         </h2>
 
         <Carousel />
-        <div style={{ marginTop: '30px' }}></div> {/* Weicher Übergang */}
       </main>
         <NewsletterSection />
         <Footer />

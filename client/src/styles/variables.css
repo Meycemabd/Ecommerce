@@ -1,0 +1,9 @@
+:root {
+    --main-color: #111111;
+    --accent-color: #e50010;
+    --bg-color: #ffffff;
+    --border-color: #e0e0e0;
+    --hover-scale: 1.1;
+    --transition-speed: 0.2s;
+  }
+  

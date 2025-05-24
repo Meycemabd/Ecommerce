@@ -1,0 +1,115 @@
+@import '../../styles/variables.css';
+
+/* Überschrift */
+.carousel-heading {
+  letter-spacing: 3px;
+  color: #e50010;
+  font-family: Arial, sans-serif;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+}
+
+/* Karte - nur Grundstyling, Flexbox durch Bootstrap */
+.carousel-card {
+  border: none;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  /* height: 100%; <-- durch h-100 Bootstrap Klasse */
+}
+
+/* Produktbild */
+.carousel-img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* Produkttitel */
+.carousel-title {
+  font-size: 1rem;
+  color: #111;
+}
+
+/* Preis */
+.carousel-price {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Button Styling */
+.carousel-btn {
+  border: 1px solid #e50010 !important;
+  background-color: transparent;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  /* padding und margin durch Bootstrap Klassen gesteuert */
+}
+
+.carousel-btn:hover {
+  background-color: #e50010 !important;
+  color: white;
+  border-color: #e50010 !important;
+}
+
+/* Benutzerdefinierte Pfeile */
+.custom-arrow {
+  z-index: 11;
+  width: 44px;
+  height: 44px;
+  background-color: #e50010;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  transition: all 0.35s ease-in-out;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.prev-arrow {
+  left: -22px;
+}
+
+.next-arrow {
+  right: -22px;
+}
+
+/* Pfeil-Icons über ::before */
+.custom-arrow::before {
+  color: white !important;
+  font-size: 20px;
+}
+
+/* Hover Effekt für Pfeile */
+.custom-arrow:hover {
+  background-color: #c0000d;
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Slick Dots (Navigationspunkte) */
+.slick-dots li button:before {
+  font-size: 12px;
+  color: #e50010 !important; /* rote Farbe */
+}
+
+.slick-dots li.slick-active button:before {
+  color: #a00008 !important; /* dunklerer Rotton für aktiven Punkt */
+}
+
+/* Pfeile keine Standard-Link-Stile oder Listenpunkte */
+.slick-arrow {
+  text-decoration: none !important;
+  list-style: none !important;
+  outline: none;
+  border: none;
+}
