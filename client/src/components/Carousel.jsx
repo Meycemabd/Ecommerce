@@ -7,21 +7,25 @@ export default function Carousel() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 400,
+    speed: 600, // ⬅️ weicher durch längere Dauer
     slidesToShow: 4,
     slidesToScroll: 1,
+    centerMode: true, // ⬅️ zentriert
+    centerPadding: "50px", // ⬅️ Abstand links & rechts
     responsive: [
-      { breakpoint: 1200, settings: { slidesToShow: 3 } },
-      { breakpoint: 992, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 1 } },
+      { breakpoint: 1200, settings: { slidesToShow: 2 } },
+      { breakpoint: 768, settings: { slidesToShow: 1, centerPadding: "0px" } }
     ],
     arrows: true,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 3500,
     pauseOnHover: true,
+    cssEase: "ease-in-out" 
   };
+  
 
   return (
+    
     <Slider {...settings}>
       {products.map(({ id, name, price, image }) => (
         <div key={id} className="px-3">

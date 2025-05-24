@@ -8,14 +8,21 @@
 }
 
 /* Hauptlayout */
+
 .main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: white;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+  padding: 1rem 2rem;
   display: flex;
   align-items: center;
-  padding: 16px 40px;
-  background-color: var(--bg-color);
-  border-bottom: 1px solid var(--border-color);
-  position: relative;
+  justify-content: space-between;
 }
+
 
 /* Logo */
 .logo-text {
@@ -143,23 +150,22 @@ nav {
 
 .carousel-price {
   font-size: 0.9rem;
-  color: #6c757d; /* Bootstrap text-muted */
   margin-bottom: 0.5rem;
 }
 
 .carousel-btn {
-  border: 1px solid #e50010 !important;  /* kräftiges Rot */
+  border: 1px solid #e50010 !important;  
   background-color: transparent;
   transition: background-color 0.3s, color 0.3s;
-  padding: 0.75rem 2.5rem;     /* größerer Button */
-  font-size: 1.1rem;           /* größere Schrift */
+  padding: 0.75rem 2.5rem;     
+  font-size: 1.1rem;           
   font-weight: 600;
   border-radius: 0.3rem;
   cursor: pointer;
   display: inline-block;
-  width: 100%;                 /* volle Breite, wenn gewünscht */
-  max-width: 250px;            /* maximale Breite */
-  margin: 0 auto;              /* zentrieren */
+  width: 100%;                 
+  max-width: 250px;            
+  margin: 0 auto;              
 }
 
 .carousel-btn:hover {
@@ -168,3 +174,157 @@ nav {
   border-color: #e50010 !important;
 }
 
+.hero-video-container {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Höhe je nach Wunsch */
+  overflow: hidden;
+}
+
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6); /* macht Video dunkler für bessere Lesbarkeit */
+}
+
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #e50010; /* Hier die Farbe geändert */
+  text-align: center;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+
+.hero-text h1 {
+  font-size: 4rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero-text p {
+  font-size: 1.3rem;
+  margin-top: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.newsletter {
+  background-color: #f9f9f9;
+  padding: 60px 20px;
+  margin-top: 3px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.newsletter h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.newsletter p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.newsletter-form input[type="email"] {
+  padding: 12px 20px;
+  font-size: 1rem;
+  width: 300px;
+  max-width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.newsletter-form button {
+  padding: 12px 24px;
+  background-color: black;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+}
+
+.newsletter-form button:hover {
+  background-color: #444;
+}
+.footer {
+  background-color: #f7f7f7; /* Hell wie bei Zara */
+  color: #333;
+  padding: 60px 80px 40px;
+  width: 100%;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1 1 200px;
+  margin: 20px;
+}
+
+.footer-section h4 {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  color: #111;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: 8px;
+  cursor: pointer;
+  color: #666;
+}
+
+.footer-section li:hover {
+  text-decoration: underline;
+  color: #000;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 40px;
+  font-size: 12px;
+  color: #aaa;
+  border-top: 1px solid #ddd;
+  margin-top: 40px;
+}
