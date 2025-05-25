@@ -1,0 +1,42 @@
+@import '../componentCSS/Carousel.css';
+
+
+
+.products-title {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .product-card {
+    transition: transform 0.3s ease;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .product-img {
+    height: 420px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+  
+  .product-name {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .product-price {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #e50010;
+  }
+  
