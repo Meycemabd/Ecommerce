@@ -47,9 +47,8 @@ export default function Carousel() {
             <div className="card-body text-center px-0 pt-3">
               <h5 className="carousel-title card-title fw-normal">{name}</h5>
               <p className="carousel-price">{`$${price.toFixed(2)}`}</p>
-              <button className="carousel-btn btn btn-outline-dark btn-sm mt-2 w-100 mx-auto">
-                Buy Now
-              </button>
+              <button className="btn carousel-btn">Shop now</button>
+
             </div>
           </div>
         </div>

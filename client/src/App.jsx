@@ -1,21 +1,25 @@
-import React from 'react';
-import Home from '../src/pages/Home';
-import  '../src/index.css'
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import './index.css';
+
+// Seiten & Komponenten
+import Home from './pages/Home';
 import ProductsPage from './pages/ProductsPage';
-
-
-
-// CSS-Dateien 
+import Header from './components/Header';
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState("");
+
   return (
     <>
-      
-      {/* {<Home />} */}
-      {<ProductsPage />}
+      <Header setSearchQuery={setSearchQuery} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductsPage searchQuery={searchQuery} />} />
+      </Routes>
     </>
   );
 }

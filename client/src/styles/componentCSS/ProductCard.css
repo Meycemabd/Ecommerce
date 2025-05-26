@@ -1,42 +1,82 @@
-@import '../componentCSS/Carousel.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import '../../styles/variables.css';
 
+/* Überschrift */
+.ProductsPage-heading {
+  font-size: 2rem;
+  color: #e50010;
+  text-align: center;
+  padding-top: 120px; /* Abstand zur Navbar */
+  margin-bottom: 3rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
 
+/* Karte */
+.carousel-card {
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 4px;
+}
 
-.products-title {
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 2rem;
-    font-weight: 300;
-    margin-bottom: 3rem;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .product-card {
-    transition: transform 0.3s ease;
-  }
-  
-  .product-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .product-img {
-    height: 420px;
-    object-fit: cover;
-    border-radius: 0.5rem;
-  }
-  
-  .product-name {
-    font-size: 1rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .product-price {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #e50010;
-  }
-  
+.carousel-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Bild */
+.carousel-img {
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border-radius: 2px;
+}
+
+.carousel-card:hover .carousel-img {
+  transform: scale(1.03);
+}
+
+/* Titel */
+.carousel-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  color: #111;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+  min-height: 2.2rem;
+}
+
+/* Preis */
+.carousel-price {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  color: #444;
+  margin-bottom: 0.8rem;
+}
+
+/* Button */
+.carousel-btn {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;              /* nicht fett */
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #e50010;
+  transition: all 0.3s ease;
+  padding: 0.4rem 1rem;
+  border-radius: 2px;            /* minimal */
+  text-transform: uppercase;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.carousel-btn:hover {
+  background-color: #e50010;
+  color: white;
+  border-color: #e50010;
+}

@@ -1,59 +1,83 @@
 @import '../../styles/variables.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
 
 /* Überschrift */
 .carousel-heading {
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   color: #e50010;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  text-align: center;
   margin-bottom: 3rem;
   text-transform: uppercase;
   font-weight: 300;
-  text-align: center;
 }
 
-/* Karte - nur Grundstyling, Flexbox durch Bootstrap */
+/* Produktkarte */
 .carousel-card {
   border: none;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  /* height: 100%; <-- durch h-100 Bootstrap Klasse */
+  background-color: white;
+  padding: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+  border-radius: 4px;
+}
+
+.carousel-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* Produktbild */
 .carousel-img {
   width: 100%;
-  height: 450px;
+  height: 330px;
   object-fit: cover;
   transition: transform 0.3s ease;
+  border-radius: 2px;
+}
+
+.carousel-card:hover .carousel-img {
+  transform: scale(1.03);
 }
 
 /* Produkttitel */
 .carousel-title {
-  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
   color: #111;
+  margin-bottom: 0.4rem;
+  min-height: 2.2rem;
 }
 
 /* Preis */
 .carousel-price {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  color: #444;
+  margin-bottom: 0.8rem;
 }
 
-/* Button Styling */
+/* Neuer H&M/Zara-Stil für Button */
 .carousel-btn {
-  border: 1px solid #e50010 !important;
-  background-color: transparent;
-  transition: background-color 0.4s ease, color 0.4s ease;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  /* padding und margin durch Bootstrap Klassen gesteuert */
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: black;
+  background-color: white;
+  border: 1px solid #e50010;
+  border-radius: 3px;
+  text-transform: uppercase;
+  width: 50%;
+  margin: 0 auto;
+  padding: 0.4rem 1rem;
+  transition: all 0.3s ease;
 }
 
 .carousel-btn:hover {
-  background-color: #e50010 !important;
+  background-color: #e50010;
   color: white;
-  border-color: #e50010 !important;
+  border-color: #e50010;
 }
 
 /* Benutzerdefinierte Pfeile */
@@ -83,30 +107,28 @@
   right: -22px;
 }
 
-/* Pfeil-Icons über ::before */
 .custom-arrow::before {
   color: white !important;
   font-size: 20px;
 }
 
-/* Hover Effekt für Pfeile */
 .custom-arrow:hover {
   background-color: #c0000d;
   opacity: 1;
   transform: translateY(-50%) scale(1.1);
 }
 
-/* Slick Dots (Navigationspunkte) */
+/* Slick Dots */
 .slick-dots li button:before {
   font-size: 12px;
-  color: #e50010 !important; /* rote Farbe */
+  color: #e50010 !important;
 }
 
 .slick-dots li.slick-active button:before {
-  color: #a00008 !important; /* dunklerer Rotton für aktiven Punkt */
+  color: #a00008 !important;
 }
 
-/* Pfeile keine Standard-Link-Stile oder Listenpunkte */
+/* Slick Pfeile: keine Deko */
 .slick-arrow {
   text-decoration: none !important;
   list-style: none !important;

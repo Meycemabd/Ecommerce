@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Home, ShoppingBag, Search, User, X } from 'lucide-react';
 import "../styles/componentCSS/Header.css";
 
-export default function Header() {
+export default function Header({ setSearchQuery }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const inputRef = useRef(null);
 
@@ -11,6 +11,10 @@ export default function Header() {
       inputRef.current.focus();
     }
   }, [searchOpen]);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
   return (
     <header className="main-header d-flex justify-content-between align-items-center px-4 py-3 shadow-sm bg-white fixed-top">
@@ -56,6 +60,7 @@ export default function Header() {
           placeholder="Search products..."
           ref={inputRef}
           className="search-input form-control"
+          onChange={handleSearchChange}
           aria-label="Search products"
         />
       </div>

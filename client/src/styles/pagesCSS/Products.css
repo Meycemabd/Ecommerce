@@ -1,19 +1,10 @@
-.products-page {
-    padding: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .products-heading {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 30px;
-    font-family: 'Helvetica Neue', sans-serif;
-  }
-  
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px;
-  }
-  
+.ProductsPage-heading {
+  font-size: 2rem;
+  color: #e50010;
+  text-align: center;
+  padding-top: 100px; /* vorher: 80px */
+  position: relative;
+  font-weight: 100;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
