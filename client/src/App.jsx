@@ -9,6 +9,7 @@ import './index.css';
 import Home from './pages/Home';
 import ProductsPage from './pages/ProductsPage';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductsPage searchQuery={searchQuery} />} />
       </Routes>
+      <Footer/>
     </>
   );
 }
