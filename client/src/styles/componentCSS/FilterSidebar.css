@@ -1,0 +1,51 @@
+.filter-sidebar {
+    position: sticky;
+    top: 120px; 
+    height: calc(100vh - 90px); 
+    padding: 1.5rem;
+    background-color: white;
+    color: #333;
+    font-family: Arial, sans-serif;
+    border-right: 1px solid #eee;
+    overflow-y: auto;
+  }
+  
+  .filter-sidebar h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .filter-sidebar .highlight {
+    font-weight: bold;
+    color: black;
+  }
+  
+  .filter-sidebar .filter-section h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+  
+  .filter-sidebar ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .filter-sidebar li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .filter-sidebar input[type="checkbox"] {
+    accent-color: black;
+    transform: scale(1.2);
+  }
+  
+  .filter-sidebar label {
+    font-size: 1.05rem;
+    cursor: pointer;
+  }
+  

@@ -1,0 +1,8 @@
+/* src/styles/pagesCSS/Products.css */
+.products-page {
+    padding-top: 120px; /* Abstand zur Navbar */
+  }
+.products-page .row {
+    min-height: 100vh;
+  }
+   

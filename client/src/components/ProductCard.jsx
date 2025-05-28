@@ -4,15 +4,16 @@ import "../styles/componentCSS/ProductCard.css";
 
 export default function ProductCard({ product }) {
   return (
-    <div className="card product-card border-0">
+    <div className="card carousel-card d-flex flex-column justify-content-between h-100">
       <img
         src={product.image}
-        className="card-img-top img-fluid"
         alt={product.title}
+        className="carousel-img card-img-top"
       />
-      <div className="card-body text-center">
-        <h6 className="product-title">{product.title}</h6>
-        <p className="product-price">${product.price.toFixed(2)}</p>
+      <div className="card-body text-center px-0 pt-3">
+        <h5 className="carousel-title card-title fw-normal">{product.title.split(" ").slice(0, 3).join(" ")}</h5>
+        <p className="carousel-price">${product.price.toFixed(2)}</p>
+        <button className="btn carousel-btn">Add to Bag</button>
       </div>
     </div>
   );

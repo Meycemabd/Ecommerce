@@ -1,0 +1,39 @@
+.sort-dropdown {
+    gap: 10px;
+  }
+  
+  .custom-sort-select {
+    width: 180px;
+    border-radius: 0;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+    transition: border-color 0.3s;
+  }
+  
+  .custom-sort-select:focus {
+    border-color: #e50010; 
+    .sort-dropdown {
+        gap: 10px;
+      }
+      
+      .custom-sort-select {
+        width: 180px;
+        border-radius: 0;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        font-size: 14px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #333;
+        transition: border-color 0.3s;
+      }
+      
+      .custom-sort-select:focus {
+        border-color: #e50010; /* H&M-Rot */
+        box-shadow: none;
+      }
+      
+  }
+  

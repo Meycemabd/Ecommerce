@@ -2,19 +2,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-// ✅ Korrekte Importe der Komponenten (nicht CSS!)
 import FilterSidebar from "../components/FilterSidebar";
 import SortDropdown from "../components/SortDropDown";
 import ProductList from "../components/ProductList";
 
-// ✅ Optional: CSS separat
 import "../styles/pagesCSS/Products.css";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [sortOrder, setSortOrder] = useState("newest");
 
   useEffect(() => {
@@ -29,8 +27,8 @@ export default function ProductsPage() {
   useEffect(() => {
     let result = [...products];
 
-    if (selectedCategory) {
-      result = result.filter((p) => p.category === selectedCategory);
+    if (selectedCategories.length > 0) {
+      result = result.filter((p) => selectedCategories.includes(p.category));
     }
 
     if (sortOrder === "price-asc") {
@@ -40,10 +38,14 @@ export default function ProductsPage() {
     }
 
     setFilteredProducts(result);
-  }, [selectedCategory, sortOrder, products]);
+  }, [selectedCategories, sortOrder, products]);
 
   const handleFilterChange = (category) => {
-    setSelectedCategory(category === selectedCategory ? null : category);
+    setSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((cat) => cat !== category)
+        : [...prev, category]
+    );
   };
 
   const handleSortChange = (order) => {
@@ -53,20 +55,42 @@ export default function ProductsPage() {
   return (
     <div className="products-page container-fluid px-4">
       <div className="row">
-        <div className="col-md-3">
-          <FilterSidebar
-            categories={categories}
-            onFilterChange={handleFilterChange}
-          />
-        </div>
-        <div className="col-md-9">
-          <div className="products-header d-flex justify-content-between align-items-center mb-3">
-            <h2 className="products-title">All Products</h2>
-            <SortDropdown onSortChange={handleSortChange} />
-          </div>
-          <ProductList products={filteredProducts} />
-        </div>
+  <div className="col-md-2">
+    <FilterSidebar
+      categories={categories}
+      selectedCategories={selectedCategories}
+      onFilterChange={handleFilterChange}
+    />
+  </div>
+  <div className="col-md-10">
+    <div className="products-header position-relative mb-5">
+      <h2
+        className="text-center text-uppercase fw-light mx-auto"
+        style={{
+          letterSpacing: "3px",
+          color: "#e50010",
+          fontFamily: "Arial, sans-serif",
+          width: "100%",
+        }}
+      >
+        New Arrivals
+      </h2>
+
+      <div
+        className="position-absolute"
+        style={{
+          top: "0",
+          right: "0",
+        }}
+      >
+        <SortDropdown onSortChange={handleSortChange} />
       </div>
+    </div>
+
+    <ProductList products={filteredProducts} />
+  </div>
+</div>
+
     </div>
   );
 }
