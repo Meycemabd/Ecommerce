@@ -6,7 +6,7 @@
   font-size: 2rem;
   color: #e50010;
   text-align: center;
-  padding-top: 120px; /* Abstand zur Navbar */
+  padding-top: 100px; /* Abstand zur Navbar */
   margin-bottom: 3rem;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
@@ -63,13 +63,13 @@
 .carousel-btn {
   font-family: 'Poppins', sans-serif;
   font-size: 0.85rem;
-  font-weight: 400;              /* nicht fett */
+  font-weight: 400;             
   color: #000;
   background-color: #fff;
   border: 1px solid #e50010;
   transition: all 0.3s ease;
   padding: 0.4rem 1rem;
-  border-radius: 2px;            /* minimal */
+  border-radius: 2px;            
   text-transform: uppercase;
   width: 50%;
   margin: 0 auto;

@@ -1,0 +1,16 @@
+
+.container {
+    font-family: Arial, sans-serif;
+  }
+  
+  h2 {
+    font-weight: 400;
+    font-size: 24px;
+  }
+  
+  button.btn-dark {
+    background-color: #111;
+    border-radius: 0;
+    padding: 10px 20px;
+  }
+  
