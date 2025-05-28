@@ -41,7 +41,7 @@ export default function Header({ setSearchQuery }) {
           </li>
 
           <li className="mx-3">
-            <a href="" className="nav-icon text-decoration-none" aria-label="Products">
+            <a href="/" className="nav-icon text-decoration-none" aria-label="Products">
               <ShoppingBag size={24} strokeWidth={1.5} />
             </a>
           </li>
