@@ -11,8 +11,6 @@ export default function Footer() {
             <ul className="list-unstyled">
               <li className="mb-2 footer-link">Contact</li>
               <li className="mb-2 footer-link">FAQ</li>
-              <li className="mb-2 footer-link">Return Policy</li>
-              <li className="mb-2 footer-link">Shipping</li>
             </ul>
           </div>
 
@@ -20,8 +18,6 @@ export default function Footer() {
             <h5 className="text-uppercase fw-semibold">About</h5>
             <ul className="list-unstyled">
               <li className="mb-2 footer-link">Our Story</li>
-              <li className="mb-2 footer-link">Careers</li>
-              <li className="mb-2 footer-link">Sustainability</li>
             </ul>
           </div>
 
@@ -30,7 +26,6 @@ export default function Footer() {
             <ul className="list-unstyled">
               <li className="mb-2 footer-link">Terms & Conditions</li>
               <li className="mb-2 footer-link">Privacy Policy</li>
-              <li className="mb-2 footer-link">Cookies</li>
             </ul>
           </div>
         </div>
