@@ -19,13 +19,13 @@ export default function Header({ setSearchQuery }) {
   return (
     <header className="main-header d-flex justify-content-between align-items-center px-4 py-3 shadow-sm bg-white fixed-top">
       <div className="logo-text">
-        Eyou Store
+       <a href="/">Eyou Store</a>
       </div>
 
       <nav className="flex-grow-1">
         <ul className={`nav-links list-unstyled d-flex align-items-center mb-0 ${searchOpen ? 'search-active justify-content-center' : 'justify-content-end'}`}>
           <li className="mx-3">
-            <a href="/" className="nav-icon text-decoration-none" aria-label="Home">
+            <a href="/products" className="nav-icon text-decoration-none" aria-label="Home">
               <Home size={24} strokeWidth={1.5} />
             </a>
           </li>
@@ -41,7 +41,7 @@ export default function Header({ setSearchQuery }) {
           </li>
 
           <li className="mx-3">
-            <a href="/products" className="nav-icon text-decoration-none" aria-label="Products">
+            <a href="" className="nav-icon text-decoration-none" aria-label="Products">
               <ShoppingBag size={24} strokeWidth={1.5} />
             </a>
           </li>
