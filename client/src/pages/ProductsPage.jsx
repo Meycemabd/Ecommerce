@@ -5,6 +5,7 @@ import axios from "axios";
 import FilterSidebar from "../components/FilterSidebar";
 import SortDropdown from "../components/SortDropDown";
 import ProductList from "../components/ProductList";
+import Header from "../components/Header";
 
 import "../styles/pagesCSS/Products.css";
 
@@ -14,6 +15,7 @@ export default function ProductsPage() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [sortOrder, setSortOrder] = useState("newest");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     axios.get("https://fakestoreapi.com/products").then((res) => {
@@ -27,10 +29,19 @@ export default function ProductsPage() {
   useEffect(() => {
     let result = [...products];
 
+    // Filter nach Kategorie
     if (selectedCategories.length > 0) {
       result = result.filter((p) => selectedCategories.includes(p.category));
     }
 
+    // Filter nach Suchbegriff
+    if (searchQuery.trim() !== "") {
+      result = result.filter((p) =>
+        p.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Sortierung
     if (sortOrder === "price-asc") {
       result.sort((a, b) => a.price - b.price);
     } else if (sortOrder === "price-desc") {
@@ -38,7 +49,7 @@ export default function ProductsPage() {
     }
 
     setFilteredProducts(result);
-  }, [selectedCategories, sortOrder, products]);
+  }, [selectedCategories, sortOrder, searchQuery, products]);
 
   const handleFilterChange = (category) => {
     setSelectedCategories((prev) =>
@@ -53,44 +64,40 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="products-page container-fluid px-4">
-      <div className="row">
-  <div className="col-md-2">
-    <FilterSidebar
-      categories={categories}
-      selectedCategories={selectedCategories}
-      onFilterChange={handleFilterChange}
-    />
-  </div>
-  <div className="col-md-10">
-    <div className="products-header position-relative mb-5">
-      <h2
-        className="text-center text-uppercase fw-light mx-auto"
-        style={{
-          letterSpacing: "3px",
-          color: "#e50010",
-          fontFamily: "Arial, sans-serif",
-          width: "100%",
-        }}
-      >
-        New Arrivals
-      </h2>
+    <>
+      <Header setSearchQuery={setSearchQuery} />
+      <div className="products-page container-fluid px-4">
+        <div className="row">
+          <div className="col-md-2">
+            <FilterSidebar
+              categories={categories}
+              selectedCategories={selectedCategories}
+              onFilterChange={handleFilterChange}
+              searchQuery={searchQuery} // ← Neu!
+            />
+          </div>
+          <div className="col-md-10">
+            <div className="products-header position-relative mb-5">
+              <h2
+                className="text-center text-uppercase fw-light mx-auto"
+                style={{
+                  letterSpacing: "3px",
+                  color: "#e50010",
+                  fontFamily: "Arial, sans-serif",
+                  width: "100%",
+                }}
+              >
+                New Arrivals
+              </h2>
+              <div className="position-absolute" style={{ top: "0", right: "0" }}>
+                <SortDropdown onSortChange={handleSortChange} />
+              </div>
+            </div>
 
-      <div
-        className="position-absolute"
-        style={{
-          top: "0",
-          right: "0",
-        }}
-      >
-        <SortDropdown onSortChange={handleSortChange} />
+            <ProductList products={filteredProducts} />
+          </div>
+        </div>
       </div>
-    </div>
-
-    <ProductList products={filteredProducts} />
-  </div>
-</div>
-
-    </div>
+    </>
   );
 }

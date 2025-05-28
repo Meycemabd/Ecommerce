@@ -2,11 +2,19 @@
 import React from "react";
 import "../styles/componentCSS/FilterSidebar.css";
 
-const FilterSidebar = ({ categories = [], selectedCategories = [], onFilterChange }) => {
+const FilterSidebar = ({
+  categories = [],
+  selectedCategories = [],
+  onFilterChange,
+  searchQuery = "",
+}) => {
   return (
     <aside className="filter-sidebar">
       <h2>
-        Search results for: <span className="highlight">Bluetooth</span>
+        Search results for:{" "}
+        <span className="highlight">
+          {searchQuery.trim() ? searchQuery : "All Products"}
+        </span>
       </h2>
 
       <div className="filter-section">

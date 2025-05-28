@@ -1,7 +1,7 @@
 .filter-sidebar {
     position: sticky;
     top: 120px; 
-    height: calc(100vh - 90px); 
+    height: fit-content;
     padding: 1.5rem;
     background-color: white;
     color: #333;
@@ -49,3 +49,8 @@
     cursor: pointer;
   }
   
+  .position-sticky {
+    position: sticky;
+    top: 100px;
+    z-index: 1;
+  }
