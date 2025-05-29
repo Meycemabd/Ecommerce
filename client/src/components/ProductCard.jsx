@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import "../styles/componentCSS/ProductCard.css";
 
 export default function ProductCard({ product }) {
-  const navigate = useNavigate(); // ← hinzufügen
+  const navigate = useNavigate(); 
 
   const handleCardClick = () => {
-    navigate(`/product/${product.id}`); // ← Zielseite
+    navigate(`/product/${product.id}`); 
   };
 
   return (
@@ -30,7 +30,7 @@ export default function ProductCard({ product }) {
         <button
           className="btn carousel-btn"
           onClick={(e) => {
-            e.stopPropagation(); 
+            e.stopPropagation(); // verhindert doppelte Navigation
             navigate(`/product/${product.id}`);
           }}
         >

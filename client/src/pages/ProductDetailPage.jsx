@@ -6,46 +6,57 @@ import "../styles/pagesCSS/ProductDetailPage.css";
 export default function ProductDetailPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    console.log("Geladene Produkt-ID:", id); // Debug-Ausgabe
+
     axios
       .get(`https://fakestoreapi.com/products/${id}`)
       .then((res) => setProduct(res.data))
-      .catch((err) => console.error("Fehler beim Laden des Produkts:", err));
+      .catch((err) => {
+        console.error("Fehler beim Laden des Produkts:", err);
+        setError("Produkt konnte nicht geladen werden.");
+      });
   }, [id]);
 
-  if (!product) return <p className="text-center mt-5">Loading product...</p>;
+  if (error) {
+    return <p className="text-center mt-5 text-danger">{error}</p>;
+  }
+
+  if (!product) {
+    return <p className="text-center mt-5">Loading product...</p>;
+  }
+
+  const rating = product.rating || { rate: 0, count: 0 };
 
   return (
     <div className="container product-detail-page">
       <div className="row">
-        {/* Linke Seite: Hauptbild */}
+        {/* Linke Seite: Bild */}
         <div className="col-md-6 text-center mb-4">
           <img
             src={product.image}
             alt={product.title}
             className="main-image"
+            onError={(e) =>
+              (e.target.src = "https://via.placeholder.com/300?text=No+Image")
+            }
           />
-          {/* Galerie Platzhalter (kann später hinzugefügt werden) */}
-          {/* <div className="thumbnail-gallery">
-            <img src={product.image} className="thumbnail" alt="thumb" />
-          </div> */}
         </div>
 
-        {/* Rechte Seite: Produktinfos */}
+        {/* Rechte Seite */}
         <div className="col-md-6">
           <h1 className="title">{product.title}</h1>
 
           {/* Bewertung */}
           <div className="rating mb-2">
-            {"★".repeat(Math.round(product.rating?.rate || 0)) +
-              "☆".repeat(5 - Math.round(product.rating?.rate || 0))}
-            <span className="review-count">
-              ({product.rating?.count} reviews)
-            </span>
+            {"★".repeat(Math.round(rating.rate)) +
+              "☆".repeat(5 - Math.round(rating.rate))}
+            <span className="review-count"> ({rating.count} reviews)</span>
           </div>
 
-          {/* Preisbereich */}
+          {/* Preis */}
           <div className="price-section">
             <span className="new-price">${product.price}</span>
             <span className="old-price">$399.99</span>
@@ -55,13 +66,8 @@ export default function ProductDetailPage() {
           {/* Beschreibung */}
           <p className="description">{product.description}</p>
 
-          {/* Farbauswahl */}
-          <div className="color-selection">
-            <p>Color</p>
-            <button className="color-btn selected">Silver</button>
-          </div>
 
-          {/* Mengenauswahl */}
+          {/* Menge */}
           <div className="quantity-selection mt-3">
             <label htmlFor="quantity">Quantity:</label>
             <select id="quantity">
@@ -77,9 +83,9 @@ export default function ProductDetailPage() {
 
           {/* Vorteile */}
           <ul className="advantages mt-4">
-            <li>✓ Free shipping on orders over $50</li>
-            <li>✓ 30-day return policy</li>
-            <li>✓ 2-year warranty</li>
+            <li> Free shipping on orders over $50</li>
+            <li> 30-day return policy</li>
+            <li> 2-year warranty</li>
           </ul>
         </div>
       </div>

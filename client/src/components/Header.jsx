@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Home, ShoppingBag, Search, User, X } from 'lucide-react';
+import { Home, ShoppingBag, Search, User, X , Heart} from 'lucide-react';
 import "../styles/componentCSS/Header.css";
 
 export default function Header({ setSearchQuery }) {
@@ -39,19 +39,26 @@ export default function Header({ setSearchQuery }) {
               {searchOpen ? <X size={24} strokeWidth={1.5} /> : <Search size={24} strokeWidth={1.5} />}
             </button>
           </li>
+          
+          <li className="mx-3">
+            <a href="/login" className="nav-icon text-decoration-none" aria-label="Login">
+              <User size={24} strokeWidth={1.5} />
+            </a>
+          </li>
+
+          <li className="mx-3">
+            <a href="/favorites" className="nav-icon text-decoration-none" aria-label="Favorites">
+            <Heart size={24} strokeWidth={1.5} />
+            </a>
+          </li>
 
           <li className="mx-3">
           <a href="/product/2" className="nav-icon text-decoration-none" aria-label="Products">
           <ShoppingBag size={24} strokeWidth={1.5} />
             </a>
           </li>
-
-          <li className="mx-3">
-            <a href="/login" className="nav-icon text-decoration-none" aria-label="Login">
-              <User size={24} strokeWidth={1.5} />
-            </a>
-          </li>
         </ul>
+
       </nav>
 
       <div className={`search-wrapper ${searchOpen ? 'active' : ''}`}>
