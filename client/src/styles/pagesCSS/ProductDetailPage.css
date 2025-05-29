@@ -98,7 +98,7 @@
   color: #fff;
 }
 
-/* ♡ Add to Wishlist Button – Zara-Stil */
+
 .wishlist-btn {
   width: 100%;
   padding: 14px 0;
@@ -120,7 +120,7 @@
 
 
 .wishlist-btn:hover {
-  background-color: #e60023;
+  background-color: #dd5469;
   color: white;
 }
 
