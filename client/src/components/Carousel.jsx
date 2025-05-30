@@ -1,6 +1,9 @@
-import React from "react";
+// src/components/Carousel.jsx
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import products from "../data/data";
+import { Link } from "react-router-dom";
+import axios from "axios";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/componentCSS/Carousel.css";
@@ -16,6 +19,15 @@ function PrevArrow(props) {
 }
 
 export default function Carousel() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://fakestoreapi.com/products")
+      .then((res) => setProducts(res.data))
+      .catch((err) => console.error("Fehler beim Laden der Produkte:", err));
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -39,18 +51,25 @@ export default function Carousel() {
 
   return (
     <Slider {...settings}>
-      {products.map(({ id, name, price, image }) => (
+      {products.map(({ id, title, price, image }) => (
         <div key={id} className="px-3">
-          {/* Bootstrap Utility Classes für Flex-Layout benutzen */}
-          <div className="carousel-card card d-flex flex-column justify-content-between h-100">
-            <img src={image} alt={name} className="carousel-img card-img-top" />
-            <div className="card-body text-center px-0 pt-3">
-              <h5 className="carousel-title card-title fw-normal">{name}</h5>
-              <p className="carousel-price">{`$${price.toFixed(2)}`}</p>
-              <button className="btn carousel-btn">Shop now</button>
-
+          <Link to={`/product/${id}`} className="text-decoration-none text-dark">
+            <div className="carousel-card card d-flex flex-column justify-content-between h-100">
+              <img
+                src={image}
+                alt={title}
+                className="carousel-img card-img-top"
+                onError={(e) =>
+                  (e.target.src = "https://via.placeholder.com/300?text=No+Image")
+                }
+              />
+              <div className="card-body text-center px-0 pt-3">
+                <h5 className="carousel-title card-title fw-normal">{title}</h5>
+                <p className="carousel-price">{`$${price.toFixed(2)}`}</p>
+                <button className="btn carousel-btn">Shop now</button>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       ))}
     </Slider>
