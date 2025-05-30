@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-light text-dark pt-5 pb-4">
       <div className="container">
-        <div className="row justify-content-center text-center text-md-start">
+        <div className="row justify-content-center text-center text-md-start" style={{padding: "40px" }}>
           <div className="col-12 col-md-4 mb-4">
             <h5 className="text-uppercase fw-semibold">Customer Service</h5>
             <ul className="list-unstyled">

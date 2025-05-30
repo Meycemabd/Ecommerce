@@ -10,6 +10,8 @@ import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from "./pages/ProductDetailPage";
 import Header from './components/Header';
 import Footer from './components/Footer';
+import FavoritePage from "./pages/FavoritePage";
+
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -21,6 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductsPage searchQuery={searchQuery} />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Route path="/favorites" element={<FavoritePage />} />
         </Routes>
       <Footer/>
     </>

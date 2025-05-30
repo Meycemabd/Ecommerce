@@ -1,5 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import favoritesReducer from "./favoritesSlice";
+// src/redux/store.js
+import { configureStore } from '@reduxjs/toolkit';
+import favoritesReducer from '../redux/favoritesSlice';
 
 export const store = configureStore({
   reducer: {

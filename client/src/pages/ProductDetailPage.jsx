@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavorites, removeFromFavorites } from "../redux/favoritesSlice";
 import axios from "axios";
 import "../styles/pagesCSS/ProductDetailPage.css";
 
@@ -7,6 +9,9 @@ export default function ProductDetailPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const favorites = useSelector(state => state.favorites);
+  const isFavorite = favorites.some(f => f.id === product.id);
 
   useEffect(() => {
     console.log("Geladene Produkt-ID:", id); // Debug-Ausgabe
@@ -29,6 +34,14 @@ export default function ProductDetailPage() {
   }
 
   const rating = product.rating || { rate: 0, count: 0 };
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      dispatch(removeFromFavorites(product.id));
+    } else {
+      dispatch(addToFavorites(product));
+    }
+  };
 
   return (
     <div className="container product-detail-page">
@@ -79,7 +92,10 @@ export default function ProductDetailPage() {
 
           {/* Buttons */}
           <button className="btn btn-dark cart-btn mt-4">Add to Cart</button>
-          <button className="btn wishlist-btn mt-2">♡ Add to Wishlist</button>
+          <button className="btn wishlist-btn mt-2" onClick={toggleFavorite}>
+            {isFavorite ? "♥ Remove from Wishlist" : "♡ Add to Wishlist"}
+          </button>
+
 
           {/* Vorteile */}
           <ul className="advantages mt-4">
