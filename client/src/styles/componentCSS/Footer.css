@@ -3,8 +3,7 @@
   border-top: 1px solid #e0e0e0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #555;
-  padding-top: 20px;
-  padding-bottom: 10px;
+  padding: 20px 0 10px;
 }
 
 .footer-modern h6 {
@@ -15,10 +14,14 @@
   margin-bottom: 6px;
 }
 
-.footer-modern p,
-.footer-modern small {
+.footer-modern p {
   font-size: 12px;
   margin: 0;
+  color: #777;
+}
+
+.footer-modern small {
+  font-size: 12px;
   color: #777;
 }
 

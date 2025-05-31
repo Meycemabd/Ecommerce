@@ -18,13 +18,13 @@ export default function Footer() {
           <div className="col-md-4 mb-3">
             <h6>Follow Us</h6>
             <div className="footer-icons">
-              <a href="#"><FaInstagram /></a>
-              <a href="#"><FaFacebookF /></a>
-              <a href="#"><FaTiktok /></a>
+              <a href="#" aria-label="Instagram"><FaInstagram /></a>
+              <a href="#" aria-label="Facebook"><FaFacebookF /></a>
+              <a href="#" aria-label="TikTok"><FaTiktok /></a>
             </div>
           </div>
         </div>
-        <div className="text-muted small">© 2025 Eyou Store. All rights reserved.</div>
+        <small className="text-muted">© 2025 Eyou Store. All rights reserved.</small>
       </div>
     </footer>
   );

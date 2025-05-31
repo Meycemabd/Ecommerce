@@ -8,9 +8,10 @@ export default function HeroSection() {
         <source src="/video/promo.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+
       <div className="hero-text position-absolute top-50 start-50 translate-middle text-center text-light">
-      <h1 className="hero-heading">Summer Sale</h1>
-      <p className="hero-subtext">Up to 50% off · Limited Time Only</p>
+        <h1 className="hero-heading">Summer Sale</h1>
+        <p className="hero-subtext">Up to 50% off · Limited Time Only</p>
       </div>
     </section>
   );

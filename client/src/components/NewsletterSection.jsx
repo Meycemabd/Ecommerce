@@ -1,20 +1,22 @@
 import React from 'react';
-import '../styles/componentCSS/Newsletter.css'; // Pfad anpassen
+import '../styles/componentCSS/Newsletter.css';
 
 export default function NewsletterSection() {
   return (
-    <section className="newsletter-section bg-light py-5 text-center">
+    <section className="newsletter-section py-5 text-center">
       <div className="container">
-        <h2 className="text-uppercase fw-bold mb-3">Get 10% off your first order</h2>
-        <p className="mb-4 text-muted">Subscribe to our newsletter and stay updated on new arrivals and exclusive offers.</p>
-        <form className="d-flex justify-content-center flex-wrap gap-2" onSubmit={(e) => e.preventDefault()}>
+        <h2 className="newsletter-title mb-3">Get 10% Off Your First Order</h2>
+        <p className="newsletter-subtext mb-4">
+          Subscribe to our newsletter for updates on new collections and exclusive offers.
+        </p>
+        <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
           <input
             type="email"
-            className="form-control form-control-lg newsletter-input"
+            className="newsletter-input"
             placeholder="Enter your email"
             required
           />
-          <button type="submit" className="btn btn-dark btn-lg text-uppercase">
+          <button type="submit" className="newsletter-button">
             Subscribe
           </button>
         </form>

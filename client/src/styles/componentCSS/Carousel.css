@@ -1,46 +1,31 @@
 @import '../../styles/variables.css';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
 
-/* Überschrift */
-.carousel-heading {
-  letter-spacing: 2px;
-  color: #e50010;
-  font-family: 'Poppins', sans-serif;
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 3rem;
-  text-transform: uppercase;
-  font-weight: 300;
-}
-
-/* Produktkarte */
 .carousel-card {
   border: none;
   background-color: white;
   padding: 0.75rem;
+  border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease;
-  border-radius: 4px;
 }
 
 .carousel-card:hover {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Produktbild */
 .carousel-img {
   width: 100%;
   height: 330px;
   object-fit: cover;
-  transition: transform 0.3s ease;
   border-radius: 2px;
+  transition: transform 0.3s ease;
 }
 
 .carousel-card:hover .carousel-img {
   transform: scale(1.03);
 }
 
-/* Produkttitel */
 .carousel-title {
   font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
@@ -50,7 +35,6 @@
   min-height: 2.2rem;
 }
 
-/* Preis */
 .carousel-price {
   font-family: 'Poppins', sans-serif;
   font-size: 0.85rem;
@@ -58,7 +42,6 @@
   margin-bottom: 0.8rem;
 }
 
-/* Neuer H&M/Zara-Stil für Button */
 .carousel-btn {
   font-family: 'Poppins', sans-serif;
   font-size: 0.85rem;
@@ -77,10 +60,8 @@
 .carousel-btn:hover {
   background-color: #e50010;
   color: white;
-  border-color: #e50010;
 }
 
-/* Benutzerdefinierte Pfeile */
 .custom-arrow {
   z-index: 11;
   width: 44px;
@@ -90,13 +71,19 @@
   display: flex !important;
   align-items: center;
   justify-content: center;
-  opacity: 0.9;
-  transition: all 0.35s ease-in-out;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  transition: all 0.35s ease;
+  opacity: 0.9;
+}
+
+.custom-arrow:hover {
+  background-color: #c0000d;
+  transform: translateY(-50%) scale(1.1);
+  opacity: 1;
 }
 
 .prev-arrow {
@@ -112,13 +99,7 @@
   font-size: 20px;
 }
 
-.custom-arrow:hover {
-  background-color: #c0000d;
-  opacity: 1;
-  transform: translateY(-50%) scale(1.1);
-}
-
-/* Slick Dots */
+/* Slick dots styling */
 .slick-dots li button:before {
   font-size: 12px;
   color: #e50010 !important;
@@ -128,10 +109,8 @@
   color: #a00008 !important;
 }
 
-/* Slick Pfeile: keine Deko */
+/* Remove default arrow styles */
 .slick-arrow {
-  text-decoration: none !important;
-  list-style: none !important;
   outline: none;
   border: none;
 }

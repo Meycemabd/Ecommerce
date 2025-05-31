@@ -1,28 +1,32 @@
 @import '../../styles/variables.css';
 
+/* Darkens the background video for better text contrast */
 .hero-video {
-  filter: brightness(0.5); 
+  filter: brightness(0.5);
 }
 
+/* Styles for the centered hero text */
 .hero-text {
-  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); 
-  color: #f1f1f1; 
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  color: #f1f1f1;
 }
 
+/* Main heading styling */
 .hero-heading {
-  font-family: 'Playfair Display', serif; 
+  font-family: 'Playfair Display', serif;
   font-size: 3.2rem;
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #e50010; 
+  color: #e50010;
   margin-bottom: 1rem;
 }
 
+/* Subtext styling */
 .hero-subtext {
-  font-family: 'Montserrat', sans-serif; 
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 1px;
-  color: #e0e0e0; 
+  color: #e0e0e0;
 }

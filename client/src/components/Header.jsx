@@ -14,9 +14,7 @@ export default function Header({ setSearchQuery }) {
     }
   }, [searchOpen]);
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
+  const handleSearchChange = (e) => setSearchQuery(e.target.value);
 
   return (
     <header className="main-header d-flex justify-content-between align-items-center px-4 py-3 shadow-sm bg-white fixed-top">
@@ -26,7 +24,6 @@ export default function Header({ setSearchQuery }) {
 
       <nav className="flex-grow-1">
         <ul className={`nav-links list-unstyled d-flex align-items-center mb-0 ${searchOpen ? 'search-active justify-content-center' : 'justify-content-end'}`}>
-          
           <li className="mx-3">
             <a href="/products" className="nav-icon text-decoration-none" aria-label="Home">
               <Home size={24} strokeWidth={1.5} />
@@ -36,7 +33,7 @@ export default function Header({ setSearchQuery }) {
           <li className="mx-3">
             <button
               onClick={() => setSearchOpen(prev => !prev)}
-              className="nav-icon bg-transparent border-0"
+              className="nav-icon"
               aria-label={searchOpen ? "Close search" : "Open search"}
             >
               {searchOpen ? <X size={24} strokeWidth={1.5} /> : <Search size={24} strokeWidth={1.5} />}
@@ -61,11 +58,10 @@ export default function Header({ setSearchQuery }) {
           </li>
 
           <li className="mx-3">
-            <a href="/product/2" className="nav-icon text-decoration-none" aria-label="Products">
+            <a href="/cart" className="nav-icon text-decoration-none" aria-label="Cart">
               <ShoppingBag size={24} strokeWidth={1.5} />
             </a>
           </li>
-          
         </ul>
       </nav>
 
