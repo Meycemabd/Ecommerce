@@ -1,6 +1,6 @@
-// src/redux/store.js
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import favoritesReducer from '../redux/favoritesSlice';
+import cartReducer from '../redux/cartSlice'; 
 
 import {
   persistStore,
@@ -13,23 +13,20 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-import storage from 'redux-persist/lib/storage'; // localStorage
+import storage from 'redux-persist/lib/storage';
 
-// 1. Combine Reducers
 const rootReducer = combineReducers({
   favorites: favoritesReducer,
+  cart: cartReducer, 
 });
 
-// 2. Persist Config
 const persistConfig = {
   key: 'root',
   storage,
 };
 
-// 3. Persisted Reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// 4. Create Store
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
@@ -40,5 +37,4 @@ export const store = configureStore({
     }),
 });
 
-// 5. Export Persistor
 export const persistor = persistStore(store);

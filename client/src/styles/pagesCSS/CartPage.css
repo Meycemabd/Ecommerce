@@ -1,0 +1,18 @@
+.h-custom {
+    min-height: 100vh;
+  }
+  
+  .bg-dark {
+    background-color: #111 !important;
+  }
+  
+  .text-white p, .text-white h5, .text-white strong {
+    color: #fff;
+  }
+  
+  .btn-link {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  

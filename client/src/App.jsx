@@ -11,6 +11,7 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import Header from './components/Header';
 import Footer from './components/Footer';
 import FavoritePage from "./pages/FavoritePage";
+import CartPage from './pages/CartPage';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/products" element={<ProductsPage searchQuery={searchQuery} />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/favorites" element={<FavoritePage />} />
+        <Route path="/cart" element={<CartPage />} />
         </Routes>
       <Footer/>
     </>

@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToFavorites, removeFromFavorites } from "../redux/favoritesSlice";
+import { addToCart } from "../redux/cartSlice";
+
 import axios from "axios";
 import "../styles/pagesCSS/ProductDetailPage.css";
 
@@ -9,6 +11,7 @@ export default function ProductDetailPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites);
 
@@ -41,6 +44,10 @@ export default function ProductDetailPage() {
     } else {
       dispatch(addToFavorites(product));
     }
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ ...product, quantity: Number(quantity) }));
   };
 
   return (
@@ -76,14 +83,26 @@ export default function ProductDetailPage() {
 
           <div className="quantity-selection mt-3">
             <label htmlFor="quantity">Quantity:</label>
-            <select id="quantity">
-              {[1, 2, 3, 4].map((qty) => (
-                <option key={qty}>{qty}</option>
+            <select
+              id="quantity"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            >
+              {[1, 2, 3, 4, 5].map((qty) => (
+                <option key={qty} value={qty}>
+                  {qty}
+                </option>
               ))}
             </select>
           </div>
 
-          <button className="btn btn-dark cart-btn mt-4">Add to Cart</button>
+          <button
+            className="btn btn-dark cart-btn mt-4"
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </button>
+
           <button className="btn wishlist-btn mt-2" onClick={toggleFavorite}>
             {isFavorite ? "♥ Remove from Wishlist" : "♡ Add to Wishlist"}
           </button>
