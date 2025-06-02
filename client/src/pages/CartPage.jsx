@@ -29,12 +29,12 @@ export default function CartPage() {
                 <MDBRow>
                   {/* LEFT SIDE */}
                   <MDBCol lg="7">
-                    <MDBTypography tag="h6" className="mb-3">
-                      <a href="/" className="text-body cart-back-link">
-                        <MDBIcon fas icon="arrow-left" className="me-2" />
-                        <h4>Continue Shopping</h4>
+                  <MDBTypography tag="h6" className="mb-3">
+                      <a href="/" className="text-body cart-back-link d-flex align-items-center">
+                        <MDBIcon fas icon="arrow-left" className="me-3 fs-5 text-secondary" />
+                        <span className="fw-light fs-6">Continue Shopping</span>
                       </a>
-                    </MDBTypography>
+                  </MDBTypography>
 
                     <hr />
 
@@ -72,14 +72,13 @@ export default function CartPage() {
                               <MDBTypography tag="h6" className="cart-product-price mb-0">
                                 ${(item.price * item.quantity).toFixed(2)}
                               </MDBTypography>
-                              <MDBBtn
-                                color="link"
-                                size="sm"
-                                className="cart-trash-btn"
-                                onClick={() => dispatch(removeFromCart(item.id))}
-                              >
-                                <MDBIcon fas icon="trash-alt" />
-                              </MDBBtn>
+                                  <button
+                                  className="cart-trash-btn"
+                                  onClick={() => dispatch(removeFromCart(item.id))}
+                                >
+                                  <MDBIcon fas icon="trash-alt" />
+                                </button>
+
                             </div>
                           </div>
                         </MDBCardBody>
@@ -118,9 +117,6 @@ export default function CartPage() {
                             </span>
                           </div>
                         </button>
-
-
-
                       </MDBCardBody>
                     </MDBCard>
                   </MDBCol>

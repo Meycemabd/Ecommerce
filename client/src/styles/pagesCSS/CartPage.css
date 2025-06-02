@@ -16,6 +16,11 @@
   font-size: 0.95rem;
 }
 
+.cart-back-link:hover .fa-arrow-left {
+  transform: translateX(-4px);
+  transition: transform 0.3s ease;
+}
+
 /* Haupttitel */
 .cart-title {
   font-size: 1.4rem;
@@ -64,7 +69,6 @@
   padding: 0;
 }
 
-/* Rechte Seite: Summary */
 .cart-summary-card {
   background-color: #fff;
   color: #111;
@@ -101,7 +105,7 @@
   font-size: 1rem;
   font-weight: 500;
   color: white;
-  background-color: #ff6f61; /* Korallenrot / freundlich */
+  background-color: #ff6f61;
   border: none;
   border-radius: 6px;
   text-transform: uppercase;
@@ -124,7 +128,7 @@
 }
 
 .cart-card-checkout-btn:hover {
-  background-color: #e85b51; /* dunkleres rosé beim Hover */
+  background-color: #e85b51; 
 }
 
 .cart-card-checkout-btn:active {
@@ -138,11 +142,17 @@
 .cart-trash-btn {
   color: #e50010;
   font-size: 1.2rem;
+  background: transparent;
+  border: none;
   margin-left: 1rem;
+  padding: 0;
   transition: color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
 }
 
 .cart-trash-btn:hover {
   color: #b4000d;
   transform: scale(0.8);
 }
+
+
