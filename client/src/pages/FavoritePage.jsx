@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom'; // ✅ Import für Weiterleitung
+import { useNavigate } from 'react-router-dom';
 import { removeFromFavorites } from '../redux/favoritesSlice';
 import { addToCart } from '../redux/cartSlice';
 import '../styles/pagesCSS/FavoritePage.css';
@@ -7,12 +7,12 @@ import '../styles/pagesCSS/FavoritePage.css';
 export default function FavoritePage() {
   const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // ✅ Hook für Navigation
+  const navigate = useNavigate(); 
 
   const handleAddToCart = (item) => {
-    dispatch(addToCart(item));         // Produkt hinzufügen
-    dispatch(removeFromFavorites(item.id)); // Optional: aus Favoriten entfernen
-    navigate('/cart');                 // ✅ Weiterleitung zur CartPage
+    dispatch(addToCart({ ...item, quantity: 1 }));  // ✅ quantity hinzufügen
+    dispatch(removeFromFavorites(item.id)); 
+    navigate('/cart');                 
   };
 
   return (
