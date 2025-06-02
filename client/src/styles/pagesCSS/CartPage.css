@@ -1,5 +1,148 @@
-@media (min-width: 1025px) {
-    .h-custom {
-    height: 100vh !important;
-    }
-    }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+.cart-page {
+  background-color: #f8f9fa;
+  padding-top: 100px;
+  padding-bottom: 60px;
+  min-height: 75vh;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Back Link */
+.cart-back-link {
+  font-weight: 300;
+  text-decoration: none;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* Haupttitel */
+.cart-title {
+  font-size: 1.4rem;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  margin-bottom: 0;
+}
+
+/* Untertitel */
+.cart-subtitle {
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 300;
+}
+
+/* Einzelnes Produkt */
+.cart-product-card {
+  border: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+}
+
+.cart-product-title {
+  font-weight: 300;
+  font-size: 1rem;
+  color: #111;
+}
+
+.cart-product-quantity {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 300;
+}
+
+.cart-product-price {
+  font-weight: 300;
+  font-size: 1rem;
+  margin-right: 0.75rem;
+}
+
+.cart-trash-btn {
+  color: #dc3545;
+  font-size: 1rem;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+/* Rechte Seite: Summary */
+.cart-summary-card {
+  background-color: #fff;
+  color: #111;
+  border-radius: 1rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+
+.cart-summary-heading {
+  font-weight: 300;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.cart-summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-weight: 300;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.cart-summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 400;
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+.cart-card-checkout-btn {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+  background-color: #ff6f61; /* Korallenrot / freundlich */
+  border: none;
+  border-radius: 6px;
+  text-transform: uppercase;
+  width: 60%;
+  height: 52px;
+  margin: 1rem auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.checkout-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.cart-card-checkout-btn:hover {
+  background-color: #e85b51; /* dunkleres rosé beim Hover */
+}
+
+.cart-card-checkout-btn:active {
+  background-color: #d24a43;
+  transform: none;
+  box-shadow: none;
+  padding: 0 1.5rem;
+}
+
+
+.cart-trash-btn {
+  color: #e50010;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.cart-trash-btn:hover {
+  color: #b4000d;
+  transform: scale(0.8);
+}
