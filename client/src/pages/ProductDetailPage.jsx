@@ -1,14 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToFavorites, removeFromFavorites } from "../redux/favoritesSlice";
 import { addToCart } from "../redux/cartSlice";
-
 import axios from "axios";
 import "../styles/pagesCSS/ProductDetailPage.css";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
+  const navigate = useNavigate(); // NEU
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -48,6 +48,7 @@ export default function ProductDetailPage() {
 
   const handleAddToCart = () => {
     dispatch(addToCart({ ...product, quantity: Number(quantity) }));
+    navigate("/cart"); // AUTOMATISCHE WEITERLEITUNG ZUR CART-SEITE
   };
 
   return (
