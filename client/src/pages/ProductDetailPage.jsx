@@ -48,7 +48,7 @@ export default function ProductDetailPage() {
 
   const handleAddToCart = () => {
     dispatch(addToCart({ ...product, quantity: Number(quantity) }));
-    navigate("/cart"); // AUTOMATISCHE WEITERLEITUNG ZUR CART-SEITE
+    navigate("/cart"); 
   };
 
   return (

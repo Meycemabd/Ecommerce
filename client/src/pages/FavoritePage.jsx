@@ -1,24 +1,30 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; // ✅ Import für Weiterleitung
 import { removeFromFavorites } from '../redux/favoritesSlice';
+import { addToCart } from '../redux/cartSlice';
 import '../styles/pagesCSS/FavoritePage.css';
 
 export default function FavoritePage() {
   const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // ✅ Hook für Navigation
 
   const handleAddToCart = (item) => {
-    // TODO: Implement cart logic
-    alert(`${item.title} added to cart!`);
+    dispatch(addToCart(item));         // Produkt hinzufügen
+    dispatch(removeFromFavorites(item.id)); // Optional: aus Favoriten entfernen
+    navigate('/cart');                 // ✅ Weiterleitung zur CartPage
   };
 
   return (
     <div className="favorite-page container">
       <h2 className="wishlist-title" style={{
-                  letterSpacing: "3px",
-                  color: "#e50010",
-                  fontFamily: "Arial, sans-serif",
-                  width: "100%",
-                }}>Your Wishlist</h2>
+        letterSpacing: "3px",
+        color: "#e50010",
+        fontFamily: "Arial, sans-serif",
+        width: "100%",
+      }}>
+        Your Wishlist
+      </h2>
 
       {favorites.length === 0 ? (
         <div className="empty-message">
@@ -34,8 +40,18 @@ export default function FavoritePage() {
                 <h5 className="wishlist-name">{item.title}</h5>
                 <p className="wishlist-price">€ {item.price}</p>
                 <div className="wishlist-actions">
-                  <button className="btn btn-dark btn-sm" onClick={() => handleAddToCart(item)}>Add to Cart</button>
-                  <button className="btn btn-link text-danger btn-sm" onClick={() => dispatch(removeFromFavorites(item.id))}>Remove</button>
+                  <button
+                    className="btn btn-dark btn-sm"
+                    onClick={() => handleAddToCart(item)}
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    className="btn btn-link text-danger btn-sm"
+                    onClick={() => dispatch(removeFromFavorites(item.id))}
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
             </li>
