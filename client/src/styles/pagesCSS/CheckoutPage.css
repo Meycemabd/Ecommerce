@@ -110,3 +110,11 @@
   font-size: 18px;
   font-weight: 700;
 }
+
+/* Optional in CheckoutPage.css */
+.checkout-form h4 {
+  margin-top: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+}

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "../styles/pagesCSS/CheckoutPage.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearCart } from "../redux/cartSlice"; // Falls nicht vorhanden, bitte erstellen
+import { clearCart } from "../redux/cartSlice";
 
 export default function CheckoutPage() {
   const cart = useSelector((state) => state.cart);
@@ -19,6 +19,10 @@ export default function CheckoutPage() {
     city: "",
     postalCode: "",
     country: "",
+    cardName: "",
+    cardNumber: "",
+    expiry: "",
+    cvv: "",
   });
 
   const handleChange = (e) => {
@@ -30,7 +34,20 @@ export default function CheckoutPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Fake Payment Logik
+    if (
+      !formData.cardNumber ||
+      !formData.cardName ||
+      !formData.expiry ||
+      !formData.cvv
+    ) {
+      alert("Please fill out all payment fields.");
+      return;
+    }
+
     dispatch(clearCart());
+
     navigate("/thank-you", {
       state: {
         user: formData,
@@ -54,6 +71,7 @@ export default function CheckoutPage() {
           </h2>
 
           <form onSubmit={handleSubmit}>
+            {/* Shipping Info */}
             <label>Full Name</label>
             <input type="text" name="name" value={formData.name} onChange={handleChange} required />
 
@@ -86,6 +104,21 @@ export default function CheckoutPage() {
               <option value="Canada">Canada</option>
               <option value="Australia">Australia</option>
             </select>
+
+            {/* Payment Info */}
+            <h4 style={{ marginTop: "30px" }}>Payment</h4>
+
+            <label>Cardholder Name</label>
+            <input type="text" name="cardName" value={formData.cardName} onChange={handleChange} required />
+
+            <label>Card Number</label>
+            <input type="text" name="cardNumber" value={formData.cardNumber} onChange={handleChange} required placeholder="1234 5678 9012 3456" />
+
+            <label>Expiry Date (MM/YY)</label>
+            <input type="text" name="expiry" value={formData.expiry} onChange={handleChange} required placeholder="MM/YY" />
+
+            <label>CVV</label>
+            <input type="text" name="cvv" value={formData.cvv} onChange={handleChange} required placeholder="123" />
 
             <button type="submit" className="checkout-submit-btn">
               Place Order
