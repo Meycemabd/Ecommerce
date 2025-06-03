@@ -1,0 +1,50 @@
+.thankyou-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f8f8;
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  
+  .thankyou-card {
+    background-color: #fff;
+    padding: 48px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+  }
+  
+  .thankyou-card h1 {
+    font-size: 2rem;
+    color: #111;
+    margin-bottom: 16px;
+  }
+  
+  .thankyou-card p {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 12px;
+  }
+  
+  .btn-back-home {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 12px 28px;
+    background-color: #f4b5a8; /* zarter Rosé-Orange-Ton */
+    color: #111;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 400;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  
+  .btn-back-home:hover {
+    background-color: #f2a896;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  

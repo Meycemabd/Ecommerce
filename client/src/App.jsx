@@ -12,6 +12,9 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import FavoritePage from "./pages/FavoritePage";
 import CartPage from './pages/CartPage';
+import CheckoutPage from "./pages/CheckouPage";
+import ThankYouPage from "./pages/ThankYouPage";
+
 
 
 function App() {
@@ -26,6 +29,8 @@ function App() {
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/favorites" element={<FavoritePage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/thank-you" element={<ThankYouPage />} />
         </Routes>
       <Footer/>
     </>

@@ -16,11 +16,13 @@ import {
   increaseQuantity,
   decreaseQuantity,
 } from "../redux/cartSlice";
+import { useNavigate } from "react-router-dom";
 import "../styles/pagesCSS/CartPage.css";
 
 export default function CartPage() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
@@ -126,7 +128,11 @@ export default function CartPage() {
                           <strong className="cart-card-total-value">${total.toFixed(2)}</strong>
                         </div>
 
-                        <button className="cart-card-checkout-btn">
+                        <button
+                          className="cart-card-checkout-btn"
+                          onClick={() => navigate("/checkout")}
+                          disabled={cart.length === 0}
+                        >
                           <div className="checkout-inner">
                             <span>${total.toFixed(2)}</span>
                             <span>

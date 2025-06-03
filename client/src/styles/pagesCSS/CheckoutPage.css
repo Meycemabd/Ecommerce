@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+.checkout-page {
+  font-family: 'Poppins', sans-serif;
+  padding: 80px 20px 40px;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+.checkout-container {
+  display: flex;
+  max-width: 1100px;
+  margin: auto;
+  gap: 40px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+.checkout-form {
+  flex: 2;
+}
+
+.checkout-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-form label {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 8px;
+  margin-top: 20px;
+  color: #333;
+  display: block;
+  letter-spacing: 0.5px;
+}
+
+.checkout-form input,
+.checkout-form select {
+  padding: 12px;
+  margin-bottom: 15px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+
+.checkout-submit-btn {
+  margin-top: 30px;
+  background-color: #111;
+  color: white;
+  padding: 14px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-submit-btn:hover {
+  background-color: #333;
+}
+
+/* Summary Section */
+.checkout-summary {
+  flex: 1;
+  background-color: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 24px;
+  height: fit-content;
+}
+
+.checkout-summary h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: #333;
+}
+
+.summary-title {
+  flex: 1;
+  font-weight: 500;
+}
+
+.summary-quantity {
+  width: 60px;
+  text-align: center;
+}
+
+.summary-price {
+  font-weight: 600;
+  color: #111;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  font-size: 18px;
+  font-weight: 700;
+}
