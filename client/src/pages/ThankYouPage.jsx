@@ -1,17 +1,28 @@
+// src/pages/ThankYouPage.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "../styles/pagesCSS/ThankYouPage.css";
 
 export default function ThankYouPage() {
+  const location = useLocation();
+  const user = location.state?.user;
+  const total = location.state?.total;
+
   return (
-    <div className="thankyou-page">
-      <div className="thankyou-card">
-        <h1>Thank You!</h1>
-        <p>Your order has been placed successfully.</p>
-        <p>You will receive a confirmation email shortly.</p>
-        <Link to="/products" className="btn-back-home">
-          Continue Shopping
-        </Link>
+    <div className="thank-you-page">
+      <div className="thank-you-container">
+        <h2>Thank you for your order!</h2>
+        <p>We’ve sent a confirmation to: <strong>{user?.email}</strong></p>
+
+        <div className="thank-you-details">
+          <h4>Shipping Info</h4>
+          <p>{user?.name}</p>
+          <p>{user?.address}</p>
+          <p>{user?.postalCode} {user?.city}, {user?.country}</p>
+
+          <h4 className="mt-4">Order Total</h4>
+          <p><strong>€ {total?.toFixed(2)}</strong></p>
+        </div>
       </div>
     </div>
   );

@@ -1,18 +1,42 @@
 // src/pages/CheckoutPage.jsx
-import React from "react";
+import React, { useState } from "react";
 import "../styles/pagesCSS/CheckoutPage.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { clearCart } from "../redux/cartSlice"; // Falls nicht vorhanden, bitte erstellen
 
 export default function CheckoutPage() {
   const cart = useSelector((state) => state.cart);
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    address: "",
+    city: "",
+    postalCode: "",
+    country: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Optional: Validierung oder Logik
-    navigate("/thank-you");
+    dispatch(clearCart());
+    navigate("/thank-you", {
+      state: {
+        user: formData,
+        total,
+      },
+    });
   };
 
   return (
@@ -20,35 +44,33 @@ export default function CheckoutPage() {
       <div className="checkout-container">
         {/* LEFT - FORM */}
         <div className="checkout-form">
-          <h2
-            className="mb-4 text-center text-uppercase fw-light"
-            style={{
-              letterSpacing: "3px",
-              color: "#e50010",
-              fontFamily: "'Poppins', sans-serif",
-            }}
-          >
+          <h2 className="mb-4 text-center text-uppercase fw-light"
+              style={{
+                letterSpacing: "3px",
+                color: "#e50010",
+                fontFamily: "'Poppins', sans-serif",
+              }}>
             Checkout
           </h2>
 
           <form onSubmit={handleSubmit}>
             <label>Full Name</label>
-            <input type="text" placeholder="John Doe" required />
+            <input type="text" name="name" value={formData.name} onChange={handleChange} required />
 
             <label>Email</label>
-            <input type="email" placeholder="john@example.com" required />
+            <input type="email" name="email" value={formData.email} onChange={handleChange} required />
 
             <label>Address</label>
-            <input type="text" placeholder="123 Main St" required />
+            <input type="text" name="address" value={formData.address} onChange={handleChange} required />
 
             <label>City</label>
-            <input type="text" placeholder="Berlin" required />
+            <input type="text" name="city" value={formData.city} onChange={handleChange} required />
 
             <label>Postal Code</label>
-            <input type="text" placeholder="10115" required />
+            <input type="text" name="postalCode" value={formData.postalCode} onChange={handleChange} required />
 
             <label>Country</label>
-            <select required>
+            <select name="country" value={formData.country} onChange={handleChange} required>
               <option value="">Select your country</option>
               <option value="Germany">Germany</option>
               <option value="Austria">Austria</option>
