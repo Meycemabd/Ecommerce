@@ -11,7 +11,11 @@ import {
 } from "mdb-react-ui-kit";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../redux/cartSlice";
+import {
+  removeFromCart,
+  increaseQuantity,
+  decreaseQuantity,
+} from "../redux/cartSlice";
 import "../styles/pagesCSS/CartPage.css";
 
 export default function CartPage() {
@@ -29,12 +33,12 @@ export default function CartPage() {
                 <MDBRow>
                   {/* LEFT SIDE */}
                   <MDBCol lg="7">
-                  <MDBTypography tag="h6" className="mb-3">
+                    <MDBTypography tag="h6" className="mb-3">
                       <a href="/" className="text-body cart-back-link d-flex align-items-center">
                         <MDBIcon fas icon="arrow-left" className="me-3 fs-5 text-secondary" />
                         <span className="fw-light fs-6">Continue Shopping</span>
                       </a>
-                  </MDBTypography>
+                    </MDBTypography>
 
                     <hr />
 
@@ -63,22 +67,35 @@ export default function CartPage() {
                                 <MDBTypography tag="h6" className="cart-product-title">
                                   {item.title}
                                 </MDBTypography>
-                                <p className="cart-product-quantity">
-                                  Quantity: {item.quantity}
-                                </p>
+
+                                {/* Quantity Controls */}
+                                <div className="d-flex align-items-center mt-2">
+                                  <button
+                                    className="quantity-btn"
+                                    onClick={() => dispatch(decreaseQuantity(item.id))}
+                                  >
+                                    <MDBIcon fas icon="minus" />
+                                  </button>
+                                  <span className="mx-3 cart-quantity-number">{item.quantity}</span>
+                                  <button
+                                    className="quantity-btn"
+                                    onClick={() => dispatch(increaseQuantity(item.id))}
+                                  >
+                                    <MDBIcon fas icon="plus" />
+                                  </button>
+                                </div>
                               </div>
                             </div>
                             <div className="d-flex flex-row align-items-center">
                               <MDBTypography tag="h6" className="cart-product-price mb-0">
                                 ${(item.price * item.quantity).toFixed(2)}
                               </MDBTypography>
-                                  <button
-                                  className="cart-trash-btn"
-                                  onClick={() => dispatch(removeFromCart(item.id))}
-                                >
-                                  <MDBIcon fas icon="trash-alt" />
-                                </button>
-
+                              <button
+                                className="cart-trash-btn"
+                                onClick={() => dispatch(removeFromCart(item.id))}
+                              >
+                                <MDBIcon fas icon="trash-alt" />
+                              </button>
                             </div>
                           </div>
                         </MDBCardBody>
@@ -110,9 +127,9 @@ export default function CartPage() {
                         </div>
 
                         <button className="cart-card-checkout-btn">
-                            <div className="checkout-inner">
+                          <div className="checkout-inner">
                             <span>${total.toFixed(2)}</span>
-                              <span>
+                            <span>
                               Checkout <i className="fas fa-arrow-right ms-2"></i>
                             </span>
                           </div>

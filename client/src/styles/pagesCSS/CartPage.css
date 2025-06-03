@@ -155,4 +155,23 @@
   transform: scale(0.8);
 }
 
+.quantity-btn {
+  border: none;
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 6px 10px;
+  border-radius: 50%;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.quantity-btn:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.cart-quantity-number {
+  font-weight: 500;
+  font-size: 15px;
+}
 
