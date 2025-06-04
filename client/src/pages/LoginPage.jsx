@@ -6,19 +6,25 @@ import {
   MDBInput
 } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router-dom';
-import '../styles/pagesCSS/LoginPage.css'
+import '../styles/pagesCSS/LoginPage.css';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (email === 'user@example.com' && password === '123456') {
-      navigate('/dashboard');
+
+    const isValid = email === 'user@example.com' && password === '123456';
+
+    if (isValid) {
+      localStorage.setItem('isLoggedIn', 'true'); // 🔑 Login-Status speichern
+      setErrorMsg('');
+      navigate('/dashboard'); // Weiterleitung nach erfolgreichem Login
     } else {
-      alert('Invalid email or password');
+      setErrorMsg('Invalid email or password');
     }
   };
 
@@ -33,32 +39,39 @@ export default function LoginPage() {
           Sign into your account
         </h5>
 
-        <form onSubmit={handleLogin}>
-          <MDBInput 
-            className='mb-3' 
-            label='Email address' 
-            type='email' 
-            size="md"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <MDBInput 
-            className='mb-3' 
-            label='Password' 
-            type='password' 
-            size="md"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <form onSubmit={handleLogin} noValidate>
+          <div className="mb-3">
+            <label className="form-label custom-label">Email address</label>
+            <MDBInput 
+              type="email" 
+              size="md"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-          <MDBBtn className="w-100 mb-3" color='dark' size='md' type="submit">
+          <div className="mb-3">
+            <label className="form-label custom-label">Password</label>
+            <MDBInput 
+              type="password" 
+              size="md"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+
+          <MDBBtn className="w-100 mb-2" color='dark' size='md' type="submit">
             Login
           </MDBBtn>
+
+          {errorMsg && (
+            <p className="text-danger text-center mt-2 small">{errorMsg}</p>
+          )}
         </form>
 
-        <div className="text-center">
+        <div className="text-center mt-3">
           <a href="#!" className="small text-muted d-block mb-2">Forgot password?</a>
           <p className="small">
             Don't have an account? <a href="#!" style={{ color: 'var(--accent-color)' }}>Register here</a>
