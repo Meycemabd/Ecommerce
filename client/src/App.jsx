@@ -19,8 +19,6 @@ import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
 
 
-
-
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
 

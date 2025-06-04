@@ -3,6 +3,7 @@ import { Home, ShoppingBag, Search, User, X, Heart } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import "../styles/componentCSS/Header.css";
 
+
 export default function Header({ setSearchQuery }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const inputRef = useRef(null);
@@ -19,7 +20,7 @@ export default function Header({ setSearchQuery }) {
   return (
     <header className="main-header d-flex justify-content-between align-items-center px-4 py-3 shadow-sm bg-white fixed-top">
       <div className="logo-text">
-        <a href="/">Eyou Store</a>
+        <a href="/">Eyou.Store</a>
       </div>
 
       <nav className="flex-grow-1">

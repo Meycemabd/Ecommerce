@@ -1,0 +1,25 @@
+@import '../../styles/variables.css';
+  
+  .login-wrapper {
+    height: 100vh;
+    background-color: var(--bg-color);
+    padding: 1rem;
+  }
+  
+  .login-card {
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+  }
+  
+  .logo-text {
+    font-family: 'Pacifico', cursive;
+    font-size: 32px;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  

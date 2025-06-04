@@ -3,15 +3,10 @@ import React, { useState } from 'react';
 import {
   MDBBtn,
   MDBContainer,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBRow,
-  MDBCol,
-  MDBIcon,
   MDBInput
 } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router-dom';
+import '../styles/pagesCSS/LoginPage.css'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -20,8 +15,6 @@ export default function LoginPage() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    // Fake Login-Daten
     if (email === 'user@example.com' && password === '123456') {
       navigate('/dashboard');
     } else {
@@ -30,68 +23,48 @@ export default function LoginPage() {
   };
 
   return (
-    <MDBContainer className="my-5">
-      <MDBCard>
-        <MDBRow className='g-0'>
-          <MDBCol md='6'>
-            <MDBCardImage 
-              src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp' 
-              alt="login form" 
-              className='rounded-start w-100'
-            />
-          </MDBCol>
+    <MDBContainer fluid className="login-wrapper d-flex align-items-center justify-content-center">
+      <div className="login-card shadow-sm p-4 rounded">
+        <div className="text-center mb-4 logo-text">
+          Eyou.Store
+        </div>
 
-          <MDBCol md='6'>
-            <MDBCardBody className='d-flex flex-column'>
+        <h5 className="text-center mb-4" style={{ fontFamily: "'Poppins', sans-serif", letterSpacing: '1px' }}>
+          Sign into your account
+        </h5>
 
-              <div className='d-flex flex-row mt-2'>
-                <MDBIcon fas icon="cubes fa-3x me-3" style={{ color: '#e50010' }} />
-                <span className="h1 fw-bold mb-0" style={{ fontFamily: "'Poppins', sans-serif" }}>MyShop</span>
-              </div>
+        <form onSubmit={handleLogin}>
+          <MDBInput 
+            className='mb-3' 
+            label='Email address' 
+            type='email' 
+            size="md"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <MDBInput 
+            className='mb-3' 
+            label='Password' 
+            type='password' 
+            size="md"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-              <h5 className="fw-normal my-4 pb-3" style={{ letterSpacing: '1px', fontFamily: "'Poppins', sans-serif" }}>
-                Sign into your account
-              </h5>
+          <MDBBtn className="w-100 mb-3" color='dark' size='md' type="submit">
+            Login
+          </MDBBtn>
+        </form>
 
-              <form onSubmit={handleLogin}>
-                <MDBInput 
-                  wrapperClass='mb-4' 
-                  label='Email address' 
-                  type='email' 
-                  size="lg"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <MDBInput 
-                  wrapperClass='mb-4' 
-                  label='Password' 
-                  type='password' 
-                  size="lg"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-
-                <MDBBtn className="mb-4 px-5" color='dark' size='lg' type="submit">
-                  Login
-                </MDBBtn>
-              </form>
-
-              <a className="small text-muted" href="#!">Forgot password?</a>
-              <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
-                Don't have an account? <a href="#!" style={{ color: '#393f81' }}>Register here</a>
-              </p>
-
-              <div className='d-flex flex-row justify-content-start'>
-                <a href="#!" className="small text-muted me-1">Terms of use.</a>
-                <a href="#!" className="small text-muted">Privacy policy</a>
-              </div>
-
-            </MDBCardBody>
-          </MDBCol>
-        </MDBRow>
-      </MDBCard>
+        <div className="text-center">
+          <a href="#!" className="small text-muted d-block mb-2">Forgot password?</a>
+          <p className="small">
+            Don't have an account? <a href="#!" style={{ color: 'var(--accent-color)' }}>Register here</a>
+          </p>
+        </div>
+      </div>
     </MDBContainer>
   );
 }
