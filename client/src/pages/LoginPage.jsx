@@ -62,9 +62,10 @@ export default function LoginPage() {
             />
           </div>
 
-          <MDBBtn className="w-100 mb-2" color='dark' size='md' type="submit">
+          <button className="btn btn-dark btn-md w-100 mb-2" type="submit">
             Login
-          </MDBBtn>
+          </button>
+
 
           {errorMsg && (
             <p className="text-danger text-center mt-2 small">{errorMsg}</p>

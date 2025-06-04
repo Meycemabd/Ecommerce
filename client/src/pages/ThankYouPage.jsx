@@ -1,10 +1,11 @@
 // src/pages/ThankYouPage.jsx
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/pagesCSS/ThankYouPage.css";
 
 export default function ThankYouPage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const user = location.state?.user;
   const total = location.state?.total;
 
@@ -23,6 +24,13 @@ export default function ThankYouPage() {
           <h4 className="mt-4">Order Total</h4>
           <p><strong>€ {total?.toFixed(2)}</strong></p>
         </div>
+
+        <button 
+          className="btn btn-dark mt-4"
+          onClick={() => navigate('/')}
+        >
+          Back to Shop
+        </button>
       </div>
     </div>
   );
