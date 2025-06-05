@@ -1,12 +1,20 @@
 // src/pages/ThankYouPage.jsx
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/pagesCSS/ThankYouPage.css";
 
 export default function ThankYouPage() {
   const location = useLocation();
+  const navigate = useNavigate();
   const user = location.state?.user;
   const total = location.state?.total;
+
+  // Falls kein user vorhanden ist (z.B. direkter Aufruf der Seite)
+  useEffect(() => {
+    if (!user || !total) {
+      navigate("/");
+    }
+  }, [user, total, navigate]);
 
   return (
     <div className="thank-you-page">
@@ -27,8 +35,8 @@ export default function ThankYouPage() {
         <button 
           className="btn btn-dark mt-4"
           onClick={() => {
-            window.scrollTo(0, 0);      
-            window.location.href = '/';
+            window.scrollTo(0, 0);
+            navigate("/");
           }}
         >
           Back to Shop

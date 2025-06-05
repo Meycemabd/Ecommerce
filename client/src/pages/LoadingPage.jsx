@@ -3,9 +3,12 @@ import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function LoadingPage() {
   const [progress, setProgress] = React.useState(0);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   React.useEffect(() => {
     const timer = setInterval(() => {
@@ -14,10 +17,16 @@ export default function LoadingPage() {
       );
     }, 300);
 
+    // Nach 3 Sekunden zur Thank-You-Seite weiterleiten
+    const redirectTimer = setTimeout(() => {
+      navigate("/thank-you", { state: location.state });
+    }, 3000);
+
     return () => {
       clearInterval(timer);
+      clearTimeout(redirectTimer);
     };
-  }, []);
+  }, [navigate, location.state]);
 
   return (
     <Box

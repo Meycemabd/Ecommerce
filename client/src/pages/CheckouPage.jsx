@@ -48,7 +48,8 @@ export default function CheckoutPage() {
 
     dispatch(clearCart());
 
-    navigate("/thank-you", {
+    // Statt direkt zur ThankYou-Seite, erst zur LoadingPage weiterleiten
+    navigate("/loading", {
       state: {
         user: formData,
         total,
@@ -61,34 +62,71 @@ export default function CheckoutPage() {
       <div className="checkout-container">
         {/* LEFT - FORM */}
         <div className="checkout-form">
-          <h2 className="mb-4 text-center text-uppercase fw-light"
-              style={{
-                letterSpacing: "3px",
-                color: "#e50010",
-                fontFamily: "'Poppins', sans-serif",
-              }}>
+          <h2
+            className="mb-4 text-center text-uppercase fw-light"
+            style={{
+              letterSpacing: "3px",
+              color: "#e50010",
+              fontFamily: "'Poppins', sans-serif",
+            }}
+          >
             Checkout
           </h2>
 
           <form onSubmit={handleSubmit}>
             {/* Shipping Info */}
             <label>Full Name</label>
-            <input type="text" name="name" value={formData.name} onChange={handleChange} required />
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
 
             <label>Email</label>
-            <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
 
             <label>Address</label>
-            <input type="text" name="address" value={formData.address} onChange={handleChange} required />
+            <input
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
 
             <label>City</label>
-            <input type="text" name="city" value={formData.city} onChange={handleChange} required />
+            <input
+              type="text"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              required
+            />
 
             <label>Postal Code</label>
-            <input type="text" name="postalCode" value={formData.postalCode} onChange={handleChange} required />
+            <input
+              type="text"
+              name="postalCode"
+              value={formData.postalCode}
+              onChange={handleChange}
+              required
+            />
 
             <label>Country</label>
-            <select name="country" value={formData.country} onChange={handleChange} required>
+            <select
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              required
+            >
               <option value="">Select your country</option>
               <option value="Germany">Germany</option>
               <option value="Austria">Austria</option>
@@ -109,16 +147,43 @@ export default function CheckoutPage() {
             <h4 style={{ marginTop: "30px" }}>Payment</h4>
 
             <label>Cardholder Name</label>
-            <input type="text" name="cardName" value={formData.cardName} onChange={handleChange} required />
+            <input
+              type="text"
+              name="cardName"
+              value={formData.cardName}
+              onChange={handleChange}
+              required
+            />
 
             <label>Card Number</label>
-            <input type="text" name="cardNumber" value={formData.cardNumber} onChange={handleChange} required placeholder="1234 5678 9012 3456" />
+            <input
+              type="text"
+              name="cardNumber"
+              value={formData.cardNumber}
+              onChange={handleChange}
+              required
+              placeholder="1234 5678 9012 3456"
+            />
 
             <label>Expiry Date (MM/YY)</label>
-            <input type="text" name="expiry" value={formData.expiry} onChange={handleChange} required placeholder="MM/YY" />
+            <input
+              type="text"
+              name="expiry"
+              value={formData.expiry}
+              onChange={handleChange}
+              required
+              placeholder="MM/YY"
+            />
 
             <label>CVV</label>
-            <input type="text" name="cvv" value={formData.cvv} onChange={handleChange} required placeholder="123" />
+            <input
+              type="text"
+              name="cvv"
+              value={formData.cvv}
+              onChange={handleChange}
+              required
+              placeholder="123"
+            />
 
             <button type="submit" className="checkout-submit-btn">
               Place Order

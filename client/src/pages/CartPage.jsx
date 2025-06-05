@@ -130,7 +130,7 @@ export default function CartPage() {
 
                         <button
                           className="cart-card-checkout-btn"
-                          onClick={() => navigate("/checkout")}
+                          onClick={() => navigate("/checkout", { state: { total } })}
                           disabled={cart.length === 0}
                         >
                           <div className="checkout-inner">

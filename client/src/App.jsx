@@ -13,11 +13,11 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import FavoritePage from "./pages/FavoritePage";
 import CartPage from './pages/CartPage';
-import CheckoutPage from "./pages/CheckouPage";
+import CheckoutPage from "./pages/CheckouPage";  
+import LoadingPage from "./pages/LoadingPage";  
 import ThankYouPage from "./pages/ThankYouPage";
 import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
-
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -32,18 +32,21 @@ function App() {
         <Route path="/favorites" element={<FavoritePage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/loading" element={<LoadingPage />} />  {/* Neue Route */}
         <Route path="/thank-you" element={<ThankYouPage />} />
-        <Route path="/dashboard"
-               element={
-               localStorage.getItem("isLoggedIn") === "true" ? (
+        <Route
+          path="/dashboard"
+          element={
+            localStorage.getItem("isLoggedIn") === "true" ? (
               <DashboardPage />
             ) : (
               <Navigate to="/login" />
             )
-            }/>
+          }
+        />
         <Route path="/login" element={<LoginPage />} />
-        </Routes>
-      <Footer/>
+      </Routes>
+      <Footer />
     </>
   );
 }
