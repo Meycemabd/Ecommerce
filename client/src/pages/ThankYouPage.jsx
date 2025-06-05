@@ -1,11 +1,10 @@
 // src/pages/ThankYouPage.jsx
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "../styles/pagesCSS/ThankYouPage.css";
 
 export default function ThankYouPage() {
   const location = useLocation();
-  const navigate = useNavigate();
   const user = location.state?.user;
   const total = location.state?.total;
 
@@ -27,7 +26,10 @@ export default function ThankYouPage() {
 
         <button 
           className="btn btn-dark mt-4"
-          onClick={() => navigate('/')}
+          onClick={() => {
+            window.scrollTo(0, 0);      
+            window.location.href = '/';
+          }}
         >
           Back to Shop
         </button>
