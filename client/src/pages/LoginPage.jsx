@@ -1,4 +1,3 @@
-// src/pages/LoginPage.jsx
 import React, { useState } from 'react';
 import {
   MDBBtn,
@@ -6,12 +5,14 @@ import {
   MDBInput
 } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router-dom';
+import LoadingPage from '../pages/LoadingPage';
 import '../styles/pagesCSS/LoginPage.css';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [loading, setLoading] = useState(false); // ✅ Zustand für Ladeanzeige
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -20,13 +21,20 @@ export default function LoginPage() {
     const isValid = email === 'user@example.com' && password === '123456';
 
     if (isValid) {
-      localStorage.setItem('isLoggedIn', 'true'); // 🔑 Login-Status speichern
+      setLoading(true); // Ladeanzeige aktivieren
       setErrorMsg('');
-      navigate('/dashboard'); // Weiterleitung nach erfolgreichem Login
+      localStorage.setItem('isLoggedIn', 'true'); // 🔑 Login-Status speichern
+
+      // Ladeanzeige für 1.5 Sek. anzeigen, dann weiterleiten
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 1500);
     } else {
       setErrorMsg('Invalid email or password');
     }
   };
+
+  if (loading) return <LoadingPage />;
 
   return (
     <MDBContainer fluid className="login-wrapper d-flex align-items-center justify-content-center">
@@ -65,7 +73,6 @@ export default function LoginPage() {
           <button className="btn btn-dark btn-md w-100 mb-2" type="submit">
             Login
           </button>
-
 
           {errorMsg && (
             <p className="text-danger text-center mt-2 small">{errorMsg}</p>
