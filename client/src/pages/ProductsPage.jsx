@@ -73,7 +73,7 @@ export default function ProductsPage() {
               categories={categories}
               selectedCategories={selectedCategories}
               onFilterChange={handleFilterChange}
-              searchQuery={searchQuery} // ← Neu!
+              searchQuery={searchQuery}
             />
           </div>
           <div className="col-md-10">
@@ -94,7 +94,13 @@ export default function ProductsPage() {
               </div>
             </div>
 
-            <ProductList products={filteredProducts} />
+            {filteredProducts.length > 0 ? (
+              <ProductList products={filteredProducts} />
+            ) : (
+              <div className="text-center mt-5">
+                <h5 className="text-muted">No products found matching your search.</h5>
+              </div>
+            )}
           </div>
         </div>
       </div>
