@@ -46,8 +46,7 @@ export default function ProductDetailPage() {
   };
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ ...product, quantity: Number(quantity) }));
-    
+    dispatch(addToCart({ ...product, quantity }));
   };
 
   return (
@@ -82,11 +81,14 @@ export default function ProductDetailPage() {
           <p className="description">{product.description}</p>
 
           <div className="quantity-selection mt-3">
-            <label htmlFor="quantity">Quantity:</label>
+            <label htmlFor="quantity" className="quantity-label">
+              Quantity:
+            </label>
             <select
               id="quantity"
               value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              className="quantity-dropdown"
             >
               {[1, 2, 3, 4, 5].map((qty) => (
                 <option key={qty} value={qty}>
@@ -96,10 +98,7 @@ export default function ProductDetailPage() {
             </select>
           </div>
 
-          <button
-            className="btn btn-dark cart-btn mt-4"
-            onClick={handleAddToCart}
-          >
+          <button className="cart-btn mt-4" onClick={handleAddToCart}>
             Add to Cart
           </button>
 
