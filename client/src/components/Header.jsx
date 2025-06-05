@@ -3,11 +3,16 @@ import { Home, ShoppingBag, Search, User, X, Heart } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import "../styles/componentCSS/Header.css";
 
-
 export default function Header({ setSearchQuery }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const inputRef = useRef(null);
+
   const favoriteCount = useSelector((state) => state.favorites.length);
+
+  // ✅ NEU: cart count berechnen
+  const cartCount = useSelector((state) =>
+    state.cart.reduce((total, item) => total + item.quantity, 0)
+  );
 
   useEffect(() => {
     if (searchOpen && inputRef.current) {
@@ -58,9 +63,14 @@ export default function Header({ setSearchQuery }) {
             </a>
           </li>
 
-          <li className="mx-3">
-            <a href="/cart" className="nav-icon text-decoration-none" aria-label="Cart">
+          <li className="mx-3 position-relative">
+            <a href="/cart" className="nav-icon text-decoration-none position-relative" aria-label="Cart">
               <ShoppingBag size={24} strokeWidth={1.5} />
+              {cartCount > 0 && (
+                <span className="badge bg-dark text-white rounded-circle position-absolute top-0 start-100 translate-middle" style={{ fontSize: '0.7rem', minWidth: '18px', height: '18px', lineHeight: '18px', padding: '0 5px', textAlign: 'center' }}>
+                  {cartCount}
+                </span>
+              )}
             </a>
           </li>
         </ul>
