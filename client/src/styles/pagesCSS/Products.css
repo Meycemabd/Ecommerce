@@ -1,8 +1,42 @@
 /* src/styles/pagesCSS/Products.css */
 .products-page {
-    padding-top: 120px; /* Abstand zur Navbar */
-  }
+  padding-top: 120px; /* Abstand zur Navbar */
+  padding-bottom: 40px;
+}
+
 .products-page .row {
-    min-height: 100vh;
+  min-height: 100vh;
+}
+
+/* FilterSidebar und Hauptinhalt nebeneinander (ab md) */
+@media (min-width: 768px) {
+  .products-page .row > div:first-child {
+    border-right: 1px solid #ddd;
   }
-   
+}
+
+/* Mobile Ansicht – Stack Layout */
+@media (max-width: 767px) {
+  .products-page {
+    padding: 100px 1rem 2rem;
+  }
+
+  .products-header h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .products-page .row {
+    flex-direction: column;
+  }
+
+  .products-page .row > div {
+    width: 100%;
+  }
+
+  .products-header .position-absolute {
+    position: static !important;
+    margin-top: 1rem;
+    text-align: center;
+  }
+}
