@@ -1,29 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LoadingPage from "../pages/LoadingPage";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/authSlice"; // 👈 Redux-Logout importieren
 
 export default function DashboardPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
-    if (!isLoggedIn) {
-      navigate("/login"); // ❗️Falls nicht eingeloggt, zurück zur Login-Seite
-      return;
-    }
-
-    const timer = setTimeout(() => setLoading(false), 1500); // Ladezeit nur wenn eingeloggt
-    return () => clearTimeout(timer);
-  }, [navigate]);
+    const timeout = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timeout);
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    navigate("/login");
+    setLoading(true);
+    dispatch(logout()); // 👈 Redux-Logout auslösen
+    setTimeout(() => {
+      navigate("/login");
+    }, 1500);
   };
-
-  if (loading) return <LoadingPage />;
 
   return (
     <div
@@ -36,10 +32,21 @@ export default function DashboardPage() {
         textAlign: "center",
       }}
     >
-      <h2>Welcome to your Dashboard</h2>
-      <button className="btn btn-dark mt-3" onClick={handleLogout}>
-        Logout
-      </button>
+      {loading ? (
+        <div className="text-center">
+          <div className="spinner-border text-dark" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <p className="mt-3">Loading your dashboard...</p>
+        </div>
+      ) : (
+        <>
+          <h2>Welcome to your Dashboard</h2>
+          <button onClick={handleLogout} className="btn btn-outline-dark mt-3">
+            Logout
+          </button>
+        </>
+      )}
     </div>
   );
 }

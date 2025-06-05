@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Home, ShoppingBag, Search, User, X, Heart } from 'lucide-react';
+import { Home, ShoppingBag, Search, User, X, Heart, Check } from 'lucide-react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import "../styles/componentCSS/Header.css";
 
 export default function Header({ setSearchQuery }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const inputRef = useRef(null);
 
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 👈 aus Redux!
   const favoriteCount = useSelector((state) => state.favorites.length);
-
-  // ✅ NEU: cart count berechnen
   const cartCount = useSelector((state) =>
     state.cart.reduce((total, item) => total + item.quantity, 0)
   );
@@ -25,15 +25,15 @@ export default function Header({ setSearchQuery }) {
   return (
     <header className="main-header d-flex justify-content-between align-items-center px-4 py-3 shadow-sm bg-white fixed-top">
       <div className="logo-text">
-        <a href="/">Eyou.Store</a>
+        <Link to="/">Eyou.Store</Link>
       </div>
 
       <nav className="flex-grow-1">
         <ul className={`nav-links list-unstyled d-flex align-items-center mb-0 ${searchOpen ? 'search-active justify-content-center' : 'justify-content-end'}`}>
           <li className="mx-3">
-            <a href="/products" className="nav-icon text-decoration-none" aria-label="Home">
+            <Link to="/products" className="nav-icon text-decoration-none" aria-label="Home">
               <Home size={24} strokeWidth={1.5} />
-            </a>
+            </Link>
           </li>
 
           <li className="mx-3">
@@ -46,32 +46,50 @@ export default function Header({ setSearchQuery }) {
             </button>
           </li>
 
-          <li className="mx-3">
-            <a href="/login" className="nav-icon text-decoration-none" aria-label="Login">
-              <User size={24} strokeWidth={1.5} />
-            </a>
+          <li className="mx-3 position-relative">
+            <Link to="/login" className="nav-icon text-decoration-none position-relative" aria-label="Login">
+              {isLoggedIn ? (
+                <>
+                  <User size={24} strokeWidth={1.5} />
+                  <Check
+                    size={14}
+                    strokeWidth={3}
+                    color="green"
+                    className="position-absolute"
+                    style={{
+                      top: 0,
+                      right: 0,
+                      backgroundColor: 'white',
+                      borderRadius: '50%',
+                    }}
+                  />
+                </>
+              ) : (
+                <User size={24} strokeWidth={1.5} />
+              )}
+            </Link>
           </li>
 
           <li className="mx-3 position-relative">
-            <a href="/favorites" className="nav-icon text-decoration-none position-relative" aria-label="Favorites">
+            <Link to="/favorites" className="nav-icon text-decoration-none position-relative" aria-label="Favorites">
               <Heart size={24} strokeWidth={1.5} />
               {favoriteCount > 0 && (
                 <span className="badge bg-danger text-white rounded-circle position-absolute top-0 start-100 translate-middle" style={{ fontSize: '0.7rem', minWidth: '18px', height: '18px', lineHeight: '18px', padding: '0 5px', textAlign: 'center' }}>
                   {favoriteCount}
                 </span>
               )}
-            </a>
+            </Link>
           </li>
 
           <li className="mx-3 position-relative">
-            <a href="/cart" className="nav-icon text-decoration-none position-relative" aria-label="Cart">
+            <Link to="/cart" className="nav-icon text-decoration-none position-relative" aria-label="Cart">
               <ShoppingBag size={24} strokeWidth={1.5} />
               {cartCount > 0 && (
                 <span className="badge bg-dark text-white rounded-circle position-absolute top-0 start-100 translate-middle" style={{ fontSize: '0.7rem', minWidth: '18px', height: '18px', lineHeight: '18px', padding: '0 5px', textAlign: 'center' }}>
                   {cartCount}
                 </span>
               )}
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

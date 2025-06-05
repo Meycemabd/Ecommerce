@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import favoritesReducer from '../redux/favoritesSlice';
 import cartReducer from '../redux/cartSlice'; 
+import authReducer from '../redux/authSlice';
 
 import {
   persistStore,
@@ -18,11 +19,13 @@ import storage from 'redux-persist/lib/storage';
 const rootReducer = combineReducers({
   favorites: favoritesReducer,
   cart: cartReducer, 
+  auth: authReducer, 
 });
 
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: ['cart', 'favorites', 'auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
