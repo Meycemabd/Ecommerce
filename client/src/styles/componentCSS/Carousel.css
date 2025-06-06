@@ -170,6 +170,7 @@
 .carousel-container {
   padding: 40px 0;
   background: #fafafa;
+  position: relative;
 }
 
 .carousel-slide {
@@ -181,36 +182,43 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   background: #fff;
-  border: none;
+  border: 2px solid #e50010;
   border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(229, 0, 16, 0.2);
   cursor: pointer;
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  color: #e50010;
+  padding: 0;
+}
+
+.carousel-arrow svg {
+  stroke-width: 2.5;
 }
 
 .carousel-arrow:hover {
-  background: #f5f5f5;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  background: #fff5f5;
+  border-color: #e50010;
+  box-shadow: 0 4px 12px rgba(229, 0, 16, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow:active {
+  transform: translateY(-50%) scale(0.95);
 }
 
 .carousel-arrow.next {
-  right: -20px;
+  right: -25px;
 }
 
 .carousel-arrow.prev {
-  left: -20px;
-}
-
-.carousel-arrow span {
-  font-size: 20px;
-  color: #333;
+  left: -25px;
 }
 
 /* Slick Dots */
@@ -224,7 +232,7 @@
 }
 
 .slick-dots li.slick-active button:before {
-  color: #111;
+  color: #e50010;
 }
 
 /* Slick Track */
@@ -240,6 +248,20 @@
 /* Responsive */
 @media (max-width: 768px) {
   .carousel-arrow {
-    display: none;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .carousel-arrow svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .carousel-arrow.next {
+    right: -20px;
+  }
+  
+  .carousel-arrow.prev {
+    left: -20px;
   }
 }

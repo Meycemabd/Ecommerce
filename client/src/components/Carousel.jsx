@@ -5,19 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../redux/cartSlice";
 import { addToFavorites, removeFromFavorites } from "../redux/favoritesSlice";
 import { Link } from "react-router-dom";
-import { Heart, ShoppingBag } from "lucide-react";
+import { Heart, ShoppingBag, ChevronLeft, ChevronRight } from "lucide-react";
 import "../styles/componentCSS/Carousel.css";
 
 // Custom Arrow Components
 const NextArrow = ({ onClick }) => (
   <button className="carousel-arrow next" onClick={onClick}>
-    <span>→</span>
+    <ChevronRight size={32} />
   </button>
 );
 
 const PrevArrow = ({ onClick }) => (
   <button className="carousel-arrow prev" onClick={onClick}>
-    <span>←</span>
+    <ChevronLeft size={32} />
   </button>
 );
 
