@@ -13,7 +13,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import FavoritePage from "./pages/FavoritePage";
 import CartPage from './pages/CartPage';
-import CheckoutPage from "./pages/CheckouPage";  
+import CheckoutPage from "./pages/CheckoutPage";  
 import LoadingPage from "./pages/LoadingPage";  
 import ThankYouPage from "./pages/ThankYouPage";
 import DashboardPage from './pages/DashboardPage';

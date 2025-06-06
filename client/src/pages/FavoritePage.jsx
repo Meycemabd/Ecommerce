@@ -10,7 +10,7 @@ export default function FavoritePage() {
   const navigate = useNavigate(); 
 
   const handleAddToCart = (item) => {
-    dispatch(addToCart({ ...item, quantity: 1 }));  // ✅ quantity hinzufügen
+    dispatch(addToCart({ ...item, quantity: 1 }));  
     dispatch(removeFromFavorites(item.id)); 
     navigate('/cart');                 
   };

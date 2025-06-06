@@ -2,9 +2,12 @@
 
 .checkout-page {
   font-family: 'Poppins', sans-serif;
-  padding: 80px 20px 40px;
+  margin-top: 80px;
+  padding: 0 20px 120px;
   background-color: #f8f8f8;
-  min-height: 100vh;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .checkout-container {
@@ -16,15 +19,26 @@
   border-radius: 16px;
   padding: 40px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  flex: 1;
 }
 
 .checkout-form {
   flex: 2;
+  display: flex;
+  flex-direction: column;
 }
 
 .checkout-form form {
   display: flex;
   flex-direction: column;
+  flex: 1;
+}
+
+.checkout-right {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .checkout-form label {
@@ -49,16 +63,29 @@
   font-size: 14px;
 }
 
+.error-message {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-family: 'Poppins', sans-serif;
+  display: block;
+}
+
 .checkout-submit-btn {
-  margin-top: 30px;
+  margin-top: auto;
   background-color: #111;
   color: white;
   padding: 14px;
   font-size: 16px;
   border: none;
-  border-radius: 12px;
+  border-radius: 0;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
 }
 
 .checkout-submit-btn:hover {
@@ -72,11 +99,14 @@
   border: 1px solid #eee;
   border-radius: 16px;
   padding: 24px;
-  height: fit-content;
 }
 
 .checkout-summary h3 {
   font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.summary-items {
   margin-bottom: 20px;
 }
 
@@ -116,4 +146,59 @@
   font-size: 18px;
   font-weight: 600;
   color: #222;
+}
+
+/* Payment Section */
+.payment-section {
+  margin-top: 30px;
+  background-color: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 10px;
+}
+
+.payment-section h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.payment-row {
+  display: flex;
+  gap: 20px;
+}
+
+.payment-row .form-group {
+  flex: 1;
+}
+
+.payment-row input {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.payment-row input:focus {
+  border-color: #111;
+  outline: none;
+}
+
+.payment-row input.error {
+  border-color: #dc3545;
+}
+
+.payment-row input::placeholder {
+  color: #999;
 }

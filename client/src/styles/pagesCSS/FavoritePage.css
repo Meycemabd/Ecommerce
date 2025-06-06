@@ -3,11 +3,14 @@
 .favorite-page {
   margin-top: 120px;
   padding: 20px;
+  padding-bottom: 120px;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   background-color: #f5f5f5;
-  min-height: 80vh;
+  min-height: 70vh;
   color: #111;
+  display: flex;
+  flex-direction: column;
 }
 
 .wishlist-title {
@@ -26,6 +29,7 @@
   padding: 0;
   margin: 0;
   font-family: inherit;
+  flex: 1;
 }
 
 .wishlist-item {
@@ -110,6 +114,11 @@
   padding: 60px 20px;
   color: #666;
   font-family: inherit;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .empty-message a {

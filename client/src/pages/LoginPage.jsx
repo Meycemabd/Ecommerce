@@ -73,7 +73,7 @@ export default function LoginPage() {
               />
             </div>
 
-            <button className="btn btn-dark btn-md w-100 mb-2" type="submit">
+            <button className="login-submit-btn" type="submit">
               Login
             </button>
 
