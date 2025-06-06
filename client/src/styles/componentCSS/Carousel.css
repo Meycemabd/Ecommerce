@@ -114,3 +114,55 @@
   outline: none;
   border: none;
 }
+
+.carousel-icons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 2;
+}
+
+.carousel-icon-btn {
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.carousel-icon-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Heart Icon (rot, wie gewünscht) */
+.favorite-btn svg {
+  color: #e50010;
+  stroke-width: 1.5;
+  transition: all 0.2s ease;
+}
+
+.favorite-btn.active svg {
+  fill: #e50010;
+  color: #e50010;
+}
+
+/* Cart Icon (dunkelgrau, kein Background) */
+.cart-btn svg {
+  color: #444;
+  stroke-width: 1.5;
+  transition: all 0.2s ease;
+}
+
+.cart-btn.active svg {
+  fill: #444;
+  color: #111;
+  stroke-width: 1.8;
+}
