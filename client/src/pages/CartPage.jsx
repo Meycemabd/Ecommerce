@@ -1,154 +1,91 @@
-import {
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCol,
-  MDBContainer,
-  MDBIcon,
-  MDBRow,
-  MDBTypography,
-} from "mdb-react-ui-kit";
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   removeFromCart,
   increaseQuantity,
   decreaseQuantity,
 } from "../redux/cartSlice";
-import { useNavigate } from "react-router-dom";
+import { Trash2 } from "lucide-react";
+import NewsletterSection from "../components/NewsletterSection";
 import "../styles/pagesCSS/CartPage.css";
 
 export default function CartPage() {
-  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
   const navigate = useNavigate();
+
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  const handleCheckout = () => {
+    navigate("/checkout", { state: { total } });
+  };
+
   return (
-    <section className="cart-page">
-      <MDBContainer className="py-5 h-100">
-        <MDBRow className="justify-content-center align-items-center h-100">
-          <MDBCol>
-            <MDBCard className="shadow-sm border-0 rounded-4">
-              <MDBCardBody className="p-4">
-                <MDBRow>
-                  {/* LEFT SIDE */}
-                  <MDBCol lg="7">
-                    <MDBTypography tag="h6" className="mb-3">
-                      <a href="/" className="text-body cart-back-link d-flex align-items-center">
-                        <MDBIcon fas icon="arrow-left" className="me-3 fs-5 text-secondary" />
-                        <span className="fw-light fs-6">Continue Shopping</span>
-                      </a>
-                    </MDBTypography>
+    <div className="cart-container">
+      <div className="cart-content">
+        <div className="cart-header">
+          <h1>Shopping Cart</h1>
+          <p className="cart-count">{cart.length} items in cart</p>
+        </div>
 
-                    <hr />
+        <div className="cart-main">
+          {/* Left Side - Cart Items */}
+          <div className="cart-items">
+            {cart.map((item) => (
+              <div key={item.id} className="cart-item">
+                <div className="cart-item-image">
+                  <img src={item.image} alt={item.title} />
+                </div>
+                <div className="cart-item-details">
+                  <h3>{item.title}</h3>
+                  <div className="cart-item-quantity">
+                    <button onClick={() => dispatch(decreaseQuantity(item.id))}>-</button>
+                    <span>{item.quantity}</span>
+                    <button onClick={() => dispatch(increaseQuantity(item.id))}>+</button>
+                  </div>
+                  <p className="cart-item-price">${(item.price * item.quantity).toFixed(2)}</p>
+                </div>
+                <button 
+                  className="cart-item-remove"
+                  onClick={() => dispatch(removeFromCart(item.id))}
+                >
+                  <Trash2 size={20} />
+                </button>
+              </div>
+            ))}
+          </div>
 
-                    <div className="d-flex justify-content-between align-items-center mb-4">
-                      <div>
-                        <p className="cart-title">Shopping Cart</p>
-                        <p className="cart-subtitle">
-                          You have {cart.length} item(s) in your cart
-                        </p>
-                      </div>
-                    </div>
+          {/* Right Side - Order Summary */}
+          <div className="cart-summary">
+            <h2>Order Summary</h2>
+            <div className="summary-row">
+              <span>Subtotal</span>
+              <span>${total.toFixed(2)}</span>
+            </div>
+            <div className="summary-row">
+              <span>Shipping</span>
+              <span>Free</span>
+            </div>
+            <div className="summary-row total">
+              <span>Total</span>
+              <span>${total.toFixed(2)}</span>
+            </div>
+            <button
+                className="cart-card-checkout-btn"
+                onClick={handleCheckout}
+                disabled={cart.length === 0}
+              >
+                Proceed to Checkout
+              </button>
 
-                    {cart.map((item) => (
-                      <MDBCard className="mb-3 border-0 shadow-sm rounded-4" key={item.id}>
-                        <MDBCardBody>
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div className="d-flex flex-row align-items-center">
-                              <MDBCardImage
-                                src={item.image}
-                                fluid
-                                className="rounded-3"
-                                style={{ width: "65px" }}
-                                alt={item.title}
-                              />
-                              <div className="ms-3">
-                                <MDBTypography tag="h6" className="cart-product-title">
-                                  {item.title}
-                                </MDBTypography>
-
-                                {/* Quantity Controls */}
-                                <div className="d-flex align-items-center mt-2">
-                                  <button
-                                    className="quantity-btn"
-                                    onClick={() => dispatch(decreaseQuantity(item.id))}
-                                  >
-                                    <MDBIcon fas icon="minus" />
-                                  </button>
-                                  <span className="mx-3 cart-quantity-number">{item.quantity}</span>
-                                  <button
-                                    className="quantity-btn"
-                                    onClick={() => dispatch(increaseQuantity(item.id))}
-                                  >
-                                    <MDBIcon fas icon="plus" />
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="d-flex flex-row align-items-center">
-                              <MDBTypography tag="h6" className="cart-product-price mb-0">
-                                ${(item.price * item.quantity).toFixed(2)}
-                              </MDBTypography>
-                              <button
-                                className="cart-trash-btn"
-                                onClick={() => dispatch(removeFromCart(item.id))}
-                              >
-                                <MDBIcon fas icon="trash-alt" />
-                              </button>
-                            </div>
-                          </div>
-                        </MDBCardBody>
-                      </MDBCard>
-                    ))}
-                  </MDBCol>
-
-                  {/* RIGHT SIDE */}
-                  <MDBCol lg="5">
-                    <MDBCard className="bg-white text-dark rounded-4 shadow-sm">
-                      <MDBCardBody>
-                        <MDBTypography tag="h5" className="cart-card-heading">
-                          Order Summary
-                        </MDBTypography>
-
-                        <hr />
-
-                        <div className="d-flex justify-content-between mb-2 cart-card-row">
-                          <p className="cart-card-label">Subtotal</p>
-                          <p className="cart-card-value">${total.toFixed(2)}</p>
-                        </div>
-                        <div className="d-flex justify-content-between mb-2 cart-card-row">
-                          <p className="cart-card-label">Shipping</p>
-                          <p className="cart-card-value">$0.00</p>
-                        </div>
-                        <div className="d-flex justify-content-between mb-4 cart-card-total-row">
-                          <strong className="cart-card-total-label">Total</strong>
-                          <strong className="cart-card-total-value">${total.toFixed(2)}</strong>
-                        </div>
-
-                        <button
-                          className="cart-card-checkout-btn"
-                          onClick={() => navigate("/checkout", { state: { total } })}
-                          disabled={cart.length === 0}
-                        >
-                          <div className="checkout-inner">
-                            <span>${total.toFixed(2)}</span>
-                            <span>
-                              Checkout <i className="fas fa-arrow-right ms-2"></i>
-                            </span>
-                          </div>
-                        </button>
-                      </MDBCardBody>
-                    </MDBCard>
-                  </MDBCol>
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
-    </section>
+            <Link to="/products" className="continue-shopping">
+              Continue Shopping
+            </Link>
+          </div>
+        </div>
+      </div>
+      <NewsletterSection />
+    </div>
   );
 }

@@ -1,27 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useFavorite } from "../context/FavoriteContext";
-import { useCart } from "../context/CartContext";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromFavorites } from "../redux/favoritesSlice";
+import { addToCart } from "../redux/cartSlice";
 import { Trash2, ShoppingCart } from "lucide-react";
-import "../styles/pagesCSS/FavoritePage.css";
+import "../styles/pagesCSS/FavoritesPage.css";
 
-export default function FavoritePage() {
-  const { favorites, removeFromFavorites } = useFavorite();
-  const { addToCart } = useCart();
+export default function FavoritesPage() {
+  const dispatch = useDispatch();
+  const favorites = useSelector((state) => state.favorites);
+  const cart = useSelector((state) => state.cart);
+
+  const handleRemoveFromFavorites = (productId) => {
+    dispatch(removeFromFavorites(productId));
+  };
 
   const handleAddToCart = (product) => {
-    addToCart(product);
-    removeFromFavorites(product.id);
+    dispatch(addToCart({ ...product, quantity: 1 }));
+  };
+
+  const isInCart = (productId) => {
+    return cart.some((item) => item.id === productId);
   };
 
   if (favorites.length === 0) {
     return (
-      <div className="favorite-container">
-        <div className="favorite-content">
+      <div className="favorites-container">
+        <div className="favorites-content">
           <div className="empty-favorites">
             <h3>Your Favorites List is Empty</h3>
             <p>Add some products to your favorites to see them here.</p>
-            <Link to="/" className="browse-btn">
+            <Link to="/products" className="browse-btn">
               Browse Products
             </Link>
           </div>
@@ -31,14 +40,14 @@ export default function FavoritePage() {
   }
 
   return (
-    <div className="favorite-container">
-      <div className="favorite-content">
-        <div className="favorite-header">
+    <div className="favorites-container">
+      <div className="favorites-content">
+        <div className="favorites-header">
           <h2>My Favorites</h2>
           <p>You have {favorites.length} items in your favorites list</p>
         </div>
 
-        <div className="favorite-list">
+        <div className="favorites-list">
           {favorites.map((product) => (
             <div key={product.id} className="favorite-item">
               <img src={product.image} alt={product.title} />
@@ -49,7 +58,7 @@ export default function FavoritePage() {
               <div className="item-actions">
                 <button
                   className="action-btn remove-btn"
-                  onClick={() => removeFromFavorites(product.id)}
+                  onClick={() => handleRemoveFromFavorites(product.id)}
                 >
                   <Trash2 size={16} />
                 </button>

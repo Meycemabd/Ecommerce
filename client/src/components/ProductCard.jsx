@@ -43,10 +43,6 @@ const ProductCard = ({ product }) => {
     return title.split(" ").slice(0, 3).join(" ");
   };
 
-  const getShortDescription = (description) => {
-    return description.length > 100 ? description.substring(0, 100) + "..." : description;
-  };
-
   return (
     <div className="product-card">
       <div className="product-card-icons">
@@ -79,8 +75,7 @@ const ProductCard = ({ product }) => {
         <div className="product-card-content">
           <h3 className="product-card-title">{getShortTitle(product.title)}</h3>
           <p className="product-card-price">${product.price.toFixed(2)}</p>
-          <p className="product-card-description">{getShortDescription(product.description)}</p>
-          <button className="product-card-btn primary">View Details</button>
+          <button className="product-card-btn primary">View Product</button>
         </div>
       </Link>
     </div>

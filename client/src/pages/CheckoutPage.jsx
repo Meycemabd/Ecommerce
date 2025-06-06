@@ -1,300 +1,332 @@
 // src/pages/CheckoutPage.jsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../redux/cartSlice";
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCol,
+  MDBContainer,
+  MDBIcon,
+  MDBInput,
+  MDBRow,
+  MDBTypography,
+} from "mdb-react-ui-kit";
 import "../styles/pagesCSS/CheckoutPage.css";
 
-const CheckoutPage = () => {
-  const cart = useSelector((state) => state.cart);
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const dispatch = useDispatch();
+export default function CheckoutPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const { total } = useLocation().state || { total: 0 };
+
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
+    phone: "",
     address: "",
     city: "",
-    postalCode: "",
-    country: "",
-    cardName: "",
+    state: "",
+    zipCode: "",
     cardNumber: "",
-    expiry: "",
+    cardName: "",
+    expiryDate: "",
     cvv: "",
   });
 
-  const [formErrors, setFormErrors] = useState({});
-
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
+    let formattedValue = value;
+
+    // Format card number with spaces
+    if (name === "cardNumber") {
+      formattedValue = value.replace(/\s/g, "").replace(/(\d{4})/g, "$1 ").trim();
+    }
+    // Format expiry date
+    else if (name === "expiryDate") {
+      formattedValue = value
+        .replace(/\D/g, "")
+        .replace(/(\d{2})(\d{0,2})/, "$1/$2")
+        .substr(0, 5);
+    }
+    // Format CVV
+    else if (name === "cvv") {
+      formattedValue = value.replace(/\D/g, "").substr(0, 3);
+    }
+
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: formattedValue,
     }));
-    // Clear error when user starts typing
-    if (formErrors[name]) {
-      setFormErrors((prev) => ({
-        ...prev,
-        [name]: "",
-      }));
-    }
-  };
-
-  const validateForm = () => {
-    const errors = {};
-    const cardNumberRegex = /^\d{16}$/;
-    const cvvRegex = /^\d{3,4}$/;
-    const currentDate = new Date();
-    const [expiryMonth, expiryYear] = formData.expiry.split('/');
-    const expiryDate = new Date(2000 + parseInt(expiryYear), parseInt(expiryMonth) - 1);
-
-    if (!formData.cardName.trim()) {
-      errors.cardName = "Cardholder name is required";
-    }
-
-    if (!cardNumberRegex.test(formData.cardNumber.replace(/\s/g, ""))) {
-      errors.cardNumber = "Please enter a valid 16-digit card number";
-    }
-
-    if (!formData.expiry.match(/^(0[1-9]|1[0-2])\/([0-9]{2})$/)) {
-      errors.expiry = "Please enter a valid expiry date (MM/YY)";
-    } else if (expiryDate < currentDate) {
-      errors.expiry = "Card has expired";
-    }
-
-    if (!cvvRegex.test(formData.cvv)) {
-      errors.cvv = "Please enter a valid 3 or 4 digit CVV";
-    }
-
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Process payment and order
-      const orderData = {
-        user: {
-          name: formData.name,
-          email: formData.email,
-          address: formData.address,
-          city: formData.city,
-          postalCode: formData.postalCode,
-          country: formData.country
-        },
-        total: total,
-        items: cart
-      };
-      
-      dispatch(clearCart());
-      navigate("/thank-you", { state: orderData });
-    }
+    // Speichere die Bestelldaten für die ThankYouPage
+    const orderData = {
+      customer: {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+      },
+      shipping: {
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        zipCode: formData.zipCode,
+      },
+      total: total,
+      items: cart,
+    };
+    
+    // Leere den Warenkorb
+    dispatch(clearCart());
+    
+    // Weiterleitung zur LoadingPage mit den Bestelldaten
+    navigate("/loading", { state: { orderData } });
   };
-
-  if (cart.length === 0) {
-    return (
-      <div className="checkout-page">
-        <h2>Your cart is empty</h2>
-        <button onClick={() => navigate("/")}>Continue Shopping</button>
-      </div>
-    );
-  }
 
   return (
     <div className="checkout-page">
-      <div className="checkout-container">
-        {/* LEFT - SHIPPING FORM */}
-        <div className="checkout-form">
-          <h2 className="checkout-title">Checkout</h2>
+      <MDBContainer className="py-5 h-100">
+        <MDBRow className="justify-content-center align-items-center h-100">
+          <MDBCol>
+            <MDBCard className="shadow-sm border-0 rounded-4">
+              <MDBCardBody className="p-4">
+                <MDBRow>
+                  {/* LEFT - SHIPPING FORM */}
+                  <MDBCol lg="7">
+                    <MDBTypography tag="h6" className="mb-3">
+                      <a href="/cart" className="text-body checkout-back-link d-flex align-items-center">
+                        <MDBIcon fas icon="arrow-left" className="me-3 fs-5 text-secondary" />
+                        <span className="fw-light fs-6">Back to Cart</span>
+                      </a>
+                    </MDBTypography>
 
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label>Full Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-            </div>
+                    <hr />
 
-            <div className="form-group">
-              <label>Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
+                    <form onSubmit={handleSubmit}>
+                      <MDBTypography tag="h5" className="checkout-form-heading">
+                        Shipping Information
+                      </MDBTypography>
 
-            <div className="form-group">
-              <label>Address</label>
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                required
-              />
-            </div>
+                      <MDBRow>
+                        <MDBCol md="6" className="mb-3">
+                          <label className="form-label">First Name</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="firstName"
+                            value={formData.firstName}
+                            onChange={handleInputChange}
+                            required
+                          />
+                        </MDBCol>
+                        <MDBCol md="6" className="mb-3">
+                          <label className="form-label">Last Name</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="lastName"
+                            value={formData.lastName}
+                            onChange={handleInputChange}
+                            required
+                          />
+                        </MDBCol>
+                      </MDBRow>
 
-            <div className="form-row">
-              <div className="form-group">
-                <label>City</label>
-                <input
-                  type="text"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+                      <MDBRow>
+                        <MDBCol md="6" className="mb-3">
+                          <label className="form-label">Email</label>
+                          <input
+                            type="email"
+                            className="form-control"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            required
+                          />
+                        </MDBCol>
+                        <MDBCol md="6" className="mb-3">
+                          <label className="form-label">Phone</label>
+                          <input
+                            type="tel"
+                            className="form-control"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            required
+                          />
+                        </MDBCol>
+                      </MDBRow>
 
-              <div className="form-group">
-                <label>Postal Code</label>
-                <input
-                  type="text"
-                  name="postalCode"
-                  value={formData.postalCode}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
+                      <div className="mb-3">
+                        <label className="form-label">Address</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="address"
+                          value={formData.address}
+                          onChange={handleInputChange}
+                          required
+                        />
+                      </div>
 
-            <div className="form-group">
-              <label>Country</label>
-              <select
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select your country</option>
-                <option value="Germany">Germany</option>
-                <option value="Austria">Austria</option>
-                <option value="Switzerland">Switzerland</option>
-                <option value="France">France</option>
-                <option value="Italy">Italy</option>
-                <option value="Netherlands">Netherlands</option>
-                <option value="Belgium">Belgium</option>
-                <option value="Spain">Spain</option>
-                <option value="Poland">Poland</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="United States">United States</option>
-                <option value="Canada">Canada</option>
-                <option value="Australia">Australia</option>
-              </select>
-            </div>
-          </form>
-        </div>
+                      <MDBRow>
+                        <MDBCol md="6" className="mb-3">
+                          <label className="form-label">City</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="city"
+                            value={formData.city}
+                            onChange={handleInputChange}
+                            required
+                          />
+                        </MDBCol>
+                        <MDBCol md="3" className="mb-3">
+                          <label className="form-label">State</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="state"
+                            value={formData.state}
+                            onChange={handleInputChange}
+                            required
+                          />
+                        </MDBCol>
+                        <MDBCol md="3" className="mb-3">
+                          <label className="form-label">ZIP Code</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="zipCode"
+                            value={formData.zipCode}
+                            onChange={handleInputChange}
+                            required
+                          />
+                        </MDBCol>
+                      </MDBRow>
 
-        {/* RIGHT - SUMMARY AND PAYMENT */}
-        <div className="checkout-right">
-          {/* Order Summary */}
-          <div className="checkout-summary">
-            <h3 className="section-title">Order Summary</h3>
-            <div className="summary-items">
-              {cart.map((item) => (
-                <div className="summary-item" key={item.id}>
-                  <div className="summary-title">{item.title}</div>
-                  <div className="summary-quantity">Qty: {item.quantity}</div>
-                  <div className="summary-price">
-                    € {(item.price * item.quantity).toFixed(2)}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="summary-total">
-              <span>Total:</span>
-              <span>€ {total.toFixed(2)}</span>
-            </div>
-          </div>
+                      <MDBTypography tag="h5" className="checkout-form-heading mt-4">
+                        Payment Information
+                      </MDBTypography>
 
-          {/* Payment Info */}
-          <div className="payment-section">
-            <h4 className="section-title">Payment</h4>
-            <div className="payment-form">
-              <div className="payment-row">
-                <div className="form-group">
-                  <label>Cardholder Name</label>
-                  <input
-                    type="text"
-                    name="cardName"
-                    value={formData.cardName}
-                    onChange={handleChange}
-                    required
-                    placeholder="John Doe"
-                  />
-                  {formErrors.cardName && (
-                    <span className="error-message">{formErrors.cardName}</span>
-                  )}
-                </div>
+                      <div className="mb-3">
+                        <label className="form-label">Card Number</label>
+                        <input
+                          type="text"
+                          className="form-control card-number-input"
+                          name="cardNumber"
+                          value={formData.cardNumber}
+                          onChange={handleInputChange}
+                          placeholder="1234 5678 9012 3456"
+                          maxLength="19"
+                          required
+                        />
+                      </div>
 
-                <div className="form-group">
-                  <label>Card Number</label>
-                  <input
-                    type="text"
-                    name="cardNumber"
-                    value={formData.cardNumber}
-                    onChange={handleChange}
-                    required
-                    placeholder="1234 5678 9012 3456"
-                    maxLength="19"
-                  />
-                  {formErrors.cardNumber && (
-                    <span className="error-message">{formErrors.cardNumber}</span>
-                  )}
-                </div>
-              </div>
+                      <div className="mb-3">
+                        <label className="form-label">Name on Card</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="cardName"
+                          value={formData.cardName}
+                          onChange={handleInputChange}
+                          required
+                        />
+                      </div>
 
-              <div className="payment-row">
-                <div className="form-group">
-                  <label>Expiry Date (MM/YY)</label>
-                  <input
-                    type="text"
-                    name="expiry"
-                    value={formData.expiry}
-                    onChange={handleChange}
-                    required
-                    placeholder="MM/YY"
-                    maxLength="5"
-                  />
-                  {formErrors.expiry && (
-                    <span className="error-message">{formErrors.expiry}</span>
-                  )}
-                </div>
+                      <MDBRow>
+                        <MDBCol md="6" className="mb-3">
+                          <label className="form-label">Expiry Date</label>
+                          <input
+                            type="text"
+                            className="form-control expiry-input"
+                            name="expiryDate"
+                            value={formData.expiryDate}
+                            onChange={handleInputChange}
+                            placeholder="MM/YY"
+                            maxLength="5"
+                            required
+                          />
+                        </MDBCol>
+                        <MDBCol md="6" className="mb-3">
+                          <label className="form-label">CVV</label>
+                          <input
+                            type="password"
+                            className="form-control cvv-input"
+                            name="cvv"
+                            value={formData.cvv}
+                            onChange={handleInputChange}
+                            maxLength="3"
+                            required
+                          />
+                        </MDBCol>
+                      </MDBRow>
 
-                <div className="form-group">
-                  <label>CVV</label>
-                  <input
-                    type="text"
-                    name="cvv"
-                    value={formData.cvv}
-                    onChange={handleChange}
-                    required
-                    placeholder="123"
-                    maxLength="4"
-                  />
-                  {formErrors.cvv && (
-                    <span className="error-message">{formErrors.cvv}</span>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+                      <button
+                        type="submit"
+                        className="checkout-submit-btn"
+                        disabled={cart.length === 0}
+                      >
+                        Place Order
+                      </button>
+                    </form>
+                  </MDBCol>
 
-          <button type="submit" className="checkout-submit-btn" onClick={handleSubmit}>
-            Place Order
-          </button>
-        </div>
-      </div>
+                  {/* RIGHT - ORDER SUMMARY */}
+                  <MDBCol lg="5">
+                    <MDBCard className="bg-white text-dark rounded-4 shadow-sm">
+                      <MDBCardBody>
+                        <MDBTypography tag="h5" className="checkout-card-heading">
+                          Order Summary
+                        </MDBTypography>
+
+                        <hr />
+
+                        <div className="d-flex justify-content-between mb-2 checkout-card-row">
+                          <p className="checkout-card-label">Subtotal</p>
+                          <p className="checkout-card-value">${total.toFixed(2)}</p>
+                        </div>
+                        <div className="d-flex justify-content-between mb-2 checkout-card-row">
+                          <p className="checkout-card-label">Shipping</p>
+                          <p className="checkout-card-value">$0.00</p>
+                        </div>
+                        <div className="d-flex justify-content-between mb-4 checkout-card-total-row">
+                          <strong className="checkout-card-total-label">Total</strong>
+                          <strong className="checkout-card-total-value">${total.toFixed(2)}</strong>
+                        </div>
+
+                        <div className="checkout-card-items">
+                          {cart.map((item) => (
+                            <div key={item.id} className="checkout-card-item">
+                              <div className="checkout-card-item-image">
+                                <img src={item.image} alt={item.title} />
+                              </div>
+                              <div className="checkout-card-item-details">
+                                <p className="checkout-card-item-title">{item.title}</p>
+                                <p className="checkout-card-item-quantity">Qty: {item.quantity}</p>
+                              </div>
+                              <p className="checkout-card-item-price">
+                                ${(item.price * item.quantity).toFixed(2)}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </MDBCardBody>
+                    </MDBCard>
+                  </MDBCol>
+                </MDBRow>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
     </div>
   );
-};
-
-export default CheckoutPage;
+}

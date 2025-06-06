@@ -14,7 +14,7 @@ import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from "./pages/ProductDetailPage";
 import Header from './components/Header';
 import Footer from './components/Footer';
-import FavoritePage from "./pages/FavoritePage";
+import FavoritesPage from "./pages/FavoritesPage";
 import CartPage from './pages/CartPage';
 import CheckoutPage from "./pages/CheckoutPage";  
 import LoadingPage from "./pages/LoadingPage";  
@@ -33,7 +33,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductsPage searchQuery={searchQuery} />} />
           <Route path="/product/:id" element={<ProductDetailPage />} />
-          <Route path="/favorites" element={<FavoritePage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/loading" element={<LoadingPage />} />

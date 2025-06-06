@@ -1,48 +1,31 @@
 // src/components/LoadingPage.jsx
-import React from "react";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Loader2 } from "lucide-react";
+import "../styles/pagesCSS/LoadingPage.css";
 
 export default function LoadingPage() {
-  const [progress, setProgress] = React.useState(0);
   const navigate = useNavigate();
   const location = useLocation();
+  const { orderData } = location.state || {};
 
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prevProgress) =>
-        prevProgress >= 100 ? 0 : prevProgress + 10
-      );
-    }, 300);
-
-    // Nach 3 Sekunden zur Thank-You-Seite weiterleiten
-    const redirectTimer = setTimeout(() => {
-      navigate("/thank-you", { state: location.state });
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/thank-you", { state: { orderData } });
     }, 3000);
 
-    return () => {
-      clearInterval(timer);
-      clearTimeout(redirectTimer);
-    };
-  }, [navigate, location.state]);
+    return () => clearTimeout(timer);
+  }, [navigate, orderData]);
 
   return (
-    <Box
-      sx={{
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#fafafa",
-      }}
-    >
-      <CircularProgress variant="determinate" value={progress} size={80} />
-      <Typography variant="body1" sx={{ mt: 2, color: "#555" }}>
-        Loading, please wait...
-      </Typography>
-    </Box>
+    <div className="loading-container">
+      <div className="loading-content">
+        <div className="loading-spinner">
+          <Loader2 size={48} className="spinner-icon" />
+        </div>
+        <h2 className="loading-title">Processing Your Order</h2>
+        <p className="loading-text">Please wait while we confirm your purchase</p>
+      </div>
+    </div>
   );
 }

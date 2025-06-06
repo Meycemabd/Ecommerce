@@ -1,53 +1,54 @@
-.favorite-container {
+.favorites-container {
   padding: 120px 20px 80px 20px;
   min-height: calc(100vh - 200px);
   background: #f8f8f8;
 }
 
-.favorite-content {
-  max-width: 1200px;
+.favorites-content {
+  max-width: 900px;
   margin: 0 auto;
 }
 
-.favorite-header {
-  margin-bottom: 30px;
+.favorites-header {
+  margin-bottom: 25px;
 }
 
-.favorite-header h2 {
-  font-size: 1.8rem;
+.favorites-header h2 {
+  font-size: 1.6rem;
   font-weight: 600;
   color: #333;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.favorite-header p {
+.favorites-header p {
   color: #666;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
-.favorite-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.favorites-list {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .favorite-item {
   display: flex;
   align-items: center;
-  gap: 20px;
-  background: #fff;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.favorite-item:last-child {
+  border-bottom: none;
 }
 
 .favorite-item img {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
   background: #fff;
   border-radius: 4px;
-  flex-shrink: 0;
+  margin-right: 20px;
 }
 
 .item-details {
@@ -59,7 +60,7 @@
   font-weight: 500;
   color: #333;
   margin: 0 0 5px 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -69,24 +70,22 @@
   font-weight: 600;
   color: #333;
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .item-actions {
   display: flex;
   gap: 10px;
-  margin-left: auto;
+  margin-left: 20px;
 }
 
 .action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 12px;
+  padding: 8px;
   border: none;
   border-radius: 4px;
-  font-size: 0.9rem;
-  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -111,14 +110,18 @@
   background: #333;
 }
 
+.cart-btn svg {
+  color: #FFD700;
+}
+
 .action-btn svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
 .empty-favorites {
   text-align: center;
-  padding: 40px 20px;
+  padding: 35px 20px;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -133,6 +136,7 @@
 .empty-favorites p {
   color: #666;
   margin-bottom: 20px;
+  font-size: 1rem;
 }
 
 .empty-favorites .browse-btn {
@@ -143,6 +147,7 @@
   text-decoration: none;
   border-radius: 4px;
   font-weight: 500;
+  font-size: 1rem;
   transition: background 0.2s ease;
 }
 
@@ -151,27 +156,25 @@
 }
 
 @media (max-width: 768px) {
-  .favorite-container {
+  .favorites-container {
     padding: 100px 15px 60px 15px;
   }
 
   .favorite-item {
-    padding: 12px;
-    gap: 15px;
+    padding: 12px 15px;
   }
 
   .favorite-item img {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
   }
 
   .action-btn {
-    padding: 6px 10px;
-    font-size: 0.85rem;
+    padding: 7px;
   }
 
   .action-btn svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
   }
 } 
