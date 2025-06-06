@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux";
-import { addToFavorites, removeFromFavorites } from "../redux/favoritesSlice";
 import { addToCart, removeFromCart } from "../redux/cartSlice";
+import { addToFavorites, removeFromFavorites } from "../redux/favoritesSlice";
+import { Link } from "react-router-dom";
 import { Heart, ShoppingBag } from "lucide-react";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import "../styles/componentCSS/Carousel.css";
 
-// Custom next arrow
-function NextArrow({ className, onClick }) {
-  return <div className={`${className} custom-arrow next-arrow`} onClick={onClick} />;
-}
+// Custom Arrow Components
+const NextArrow = ({ onClick }) => (
+  <button className="carousel-arrow next" onClick={onClick}>
+    <span>→</span>
+  </button>
+);
 
-// Custom previous arrow
-function PrevArrow({ className, onClick }) {
-  return <div className={`${className} custom-arrow prev-arrow`} onClick={onClick} />;
-}
+const PrevArrow = ({ onClick }) => (
+  <button className="carousel-arrow prev" onClick={onClick}>
+    <span>←</span>
+  </button>
+);
 
 export default function Carousel() {
   const [products, setProducts] = useState([]);
@@ -27,7 +27,6 @@ export default function Carousel() {
   const favorites = useSelector((state) => state.favorites);
   const cart = useSelector((state) => state.cart);
 
-  // Load products on mount
   useEffect(() => {
     axios
       .get("https://fakestoreapi.com/products")
@@ -57,17 +56,19 @@ export default function Carousel() {
     }
   };
 
+  const getShortTitle = (title) => {
+    return title.split(" ").slice(0, 3).join(" ");
+  };
+
   const settings = {
     dots: true,
     infinite: true,
     speed: 1000,
     slidesToShow: 3,
     slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: "50px",
     responsive: [
       { breakpoint: 1200, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 1, centerPadding: "0px" } }
+      { breakpoint: 768, settings: { slidesToShow: 1 } }
     ],
     arrows: true,
     autoplay: true,
@@ -78,59 +79,49 @@ export default function Carousel() {
     prevArrow: <PrevArrow />
   };
 
-  // Hilfsfunktion: Nur die ersten 3 Wörter des Titels anzeigen
-  const getShortTitle = (title) => {
-    return title.split(" ").slice(0, 3).join(" ");
-  };
-
   return (
-    <Slider {...settings}>
-      {products.map((product) => {
-        const isFavorite = favorites.some(item => item.id === product.id);
-        const isInCart = cart.some(item => item.id === product.id);
-        return (
-          <div key={product.id} className="px-3">
-            <Link to={`/product/${product.id}`} className="text-decoration-none text-dark">
-              <div className="carousel-card card h-100 d-flex flex-column justify-content-between">
-                <div className="position-relative">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="carousel-img card-img-top" 
-                    onError={(e) =>
-                      (e.target.src = "https://via.placeholder.com/300?text=No+Image")
-                    }
-                  />
-                  <div className="carousel-icons">
-                    <button
-                      className={`carousel-icon-btn favorite-btn ${isFavorite ? 'active' : ''}`}
-                      onClick={(e) => handleFavoriteClick(e, product)}
-                    >
-                      <Heart
-                        size={20}
-                        color="#111"
-                      />
-                    </button>
-                    <button
-                      className={`carousel-icon-btn cart-btn ${isInCart ? 'active' : ''}`}
-                      onClick={(e) => handleAddToCart(e, product)}
-                    >
-                      <ShoppingBag 
-                        size={20} 
-                      />
-                    </button>
-                  </div>
-                </div>
-                <div className="card-body text-center px-0 pt-3">
-                  <h5 className="carousel-title">{getShortTitle(product.title)}</h5>
-                  <p className="carousel-price">${product.price.toFixed(2)}</p>
-                  <button className="btn carousel-btn">Shop now</button>
-                </div>
+    <div className="carousel-container">
+      <Slider {...settings}>
+        {products.map((product) => (
+          <div key={product.id} className="carousel-slide">
+            <div className="product-card">
+              <div className="product-card-icons">
+                <button
+                  className={`product-card-icon-btn product-card-favorite-btn ${
+                    favorites.some(item => item.id === product.id) ? "active" : ""
+                  }`}
+                  onClick={(e) => handleFavoriteClick(e, product)}
+                >
+                  <Heart size={18} />
+                </button>
+                <button
+                  className={`product-card-icon-btn product-card-cart-btn ${
+                    cart.some(item => item.id === product.id) ? "active" : ""
+                  }`}
+                  onClick={(e) => handleAddToCart(e, product)}
+                >
+                  <ShoppingBag size={18} />
+                </button>
               </div>
-            </Link>
+              <Link to={`/product/${product.id}`} className="product-card-link">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="product-card-image"
+                  onError={(e) =>
+                    (e.target.src = "https://via.placeholder.com/300?text=No+Image")
+                  }
+                />
+                <div className="product-card-content">
+                  <h3 className="product-card-title">{getShortTitle(product.title)}</h3>
+                  <p className="product-card-price">${product.price.toFixed(2)}</p>
+                  <button className="product-card-btn primary">View Product</button>
+                </div>
+              </Link>
+            </div>
           </div>
-        );
-      })}
-    </Slider>
+        ))}
+      </Slider>
+    </div>
   );
 }

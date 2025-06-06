@@ -166,3 +166,80 @@
   color: #111;
   stroke-width: 1.8;
 }
+
+.carousel-container {
+  padding: 40px 0;
+  background: #fafafa;
+}
+
+.carousel-slide {
+  padding: 10px;
+}
+
+/* Carousel Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-arrow.next {
+  right: -20px;
+}
+
+.carousel-arrow.prev {
+  left: -20px;
+}
+
+.carousel-arrow span {
+  font-size: 20px;
+  color: #333;
+}
+
+/* Slick Dots */
+.slick-dots {
+  bottom: -40px;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
+  color: #ccc;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #111;
+}
+
+/* Slick Track */
+.slick-track {
+  display: flex;
+  align-items: stretch;
+}
+
+.slick-slide {
+  height: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .carousel-arrow {
+    display: none;
+  }
+}

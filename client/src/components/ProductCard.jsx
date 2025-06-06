@@ -1,46 +1,90 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Heart, ShoppingBag } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../redux/cartSlice";
+import { addToFavorites, removeFromFavorites } from "../redux/favoritesSlice";
 import "../styles/componentCSS/ProductCard.css";
 
-export default function ProductCard({ product }) {
-  const navigate = useNavigate();
+const ProductCard = ({ product }) => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart);
+  const favoriteItems = useSelector((state) => state.favorites);
 
-  const handleCardClick = () => {
-    navigate(`/product/${product.id}`);
+  const isInCart = (productId) => {
+    return cartItems.some((item) => item.id === productId);
   };
 
-  // Kürzt den Titel auf die ersten 3 Wörter
-  const getShortTitle = (title) => title.split(" ").slice(0, 3).join(" ");
+  const isFavorite = (productId) => {
+    return favoriteItems.some((item) => item.id === productId);
+  };
+
+  const handleCartClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isInCart(product.id)) {
+      dispatch(removeFromCart(product.id));
+    } else {
+      dispatch(addToCart({ ...product, quantity: 1 }));
+    }
+  };
+
+  const handleFavoriteClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isFavorite(product.id)) {
+      dispatch(removeFromFavorites(product.id));
+    } else {
+      dispatch(addToFavorites(product));
+    }
+  };
+
+  const getShortTitle = (title) => {
+    return title.split(" ").slice(0, 3).join(" ");
+  };
+
+  const getShortDescription = (description) => {
+    return description.length > 100 ? description.substring(0, 100) + "..." : description;
+  };
 
   return (
-    <div
-      className="card carousel-card d-flex flex-column justify-content-between h-100"
-      onClick={handleCardClick}
-      style={{ cursor: "pointer" }}
-    >
-      <img
-        src={product.image}
-        alt={product.title}
-        className="carousel-img card-img-top"
-        onError={(e) =>
-          (e.target.src = "https://via.placeholder.com/300?text=No+Image")
-        }
-      />
-      <div className="card-body text-center px-0 pt-3">
-        <h5 className="carousel-title card-title fw-normal">
-          {getShortTitle(product.title)}
-        </h5>
-        <p className="carousel-price">${product.price.toFixed(2)}</p>
+    <div className="product-card">
+      <div className="product-card-icons">
         <button
-          className="btn carousel-btn"
-          onClick={(e) => {
-            e.stopPropagation(); // Verhindert Navigation beim Button-Klick
-            navigate(`/product/${product.id}`);
-          }}
+          className={`product-card-icon-btn product-card-favorite-btn ${
+            isFavorite(product.id) ? "active" : ""
+          }`}
+          onClick={handleFavoriteClick}
         >
-          View Product
+          <Heart size={18} />
+        </button>
+        <button
+          className={`product-card-icon-btn product-card-cart-btn ${
+            isInCart(product.id) ? "active" : ""
+          }`}
+          onClick={handleCartClick}
+        >
+          <ShoppingBag size={18} />
         </button>
       </div>
+      <Link to={`/product/${product.id}`} className="product-card-link">
+        <img
+          src={product.image}
+          alt={product.title}
+          className="product-card-image"
+          onError={(e) =>
+            (e.target.src = "https://via.placeholder.com/300?text=No+Image")
+          }
+        />
+        <div className="product-card-content">
+          <h3 className="product-card-title">{getShortTitle(product.title)}</h3>
+          <p className="product-card-price">${product.price.toFixed(2)}</p>
+          <p className="product-card-description">{getShortDescription(product.description)}</p>
+          <button className="product-card-btn primary">View Details</button>
+        </div>
+      </Link>
     </div>
   );
-}
+};
+
+export default ProductCard;
