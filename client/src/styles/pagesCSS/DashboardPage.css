@@ -131,3 +131,39 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
+  /* Dunkler Outline-Button für "View Cart" */
+.dashboard-btn.outline-dark {
+    background-color: transparent;
+    color: #212529;
+    border: 2px solid #212529;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .dashboard-btn.outline-dark:hover {
+    background-color: #212529;
+    color: #fff;
+  }
+  
+  .edit-btn {
+    background-color: transparent;
+    color: #212529;
+    border: 1.5px solid #ced4da;
+    border-radius: 8px;
+    padding: 5px 14px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    cursor: pointer;
+  }
+  
+  .edit-btn:hover {
+    background-color: #212529;
+    color: white;
+    border-color: #212529;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  

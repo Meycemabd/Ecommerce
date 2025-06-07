@@ -20,12 +20,13 @@ const DashboardPage = () => {
         <h1>Welcome back.</h1>
         <p>Your style, your rules. Explore what's waiting in your wishlist or cart.</p>
         <div className="dashboard-buttons">
-          <MDBBtn className="dashboard-btn pink" onClick={() => navigate('/favorites')}>
+          <button className="dashboard-btn pink" onClick={() => navigate('/favorites')}>
             Go to Wishlist
-          </MDBBtn>
-          <MDBBtn outline color="dark" className="dashboard-btn" onClick={() => navigate('/cart')}>
-            View Cart
-          </MDBBtn>
+          </button>
+          <button className="dashboard-btn outline-dark" onClick={() => navigate('/cart')}>
+              View Cart
+          </button>
+
         </div>
       </div>
 
@@ -51,7 +52,7 @@ const DashboardPage = () => {
               <MDBCardBody>
                 <div className="d-flex justify-content-between align-items-center mb-2">
                   <h5>🏠 Address Info</h5>
-                  <MDBBtn size="sm" outline color="dark">Edit</MDBBtn>
+                  <button className="edit-btn">Edit</button>
                 </div>
                 <MDBRow>
                   <MDBCol xs="6">
@@ -74,7 +75,7 @@ const DashboardPage = () => {
               <MDBCardBody>
                 <div className="d-flex justify-content-between align-items-center mb-2">
                   <h5>💳 Payment Method</h5>
-                  <MDBBtn size="sm" outline color="dark">Edit</MDBBtn>
+                  <button className="edit-btn">Edit</button>
                 </div>
                 <p>Visa **** 1234<br />Exp: 06/26</p>
               </MDBCardBody>
@@ -87,7 +88,7 @@ const DashboardPage = () => {
               <MDBCardBody>
                 <div className="d-flex justify-content-between align-items-center mb-2">
                   <h5>📞 Contact Info</h5>
-                  <MDBBtn size="sm" outline color="dark">Edit</MDBBtn>
+                  <button className="edit-btn">Edit</button>
                 </div>
                 <p>Email: john@example.com<br />Phone: +49 123 456789</p>
               </MDBCardBody>
