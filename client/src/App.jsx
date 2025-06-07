@@ -19,7 +19,7 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from "./pages/CheckoutPage";  
 import LoadingPage from "./pages/LoadingPage";  
 import ThankYouPage from "./pages/ThankYouPage";
-import DashboardPage from './pages/DashboardPage';
+import Dashboard from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
 
 function App() {
@@ -42,7 +42,7 @@ function App() {
             path="/dashboard"
             element={
               localStorage.getItem("isLoggedIn") === "true" ? (
-                <DashboardPage />
+                <Dashboard />
               ) : (
                 <Navigate to="/login" />
               )
