@@ -100,7 +100,7 @@ body {
 
 .dashboard-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
+}ac
 
 .dashboard-card h4 {
   font-size: 1.2rem;
@@ -113,3 +113,21 @@ body {
   margin: 0;
   font-weight: 300;
 }
+
+/* Rosa Button für Wishlist */
+.dashboard-btn.pink {
+    background-color: #f8d7e5;
+    color: #212529;
+    border: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    border-radius: 12px;
+    padding: 10px 24px;
+  }
+  
+  .dashboard-btn.pink:hover {
+    background-color: #f3bfd6;
+    color: #212529;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  

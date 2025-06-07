@@ -20,7 +20,7 @@ const DashboardPage = () => {
         <h1>Welcome back.</h1>
         <p>Your style, your rules. Explore what's waiting in your wishlist or cart.</p>
         <div className="dashboard-buttons">
-          <MDBBtn color="dark" className="dashboard-btn" onClick={() => navigate('/favorites')}>
+          <MDBBtn className="dashboard-btn pink" onClick={() => navigate('/favorites')}>
             Go to Wishlist
           </MDBBtn>
           <MDBBtn outline color="dark" className="dashboard-btn" onClick={() => navigate('/cart')}>
@@ -30,7 +30,7 @@ const DashboardPage = () => {
       </div>
 
       <MDBContainer className="dashboard-content py-5">
-        {/* Address Info & Last Order in einer Reihe */}
+        {/* Address Info & Last Order nebeneinander */}
         <MDBRow className="gy-4 mb-4">
           {/* Last Order */}
           <MDBCol md="6">
@@ -44,8 +44,9 @@ const DashboardPage = () => {
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
-           {/* Address Info */}
-           <MDBCol md="6">
+
+          {/* Address Info */}
+          <MDBCol md="6">
             <MDBCard className="info-card h-100">
               <MDBCardBody>
                 <div className="d-flex justify-content-between align-items-center mb-2">
