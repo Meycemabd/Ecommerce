@@ -7,27 +7,10 @@
   padding: 1.2rem 2rem;
   background-color: #fff;
   border-bottom: 1px solid #ccc;
-}
-
-.main-nav {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.logout-btn-header {
-  background-color: transparent;
-  border: 1px solid #dc3545;
-  color: #dc3545;
-  padding: 0.4rem 0.9rem;
-  border-radius: 25px;
-  transition: 0.3s ease;
-  font-weight: 500;
-}
-
-.logout-btn-header:hover {
-  background-color: #dc3545;
-  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1030;
 }
 
 .logo-text {
@@ -62,6 +45,7 @@ nav {
 }
 
 .nav-icon {
+  position: relative;
   color: var(--main-color);
   cursor: pointer;
   transition: transform var(--transition-speed) ease, color var(--transition-speed) ease;
@@ -124,4 +108,35 @@ nav {
 .search-input:focus {
   border-color: var(--main-color);
   outline: none;
+}
+
+.badge-position {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  font-size: 0.7rem;
+  min-width: 18px;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 5px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.badge-favorites {
+  background-color: #dc3545; /* rot, wie vorher */
+  right: -3px;
+}
+
+.badge-cart {
+  background-color: #212529; /* dunkel, wie vorher */
+  right: -16px; /* mehr Abstand rechts für Cart-Badge */
+}
+
+.badge-checkmark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 50%;
 }

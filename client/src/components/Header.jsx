@@ -1,4 +1,3 @@
-// src/components/Header.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { Home, ShoppingBag, Search, User, X, Heart, Check, LogOut } from 'lucide-react';
 import { useSelector } from 'react-redux';
@@ -25,7 +24,7 @@ export default function Header({ setSearchQuery }) {
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
 
   const handleLogout = () => {
-    navigate('/logout-loading'); // Leitet zur Logout-Loading-Seite weiter
+    navigate('/logout-loading');
   };
 
   return (
@@ -35,9 +34,17 @@ export default function Header({ setSearchQuery }) {
       </div>
 
       <nav className="flex-grow-1">
-        <ul className={`nav-links list-unstyled d-flex align-items-center mb-0 ${searchOpen ? 'search-active justify-content-center' : 'justify-content-end'}`}>
+        <ul
+          className={`nav-links list-unstyled d-flex align-items-center mb-0 ${
+            searchOpen ? 'search-active justify-content-center' : 'justify-content-end'
+          }`}
+        >
           <li className="mx-3 text-center">
-            <Link to="/products" className="nav-icon text-decoration-none d-flex flex-column align-items-center" aria-label="Home">
+            <Link
+              to="/products"
+              className="nav-icon text-decoration-none d-flex flex-column align-items-center"
+              aria-label="Home"
+            >
               <Home size={24} strokeWidth={1.5} />
               <small className="nav-label">Home</small>
             </Link>
@@ -45,41 +52,49 @@ export default function Header({ setSearchQuery }) {
 
           <li className="mx-3 text-center">
             <button
-              onClick={() => setSearchOpen(prev => !prev)}
+              onClick={() => setSearchOpen((prev) => !prev)}
               className="nav-icon d-flex flex-column align-items-center"
-              aria-label={searchOpen ? "Close search" : "Open search"}
+              aria-label={searchOpen ? 'Close search' : 'Open search'}
             >
               {searchOpen ? <X size={24} strokeWidth={1.5} /> : <Search size={24} strokeWidth={1.5} />}
-              <small className="nav-label">{searchOpen ? "Close" : "Search"}</small>
+              <small className="nav-label">{searchOpen ? 'Close' : 'Search'}</small>
             </button>
           </li>
 
           <li className="mx-3 text-center position-relative">
-            <Link to="/favorites" className="nav-icon text-decoration-none d-flex flex-column align-items-center" aria-label="Favorites">
+            <Link
+              to="/favorites"
+              className="nav-icon text-decoration-none d-flex flex-column align-items-center"
+              aria-label="Favorites"
+            >
               <Heart size={24} strokeWidth={1.5} />
               <small className="nav-label">Favorites</small>
               {favoriteCount > 0 && (
-                <span className="badge bg-danger text-white rounded-circle position-absolute top-0 start-100 translate-middle" style={{ fontSize: '0.7rem', minWidth: '18px', height: '18px', lineHeight: '18px', padding: '0 5px', textAlign: 'center' }}>
-                  {favoriteCount}
-                </span>
+                <span className="badge bg-danger text-white badge-position badge-favorites">{favoriteCount}</span>
               )}
             </Link>
           </li>
 
           <li className="mx-3 text-center position-relative">
-            <Link to="/cart" className="nav-icon text-decoration-none d-flex flex-column align-items-center" aria-label="Cart">
+            <Link
+              to="/cart"
+              className="nav-icon text-decoration-none d-flex flex-column align-items-center"
+              aria-label="Cart"
+            >
               <ShoppingBag size={24} strokeWidth={1.5} />
               <small className="nav-label">Cart</small>
               {cartCount > 0 && (
-                <span className="badge bg-dark text-white rounded-circle position-absolute top-0 start-100 translate-middle" style={{ fontSize: '0.7rem', minWidth: '18px', height: '18px', lineHeight: '18px', padding: '0 5px', textAlign: 'center' }}>
-                  {cartCount}
-                </span>
+                <span className="badge bg-dark text-white badge-position badge-cart">{cartCount}</span>
               )}
             </Link>
           </li>
 
           <li className="mx-3 text-center position-relative">
-            <Link to={isLoggedIn ? "/dashboard" : "/login"} className="nav-icon text-decoration-none d-flex flex-column align-items-center" aria-label="Login">
+            <Link
+              to={isLoggedIn ? '/dashboard' : '/login'}
+              className="nav-icon text-decoration-none d-flex flex-column align-items-center"
+              aria-label="Login"
+            >
               {isLoggedIn ? (
                 <>
                   <User size={24} strokeWidth={1.5} />
@@ -87,19 +102,14 @@ export default function Header({ setSearchQuery }) {
                     size={14}
                     strokeWidth={3}
                     color="green"
-                    className="position-absolute"
-                    style={{
-                      top: 0,
-                      right: 0,
-                      backgroundColor: 'white',
-                      borderRadius: '50%',
-                    }}
+                    className="badge-checkmark"
+                    aria-hidden="true"
                   />
                 </>
               ) : (
                 <User size={24} strokeWidth={1.5} />
               )}
-              <small className="nav-label">{isLoggedIn ? "Account" : "Login"}</small>
+              <small className="nav-label">{isLoggedIn ? 'Account' : 'Login'}</small>
             </Link>
           </li>
 

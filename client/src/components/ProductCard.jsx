@@ -1,9 +1,12 @@
+// src/components/ProductCard.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import { Heart, ShoppingBag } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../redux/cartSlice";
 import { addToFavorites, removeFromFavorites } from "../redux/favoritesSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../styles/componentCSS/ProductCard.css";
 
 const ProductCard = ({ product }) => {
@@ -11,12 +14,26 @@ const ProductCard = ({ product }) => {
   const cartItems = useSelector((state) => state.cart);
   const favoriteItems = useSelector((state) => state.favorites);
 
-  const isInCart = (productId) => {
-    return cartItems.some((item) => item.id === productId);
-  };
+  const isInCart = (id) => cartItems.some((item) => item.id === id);
+  const isFavorite = (id) => favoriteItems.some((item) => item.id === id);
 
-  const isFavorite = (productId) => {
-    return favoriteItems.some((item) => item.id === productId);
+  const showToast = (message, type) => {
+    toast(message, {
+      type,
+      position: "top-right",
+      autoClose: 2000,
+      style: {
+        borderRadius: "4px",
+        backgroundColor:
+          type === "success"
+            ? "#e6fff0"
+            : type === "info"
+            ? "#fff3e6"
+            : "#fff",
+        color: type === "success" ? "#007f5f" : "#b36b00",
+        fontSize: "14px",
+      },
+    });
   };
 
   const handleCartClick = (e) => {
@@ -24,8 +41,10 @@ const ProductCard = ({ product }) => {
     e.stopPropagation();
     if (isInCart(product.id)) {
       dispatch(removeFromCart(product.id));
+      showToast("Removed from cart", "info");
     } else {
       dispatch(addToCart({ ...product, quantity: 1 }));
+      showToast("Added to cart", "success");
     }
   };
 
@@ -34,14 +53,14 @@ const ProductCard = ({ product }) => {
     e.stopPropagation();
     if (isFavorite(product.id)) {
       dispatch(removeFromFavorites(product.id));
+      showToast("Removed from favorites", "info");
     } else {
       dispatch(addToFavorites(product));
+      showToast("Added to favorites", "success");
     }
   };
 
-  const getShortTitle = (title) => {
-    return title.split(" ").slice(0, 3).join(" ");
-  };
+  const getShortTitle = (title) => title.split(" ").slice(0, 3).join(" ");
 
   return (
     <div className="product-card">

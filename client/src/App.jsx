@@ -8,6 +8,8 @@ import './index.css';
 import { Provider, useSelector } from 'react-redux';
 import { store, persistor } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { ToastContainer } from 'react-toastify';
+
 
 import Home from './pages/Home';
 import ProductsPage from './pages/ProductsPage';
@@ -23,6 +25,8 @@ import Dashboard from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
 import LogoutLoadingPage from './pages/LogoutLoadingPage';
 import RegisterPage from './pages/RegisterPage';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function AppContent() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -46,9 +50,19 @@ function AppContent() {
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
       <Footer />
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="light"
+      />
     </>
   );
 }
+
 
 function App() {
   return (
