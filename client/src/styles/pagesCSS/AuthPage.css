@@ -1,0 +1,35 @@
+.auth-container {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .auth-box {
+    background-color: #fff;
+    padding: 3rem;
+    border-radius: 1rem;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .auth-title {
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.8rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .auth-form .form-control {
+    border-radius: 0;
+    border: 1px solid #ced4da;
+    font-size: 1rem;
+  }
+  
+  .auth-form .btn {
+    border-radius: 0;
+    font-weight: 500;
+  }
+  

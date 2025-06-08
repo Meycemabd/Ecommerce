@@ -22,6 +22,8 @@ import ThankYouPage from "./pages/ThankYouPage";
 import Dashboard from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
 import LogoutLoadingPage from "./pages/LogoutLoadingPage";
+import RegisterPage from './pages/RegisterPage';
+
 
 
 function App() {
@@ -40,6 +42,7 @@ function App() {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/loading" element={<LoadingPage />} />
           <Route path="/thank-you" element={<ThankYouPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route
             path="/dashboard"
             element={
@@ -50,8 +53,8 @@ function App() {
               )
             }
           />
-          <Route path="/login" element={<LoginPage />} />
           <Route path="/logout-loading" element={<LogoutLoadingPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Routes>
         <Footer />
       </PersistGate>

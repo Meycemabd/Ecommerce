@@ -1,61 +1,57 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBInput } from 'mdb-react-ui-kit';
-import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { login } from '../redux/authSlice';
-import '../styles/pagesCSS/LoginPage.css';
+import { Link, useNavigate } from 'react-router-dom';
+import '../styles/pagesCSS/LoginPage.css';  // gleiche CSS-Datei wie LoginPage
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const handleLogin = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
 
-    const isValid = email === 'user@example.com' && password === '123456';
-
-    if (isValid) {
-      setLoading(true);
-      setErrorMsg('');
-
-      setTimeout(() => {
-        dispatch(login()); // Redux & localStorage handled inside authSlice
-        navigate('/dashboard');
-      }, 1500);
-    } else {
-      setErrorMsg('Invalid email or password');
+    if (password !== confirmPassword) {
+      setErrorMsg('Passwords do not match');
+      return;
     }
+
+    setLoading(true);
+    setErrorMsg('');
+
+    // Fake Registration (hier kannst du API call machen)
+    setTimeout(() => {
+      setLoading(false);
+      // Nach erfolgreicher Registrierung direkt Login-Seite oder Dashboard
+      navigate('/login');
+    }, 1500);
   };
 
   return (
     <MDBContainer fluid className="login-wrapper d-flex align-items-center justify-content-center">
       <div className="login-card shadow-sm p-4 rounded">
-        {/* Logo */}
         <div className="text-center mb-4 logo-text">Eyou.Store</div>
 
-        {/* Überschrift */}
         <h5
           className="text-center mb-4"
           style={{ fontFamily: "'Poppins', sans-serif", fontWeight: '300', letterSpacing: '1px' }}
         >
-          Sign into your account
+          Create your account
         </h5>
 
-        {/* Ladeanzeige oder Formular */}
         {loading ? (
           <div className="text-center mt-4">
             <div className="spinner-border text-dark" role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
-            <p className="mt-3">Logging you in...</p>
+            <p className="mt-3">Registering...</p>
           </div>
         ) : (
-          <form onSubmit={handleLogin} noValidate>
+          <form onSubmit={handleRegister} noValidate>
             <div className="mb-3">
               <label className="form-label custom-label">Email address</label>
               <MDBInput
@@ -78,21 +74,30 @@ export default function LoginPage() {
               />
             </div>
 
+            <div className="mb-3">
+              <label className="form-label custom-label">Confirm Password</label>
+              <MDBInput
+                type="password"
+                size="md"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </div>
+
             <button className="login-submit-btn" type="submit">
-              Login
+              Register
             </button>
 
             {errorMsg && <p className="text-danger text-center mt-2 small">{errorMsg}</p>}
           </form>
         )}
 
-        {/* Links unten */}
         <div className="text-center mt-3">
-          <a href="#!" className="small text-muted d-block mb-2">Forgot password?</a>
           <p className="small">
-            Don't have an account?{' '}
-            <Link to="/register" style={{ color: 'var(--accent-color)' }}>
-              Register here
+            Already have an account?{' '}
+            <Link to="/login" style={{ color: 'var(--accent-color)' }}>
+              Login here
             </Link>
           </p>
         </div>
