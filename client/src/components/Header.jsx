@@ -1,15 +1,13 @@
 // src/components/Header.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { Home, ShoppingBag, Search, User, X, Heart, Check, LogOut } from 'lucide-react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { logout } from '../redux/authSlice';
 import "../styles/componentCSS/Header.css";
 
 export default function Header({ setSearchQuery }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const inputRef = useRef(null);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -27,11 +25,8 @@ export default function Header({ setSearchQuery }) {
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
 
   const handleLogout = () => {
-    dispatch(logout());
-    navigate('/logout-loading');
+    navigate('/logout-loading'); // Leitet zur Logout-Loading-Seite weiter
   };
-  
-  
 
   return (
     <header className="main-header d-flex justify-content-between align-items-center px-4 py-3 shadow-sm bg-white fixed-top">
@@ -60,7 +55,7 @@ export default function Header({ setSearchQuery }) {
           </li>
 
           <li className="mx-3 text-center position-relative">
-            <Link to="/favorites" className="nav-icon text-decoration-none d-flex flex-column align-items-center position-relative" aria-label="Favorites">
+            <Link to="/favorites" className="nav-icon text-decoration-none d-flex flex-column align-items-center" aria-label="Favorites">
               <Heart size={24} strokeWidth={1.5} />
               <small className="nav-label">Favorites</small>
               {favoriteCount > 0 && (
@@ -72,7 +67,7 @@ export default function Header({ setSearchQuery }) {
           </li>
 
           <li className="mx-3 text-center position-relative">
-            <Link to="/cart" className="nav-icon text-decoration-none d-flex flex-column align-items-center position-relative" aria-label="Cart">
+            <Link to="/cart" className="nav-icon text-decoration-none d-flex flex-column align-items-center" aria-label="Cart">
               <ShoppingBag size={24} strokeWidth={1.5} />
               <small className="nav-label">Cart</small>
               {cartCount > 0 && (
@@ -84,7 +79,7 @@ export default function Header({ setSearchQuery }) {
           </li>
 
           <li className="mx-3 text-center position-relative">
-            <Link to={isLoggedIn ? "/dashboard" : "/login"} className="nav-icon text-decoration-none d-flex flex-column align-items-center position-relative" aria-label="Login">
+            <Link to={isLoggedIn ? "/dashboard" : "/login"} className="nav-icon text-decoration-none d-flex flex-column align-items-center" aria-label="Login">
               {isLoggedIn ? (
                 <>
                   <User size={24} strokeWidth={1.5} />
@@ -107,8 +102,7 @@ export default function Header({ setSearchQuery }) {
               <small className="nav-label">{isLoggedIn ? "Account" : "Login"}</small>
             </Link>
           </li>
-          
-          {/* Logout Button (nur sichtbar, wenn eingeloggt) */}
+
           {isLoggedIn && (
             <li className="mx-3 text-center">
               <button
