@@ -49,6 +49,7 @@ export default function CartPage() {
                 <button 
                   className="cart-item-remove"
                   onClick={() => dispatch(removeFromCart(item.id))}
+                  aria-label={`Remove ${item.title} from cart`}
                 >
                   <Trash2 size={20} />
                 </button>
@@ -72,14 +73,14 @@ export default function CartPage() {
               <span>${total.toFixed(2)}</span>
             </div>
             <button
-                className="cart-card-checkout-btn"
-                onClick={handleCheckout}
-                disabled={cart.length === 0}
-              >
-                Proceed to Checkout
-              </button>
+              className="cart-card-checkout-btn"
+              onClick={handleCheckout}
+              disabled={cart.length === 0}
+            >
+              Proceed to Checkout
+            </button>
 
-            <Link to="/products" className="continue-shopping">
+            <Link to="/products" className="continue-shopping-btn">
               Continue Shopping
             </Link>
           </div>

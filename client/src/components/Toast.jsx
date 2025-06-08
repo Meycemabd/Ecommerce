@@ -1,26 +1,12 @@
 // src/components/Toast.jsx
 import React from "react";
+import "../styles/componentCSS/Toast.css"
 
 const Toast = ({ message, visible }) => {
   if (!visible) return null;
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: "100px",
-        right: "20px",
-        zIndex: 9999,
-        backgroundColor: "#1f1f1f",
-        color: "#fff",
-        padding: "12px 20px",
-        borderRadius: "8px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
-        fontSize: "14px",
-        fontFamily: "Arial, sans-serif",
-        transition: "opacity 0.3s ease-in-out",
-      }}
-    >
+    <div className="toast-container show" role="alert" aria-live="assertive" aria-atomic="true">
       {message}
     </div>
   );
