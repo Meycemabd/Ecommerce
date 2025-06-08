@@ -8,7 +8,7 @@ export default function Header({ setSearchQuery }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const inputRef = useRef(null);
 
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 👈 aus Redux!
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const favoriteCount = useSelector((state) => state.favorites.length);
   const cartCount = useSelector((state) =>
     state.cart.reduce((total, item) => total + item.quantity, 0)
@@ -30,24 +30,26 @@ export default function Header({ setSearchQuery }) {
 
       <nav className="flex-grow-1">
         <ul className={`nav-links list-unstyled d-flex align-items-center mb-0 ${searchOpen ? 'search-active justify-content-center' : 'justify-content-end'}`}>
-          <li className="mx-3">
-            <Link to="/products" className="nav-icon text-decoration-none" aria-label="Home">
+          <li className="mx-3 text-center">
+            <Link to="/products" className="nav-icon text-decoration-none d-flex flex-column align-items-center" aria-label="Home">
               <Home size={24} strokeWidth={1.5} />
+              <small className="nav-label">Home</small>
             </Link>
           </li>
 
-          <li className="mx-3">
+          <li className="mx-3 text-center">
             <button
               onClick={() => setSearchOpen(prev => !prev)}
-              className="nav-icon"
+              className="nav-icon d-flex flex-column align-items-center"
               aria-label={searchOpen ? "Close search" : "Open search"}
             >
               {searchOpen ? <X size={24} strokeWidth={1.5} /> : <Search size={24} strokeWidth={1.5} />}
+              <small className="nav-label">{searchOpen ? "Close" : "Search"}</small>
             </button>
           </li>
 
-          <li className="mx-3 position-relative">
-            <Link to="/login" className="nav-icon text-decoration-none position-relative" aria-label="Login">
+          <li className="mx-3 text-center position-relative">
+            <Link to="/login" className="nav-icon text-decoration-none d-flex flex-column align-items-center position-relative" aria-label="Login">
               {isLoggedIn ? (
                 <>
                   <User size={24} strokeWidth={1.5} />
@@ -67,12 +69,14 @@ export default function Header({ setSearchQuery }) {
               ) : (
                 <User size={24} strokeWidth={1.5} />
               )}
+              <small className="nav-label">{isLoggedIn ? "Account" : "Login"}</small>
             </Link>
           </li>
 
-          <li className="mx-3 position-relative">
-            <Link to="/favorites" className="nav-icon text-decoration-none position-relative" aria-label="Favorites">
+          <li className="mx-3 text-center position-relative">
+            <Link to="/favorites" className="nav-icon text-decoration-none d-flex flex-column align-items-center position-relative" aria-label="Favorites">
               <Heart size={24} strokeWidth={1.5} />
+              <small className="nav-label">Favorites</small>
               {favoriteCount > 0 && (
                 <span className="badge bg-danger text-white rounded-circle position-absolute top-0 start-100 translate-middle" style={{ fontSize: '0.7rem', minWidth: '18px', height: '18px', lineHeight: '18px', padding: '0 5px', textAlign: 'center' }}>
                   {favoriteCount}
@@ -81,9 +85,10 @@ export default function Header({ setSearchQuery }) {
             </Link>
           </li>
 
-          <li className="mx-3 position-relative">
-            <Link to="/cart" className="nav-icon text-decoration-none position-relative" aria-label="Cart">
+          <li className="mx-3 text-center position-relative">
+            <Link to="/cart" className="nav-icon text-decoration-none d-flex flex-column align-items-center position-relative" aria-label="Cart">
               <ShoppingBag size={24} strokeWidth={1.5} />
+              <small className="nav-label">Cart</small>
               {cartCount > 0 && (
                 <span className="badge bg-dark text-white rounded-circle position-absolute top-0 start-100 translate-middle" style={{ fontSize: '0.7rem', minWidth: '18px', height: '18px', lineHeight: '18px', padding: '0 5px', textAlign: 'center' }}>
                   {cartCount}
