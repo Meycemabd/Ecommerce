@@ -1,0 +1,42 @@
+/* SuccessPage.css */
+.success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    background-color: #f8f8f8;
+  }
+  
+  .success-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
+  
+  .success-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  
+  .success-message {
+    color: #4caf50;
+    margin-bottom: 24px;
+    font-size: 16px;
+  }
+  
+  .back-to-shop-btn {
+    background-color: black;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  
+  .back-to-shop-btn:hover {
+    background-color: #333;
+  }
+  

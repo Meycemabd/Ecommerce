@@ -1,0 +1,67 @@
+.registered-success-wrapper {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.registered-success-card {
+  background: white;
+  padding: 3rem;
+  border-radius: 1.5rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.registered-title {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.registered-subtext {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.registered-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.registered-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  min-width: 150px;
+}
+
+.registered-btn.dark {
+  background-color: #000;
+  color: white;
+}
+
+.registered-btn.dark:hover {
+  background-color: #333;
+}
+
+.registered-btn.light {
+  background-color: white;
+  border: 1px solid #000;
+  color: #000;
+}
+
+.registered-btn.light:hover {
+  background-color: #f0f0f0;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBInput } from 'mdb-react-ui-kit';
 import { Link, useNavigate } from 'react-router-dom';
-import '../styles/pagesCSS/LoginPage.css';  // gleiche CSS-Datei wie LoginPage
+import '../styles/pagesCSS/LoginPage.css';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -26,8 +26,7 @@ export default function RegisterPage() {
     // Fake Registration (hier kannst du API call machen)
     setTimeout(() => {
       setLoading(false);
-      // Nach erfolgreicher Registrierung direkt Login-Seite oder Dashboard
-      navigate('/login');
+      navigate('/registered-success');
     }, 1500);
   };
 
@@ -85,8 +84,9 @@ export default function RegisterPage() {
               />
             </div>
 
-            <button className="login-submit-btn" type="submit">
-              Register
+            {/* Kein Link als Button – das Formular muss weiter durch onSubmit verarbeitet werden */}
+            <button className="login-submit-btn" type="submit" disabled={loading}>
+              {loading ? 'Registering...' : 'Register'}
             </button>
 
             {errorMsg && <p className="text-danger text-center mt-2 small">{errorMsg}</p>}

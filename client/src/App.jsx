@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './index.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { Provider, useSelector } from 'react-redux';
 import { store, persistor } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -25,7 +26,8 @@ import Dashboard from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
 import LogoutLoadingPage from './pages/LogoutLoadingPage';
 import RegisterPage from './pages/RegisterPage';
-import 'react-toastify/dist/ReactToastify.css';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import RegisteredSuccessPage from './pages/RegisteredSuccessPage';
 
 
 function AppContent() {
@@ -48,6 +50,8 @@ function AppContent() {
         <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/logout-loading" element={<LogoutLoadingPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/registered-success" element={<RegisteredSuccessPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       </Routes>
       <Footer />
       <ToastContainer

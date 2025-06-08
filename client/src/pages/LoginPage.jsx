@@ -88,7 +88,10 @@ export default function LoginPage() {
 
         {/* Links unten */}
         <div className="text-center mt-3">
-          <a href="#!" className="small text-muted d-block mb-2">Forgot password?</a>
+        <Link to="/forgot-password" className="small text-muted d-block mb-2">
+            Forgot password?
+        </Link>
+
           <p className="small">
             Don't have an account?{' '}
             <Link to="/register" style={{ color: 'var(--accent-color)' }}>
