@@ -1,12 +1,16 @@
+// src/components/Header.jsx
 import React, { useState, useRef, useEffect } from 'react';
-import { Home, ShoppingBag, Search, User, X, Heart, Check } from 'lucide-react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Home, ShoppingBag, Search, User, X, Heart, Check, LogOut } from 'lucide-react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../redux/authSlice';
 import "../styles/componentCSS/Header.css";
 
 export default function Header({ setSearchQuery }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const favoriteCount = useSelector((state) => state.favorites.length);
@@ -21,6 +25,13 @@ export default function Header({ setSearchQuery }) {
   }, [searchOpen]);
 
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/logout-loading');
+  };
+  
+  
 
   return (
     <header className="main-header d-flex justify-content-between align-items-center px-4 py-3 shadow-sm bg-white fixed-top">
@@ -49,31 +60,6 @@ export default function Header({ setSearchQuery }) {
           </li>
 
           <li className="mx-3 text-center position-relative">
-            <Link to="/login" className="nav-icon text-decoration-none d-flex flex-column align-items-center position-relative" aria-label="Login">
-              {isLoggedIn ? (
-                <>
-                  <User size={24} strokeWidth={1.5} />
-                  <Check
-                    size={14}
-                    strokeWidth={3}
-                    color="green"
-                    className="position-absolute"
-                    style={{
-                      top: 0,
-                      right: 0,
-                      backgroundColor: 'white',
-                      borderRadius: '50%',
-                    }}
-                  />
-                </>
-              ) : (
-                <User size={24} strokeWidth={1.5} />
-              )}
-              <small className="nav-label">{isLoggedIn ? "Account" : "Login"}</small>
-            </Link>
-          </li>
-
-          <li className="mx-3 text-center position-relative">
             <Link to="/favorites" className="nav-icon text-decoration-none d-flex flex-column align-items-center position-relative" aria-label="Favorites">
               <Heart size={24} strokeWidth={1.5} />
               <small className="nav-label">Favorites</small>
@@ -96,6 +82,45 @@ export default function Header({ setSearchQuery }) {
               )}
             </Link>
           </li>
+
+          <li className="mx-3 text-center position-relative">
+            <Link to={isLoggedIn ? "/dashboard" : "/login"} className="nav-icon text-decoration-none d-flex flex-column align-items-center position-relative" aria-label="Login">
+              {isLoggedIn ? (
+                <>
+                  <User size={24} strokeWidth={1.5} />
+                  <Check
+                    size={14}
+                    strokeWidth={3}
+                    color="green"
+                    className="position-absolute"
+                    style={{
+                      top: 0,
+                      right: 0,
+                      backgroundColor: 'white',
+                      borderRadius: '50%',
+                    }}
+                  />
+                </>
+              ) : (
+                <User size={24} strokeWidth={1.5} />
+              )}
+              <small className="nav-label">{isLoggedIn ? "Account" : "Login"}</small>
+            </Link>
+          </li>
+          
+          {/* Logout Button (nur sichtbar, wenn eingeloggt) */}
+          {isLoggedIn && (
+            <li className="mx-3 text-center">
+              <button
+                onClick={handleLogout}
+                className="nav-icon d-flex flex-column align-items-center text-danger bg-transparent border-0"
+                aria-label="Logout"
+              >
+                <LogOut size={24} strokeWidth={1.5} />
+                <small className="nav-label">Logout</small>
+              </button>
+            </li>
+          )}
         </ul>
       </nav>
 

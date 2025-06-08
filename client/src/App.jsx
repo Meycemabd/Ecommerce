@@ -21,6 +21,8 @@ import LoadingPage from "./pages/LoadingPage";
 import ThankYouPage from "./pages/ThankYouPage";
 import Dashboard from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
+import LogoutLoadingPage from "./pages/LogoutLoadingPage";
+
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -49,6 +51,7 @@ function App() {
             }
           />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/logout-loading" element={<LogoutLoadingPage />} />
         </Routes>
         <Footer />
       </PersistGate>

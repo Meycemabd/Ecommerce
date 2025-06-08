@@ -13,6 +13,7 @@ import '../styles/pagesCSS/DashboardPage.css';
 
 const DashboardPage = () => {
   const navigate = useNavigate();
+  
 
   return (
     <div className="dashboard-wrapper">
@@ -24,14 +25,12 @@ const DashboardPage = () => {
             Go to Wishlist
           </button>
           <button className="dashboard-btn outline-dark" onClick={() => navigate('/cart')}>
-              View Cart
+            View Cart
           </button>
-
         </div>
       </div>
 
       <MDBContainer className="dashboard-content py-5">
-        {/* Address Info & Last Order nebeneinander */}
         <MDBRow className="gy-4 mb-4">
           {/* Last Order */}
           <MDBCol md="6">
@@ -67,7 +66,6 @@ const DashboardPage = () => {
           </MDBCol>
         </MDBRow>
 
-        {/* Payment + Contact */}
         <MDBRow className="gy-4">
           {/* Payment Method */}
           <MDBCol md="6">

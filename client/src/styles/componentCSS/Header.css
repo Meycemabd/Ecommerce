@@ -1,17 +1,33 @@
 @import '../../styles/variables.css';
 
 .main-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 999;
-  background-color: white;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
-  padding: 1rem 2rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.main-nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.logout-btn-header {
+  background-color: transparent;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  padding: 0.4rem 0.9rem;
+  border-radius: 25px;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+.logout-btn-header:hover {
+  background-color: #dc3545;
+  color: white;
 }
 
 .logo-text {
