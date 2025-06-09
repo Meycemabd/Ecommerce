@@ -17,15 +17,21 @@ export default function LoginPage() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    const isValid = email === 'user@example.com' && password === '123456';
+    const isUser = email === 'user@example.com' && password === '123456';
+    const isAdmin = email === 'admin@example.com' && password === 'admin123';
 
-    if (isValid) {
+    if (isUser || isAdmin) {
       setLoading(true);
       setErrorMsg('');
 
       setTimeout(() => {
-        dispatch(login()); // Redux & localStorage handled inside authSlice
-        navigate('/dashboard');
+        if (isAdmin) {
+          dispatch(login({ isAdmin: true }));
+          navigate('/admin-dashboard'); // Admin weiterleiten
+        } else {
+          dispatch(login({ isAdmin: false }));
+          navigate('/dashboard'); // User weiterleiten
+        }
       }, 1500);
     } else {
       setErrorMsg('Invalid email or password');
@@ -35,10 +41,8 @@ export default function LoginPage() {
   return (
     <MDBContainer fluid className="login-wrapper d-flex align-items-center justify-content-center">
       <div className="login-card shadow-sm p-4 rounded">
-        {/* Logo */}
         <div className="text-center mb-4 logo-text">Eyou.Store</div>
 
-        {/* Überschrift */}
         <h5
           className="text-center mb-4"
           style={{ fontFamily: "'Poppins', sans-serif", fontWeight: '300', letterSpacing: '1px' }}
@@ -46,7 +50,6 @@ export default function LoginPage() {
           Sign into your account
         </h5>
 
-        {/* Ladeanzeige oder Formular */}
         {loading ? (
           <div className="text-center mt-4">
             <div className="spinner-border text-dark" role="status">
@@ -86,11 +89,10 @@ export default function LoginPage() {
           </form>
         )}
 
-        {/* Links unten */}
         <div className="text-center mt-3">
-        <Link to="/forgot-password" className="small text-muted d-block mb-2">
+          <Link to="/forgot-password" className="small text-muted d-block mb-2">
             Forgot password?
-        </Link>
+          </Link>
 
           <p className="small">
             Don't have an account?{' '}

@@ -23,7 +23,6 @@ export default function RegisterPage() {
     setLoading(true);
     setErrorMsg('');
 
-    // Fake Registration (hier kannst du API call machen)
     setTimeout(() => {
       setLoading(false);
       navigate('/registered-success');
@@ -84,7 +83,6 @@ export default function RegisterPage() {
               />
             </div>
 
-            {/* Kein Link als Button – das Formular muss weiter durch onSubmit verarbeitet werden */}
             <button className="login-submit-btn" type="submit" disabled={loading}>
               {loading ? 'Registering...' : 'Register'}
             </button>

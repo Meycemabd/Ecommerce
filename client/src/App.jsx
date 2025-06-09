@@ -28,11 +28,15 @@ import LogoutLoadingPage from './pages/LogoutLoadingPage';
 import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import RegisteredSuccessPage from './pages/RegisteredSuccessPage';
+import AdminDashboard from './pages/AdminDashboard';
+
 
 
 function AppContent() {
   const [searchQuery, setSearchQuery] = useState('');
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
+
 
   return (
     <>
@@ -52,6 +56,11 @@ function AppContent() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/registered-success" element={<RegisteredSuccessPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route
+              path="/admin-dashboard"
+              element={isLoggedIn && isAdmin ? <AdminDashboard /> : <Navigate to="/" />}
+              />
+
       </Routes>
       <Footer />
       <ToastContainer
