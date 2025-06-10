@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,7 +9,6 @@ import { Provider, useSelector } from 'react-redux';
 import { store, persistor } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ToastContainer } from 'react-toastify';
-
 
 import Home from './pages/Home';
 import ProductsPage from './pages/ProductsPage';
@@ -28,19 +26,21 @@ import LogoutLoadingPage from './pages/LogoutLoadingPage';
 import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import RegisteredSuccessPage from './pages/RegisteredSuccessPage';
-import AdminDashboard from './pages/AdminDashboard';
-
-
+import AdminDashboard from './admin/pages/Dashboard';
 
 function AppContent() {
   const [searchQuery, setSearchQuery] = useState('');
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isAdmin = useSelector((state) => state.auth.isAdmin);
-
+  const path = window.location.pathname;
 
   return (
     <>
-      <Header setSearchQuery={setSearchQuery} />
+      {/* Nur auf Client-Seiten anzeigen */}
+      {!path.startsWith('/admin') && (
+        <Header setSearchQuery={setSearchQuery} />
+      )}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductsPage searchQuery={searchQuery} />} />
@@ -56,13 +56,17 @@ function AppContent() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/registered-success" element={<RegisteredSuccessPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route
-              path="/admin-dashboard"
-              element={isLoggedIn && isAdmin ? <AdminDashboard /> : <Navigate to="/" />}
-              />
 
+        {/* Admin-Route – kein Client-Header/Footer */}
+        <Route
+          path="/admin-dashboard"
+          element={isLoggedIn && isAdmin ? <AdminDashboard /> : <Navigate to="/" />}
+        />
       </Routes>
-      <Footer />
+
+      {/* Nur auf Client-Seiten anzeigen */}
+      {!path.startsWith('/admin') && <Footer />}
+
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -75,7 +79,6 @@ function AppContent() {
     </>
   );
 }
-
 
 function App() {
   return (
