@@ -1,21 +1,19 @@
-import React from "react";
+import React from 'react';
 
 export default function Logo() {
   return (
-    <svg
-      width="40"
-      height="40"
-      viewBox="0 0 100 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-label="Fashion Admin Logo"
-      role="img"
-    >
-      <circle cx="50" cy="50" r="48" stroke="#1a73e8" strokeWidth="4" />
-      <path
-        d="M30 70 L50 30 L70 70 Z"
-        fill="#1a73e8"
-      />
-    </svg>
+    <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '20px', userSelect: 'none', cursor: 'default' }}>
+      <span
+        style={{
+          fontFamily: "'Poppins', sans-serif",
+          fontWeight: '600',
+          fontSize: '22px',
+          color: '#1A73E8',
+          userSelect: 'none',
+        }}
+      >
+        EYOU.ADMIN
+      </span>
+    </div>
   );
 }
