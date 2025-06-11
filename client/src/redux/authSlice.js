@@ -14,6 +14,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       localStorage.setItem('isLoggedIn', 'true');
 
+      // Admin-Status aus action.payload übernehmen
       state.isAdmin = action.payload?.isAdmin || false;
       localStorage.setItem('isAdmin', state.isAdmin.toString());
     },

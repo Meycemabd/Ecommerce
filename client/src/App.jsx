@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { Provider, useSelector } from 'react-redux';
-import { store, persistor } from './store/store';
+import { store, persistor } from "./redux/store";
 import { PersistGate } from 'redux-persist/integration/react';
 import { ToastContainer } from 'react-toastify';
 

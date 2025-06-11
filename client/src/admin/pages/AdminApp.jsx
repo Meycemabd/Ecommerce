@@ -4,6 +4,7 @@ import AdminHeader from './components/AdminHeader';
 import AdminSidebar from './components/AdminSidebar';
 import AdminDashboard from './pages/Dashboard';
 import AdminLogin from './pages/Login';
+import ProductsPage from "./ProductsPage";
 
 export default function AdminApp() {
   const isAdmin = localStorage.getItem('isAdmin') === 'true'; 
@@ -16,6 +17,7 @@ export default function AdminApp() {
         <Routes>
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={isAdmin ? <AdminDashboard /> : <Navigate to="/admin/login" />} />
+          <Route path="/products" element={<ProductsPage />} />
         </Routes>
       </div>
     </div>
