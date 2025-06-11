@@ -1,18 +1,14 @@
-// src/admin/components/AdminLayout.jsx
+// src/components/AdminLayout.jsx
 import React from "react";
 import AdminSidebar from "./AdminSidebar";
-import AdminHeader from "./AdminHeader";
 
 export default function AdminLayout({ children }) {
   return (
-    <div className="admin-layout d-flex">
+    <div style={{ display: "flex", minHeight: "100vh" }}>
       <AdminSidebar />
-      <div className="flex-grow-1">
-        <AdminHeader />
-        <main className="p-4" style={{ backgroundColor: "#f8f9fa", minHeight: "100vh" }}>
-          {children}
-        </main>
-      </div>
+      <main style={{ marginLeft: "230px", marginRight: "80px", flexGrow: 1, padding: "2rem", backgroundColor: "#f8f9fa" }}>
+        {children}
+      </main>
     </div>
   );
 }

@@ -57,9 +57,9 @@ function AppContent() {
         <Route path="/registered-success" element={<RegisteredSuccessPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
-        {/* Admin-Route – kein Client-Header/Footer */}
+        {/* ✅ Korrigierte Admin-Route */}
         <Route
-          path="/admin-dashboard"
+          path="/admin/dashboard"
           element={isLoggedIn && isAdmin ? <AdminDashboard /> : <Navigate to="/" />}
         />
       </Routes>

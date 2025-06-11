@@ -1,25 +1,32 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import AdminHeader from './components/AdminHeader';
-import AdminSidebar from './components/AdminSidebar';
-import AdminDashboard from './pages/Dashboard';
-import AdminLogin from './pages/Login';
-import ProductsPage from "./ProductsPage";
+// src/AdminApp.jsx
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import AdminDashboard from "./admin/pages/Dashboard";
+import ProductsPage from "./admin/pages/ProductsPage";
+import UsersPage from "./admin/pages/UsersPage";
+import AdminLayout from "./components/AdminLayout";
 
 export default function AdminApp() {
-  const isAdmin = localStorage.getItem('isAdmin') === 'true'; 
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
+
+  if (!isLoggedIn || !isAdmin) {
+    return <Navigate to="/" />;
+  }
 
   return (
-    <div className="admin-wrapper d-flex">
-      <AdminSidebar />
-      <div className="admin-main flex-grow-1">
-        <AdminHeader />
-        <Routes>
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={isAdmin ? <AdminDashboard /> : <Navigate to="/admin/login" />} />
-          <Route path="/products" element={<ProductsPage />} />
-        </Routes>
-      </div>
-    </div>
+    <AdminLayout>
+      <Routes>
+        {/* Weiterleitung von /admin-dashboard zu /admin/dashboard */}
+        <Route path="/admin-dashboard" element={<Navigate to="/admin/dashboard" replace />} />
+
+        {/* Admin Seiten */}
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/products" element={<ProductsPage />} />
+        <Route path="/admin/users" element={<UsersPage />} />
+      </Routes>
+    </AdminLayout>
   );
 }
