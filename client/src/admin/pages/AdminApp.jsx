@@ -7,6 +7,9 @@ import AdminLayout from "../components/AdminLayout";
 import AdminDashboard from "../pages/Dashboard";
 import ProductsPage from "../pages/ProductsPage";
 import ProductNewPage from "../pages/ProductNewPage";
+import ProductListPage from "../pages/ProductListPage"
+import DashboardPage from "../pages/DashboardPage";
+
 
 export default function AdminApp() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -24,6 +27,8 @@ export default function AdminApp() {
         <Route path="products/new" element={<ProductNewPage />} />
         {/* Fallback für ungültige Admin-Routen */}
         <Route path="*" element={<Navigate to="dashboard" />} />
+        <Route path="/productslist" element={<ProductListPage />} />
+        <Route path="/admin/dashboard" element={<DashboardPage />} />
       </Route>
     </Routes>
   );
