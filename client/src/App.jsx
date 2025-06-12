@@ -1,47 +1,53 @@
 import React, { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { Provider, useSelector } from 'react-redux';
-import { store, persistor } from "./redux/store";
-import { PersistGate } from 'redux-persist/integration/react';
+
+import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
+// Seiten (Client)
 import Home from './pages/Home';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import FavoritesPage from './pages/FavoritesPage';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import LoadingPage from './pages/LoadingPage';
 import ThankYouPage from './pages/ThankYouPage';
-import Dashboard from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
 import LogoutLoadingPage from './pages/LogoutLoadingPage';
 import RegisterPage from './pages/RegisterPage';
-import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import RegisteredSuccessPage from './pages/RegisteredSuccessPage';
-import AdminDashboard from './admin/pages/Dashboard';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import Dashboard from './pages/DashboardPage';
+
+// Layout
+import Header from './components/Header';
+import Footer from './components/Footer';
+
+// Admin
+import AdminApp from './admin/pages/AdminApp';
 
 function AppContent() {
   const [searchQuery, setSearchQuery] = useState('');
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isAdmin = useSelector((state) => state.auth.isAdmin);
-  const path = window.location.pathname;
+  const location = useLocation();
+  const path = location.pathname;
 
   return (
     <>
-      {/* Nur auf Client-Seiten anzeigen */}
+      {/* Header & Footer nur auf Client-Seiten anzeigen */}
       {!path.startsWith('/admin') && (
         <Header setSearchQuery={setSearchQuery} />
       )}
 
       <Routes>
+        {/* Client-Routen */}
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductsPage searchQuery={searchQuery} />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
@@ -57,16 +63,17 @@ function AppContent() {
         <Route path="/registered-success" element={<RegisteredSuccessPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
-        {/* ✅ Korrigierte Admin-Route */}
+        {/* Admin-Bereich */}
         <Route
-          path="/admin/dashboard"
-          element={isLoggedIn && isAdmin ? <AdminDashboard /> : <Navigate to="/" />}
+          path="/admin/*"
+          element={isLoggedIn && isAdmin ? <AdminApp /> : <Navigate to="/" />}
         />
       </Routes>
 
-      {/* Nur auf Client-Seiten anzeigen */}
+      {/* Footer nur auf Client-Seiten anzeigen */}
       {!path.startsWith('/admin') && <Footer />}
 
+      {/* Toast Notifications */}
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -80,14 +87,4 @@ function AppContent() {
   );
 }
 
-function App() {
-  return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <AppContent />
-      </PersistGate>
-    </Provider>
-  );
-}
-
-export default App;
+export default AppContent;

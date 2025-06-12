@@ -1,12 +1,12 @@
-// src/AdminApp.jsx
+// src/admin/pages/AdminApp.jsx
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import AdminDashboard from "./admin/pages/Dashboard";
-import ProductsPage from "./admin/pages/ProductsPage";
-import UsersPage from "./admin/pages/UsersPage";
-import AdminLayout from "./components/AdminLayout";
+import AdminLayout from "../components/AdminLayout";
+import AdminDashboard from "../pages/Dashboard";
+import ProductsPage from "../pages/ProductsPage";
+import ProductNewPage from "../pages/ProductNewPage";
 
 export default function AdminApp() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -17,16 +17,14 @@ export default function AdminApp() {
   }
 
   return (
-    <AdminLayout>
-      <Routes>
-        {/* Weiterleitung von /admin-dashboard zu /admin/dashboard */}
-        <Route path="/admin-dashboard" element={<Navigate to="/admin/dashboard" replace />} />
-
-        {/* Admin Seiten */}
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/products" element={<ProductsPage />} />
-        <Route path="/admin/users" element={<UsersPage />} />
-      </Routes>
-    </AdminLayout>
+    <Routes>
+      <Route element={<AdminLayout />}>
+        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="products" element={<ProductsPage />} />
+        <Route path="products/new" element={<ProductNewPage />} />
+        {/* Fallback für ungültige Admin-Routen */}
+        <Route path="*" element={<Navigate to="dashboard" />} />
+      </Route>
+    </Routes>
   );
 }

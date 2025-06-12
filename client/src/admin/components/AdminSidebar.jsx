@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import {
   FiHome,
-  FiBox,
   FiPlusCircle,
   FiTag,
   FiShoppingBag,
@@ -13,6 +12,8 @@ import {
   FiBarChart2,
   FiSettings,
 } from "react-icons/fi";
+import { Package } from "lucide-react";
+
 
 import Logo from "../components/Logo";
 import "../Styles/AdminSidebar.css";
@@ -31,10 +32,14 @@ export default function AdminSidebar() {
         </NavLink>
 
         <div className="nav-group">
-          <NavLink to="/admin/products" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            <FiBox />
-            <span className="link-text">Products</span>
-          </NavLink>
+        <NavLink to="/admin/products"
+              className={({ isActive }) =>
+              isActive ? "active-sidebar-link" : "inactive-sidebar-link"
+  }
+>
+  Produkte
+</NavLink>
+
           <NavLink to="/admin/products/new" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             <FiPlusCircle />
             <span className="link-text">Add New</span>

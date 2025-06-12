@@ -3,7 +3,9 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import favoritesReducer from './favoritesSlice';
 import cartReducer from './cartSlice'; 
 import authReducer from './authSlice';
-import orderReducer from "./orderSlice"; // ✅ Importiert
+import orderReducer from "./orderSlice";
+import productReducer from "./ProductSlice";
+
 
 import {
   persistStore,
@@ -22,13 +24,14 @@ const rootReducer = combineReducers({
   favorites: favoritesReducer,
   cart: cartReducer, 
   auth: authReducer,
-  order: orderReducer, // ✅ Jetzt korrekt eingebunden!
+  order: orderReducer,
+  product: productReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart', 'favorites', 'auth'], // ❗️ 'order' NICHT speichern, da Dummy
+  whitelist: ['cart', 'favorites', 'auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
