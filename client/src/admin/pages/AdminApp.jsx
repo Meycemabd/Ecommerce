@@ -6,10 +6,8 @@ import { useSelector } from "react-redux";
 import AdminLayout from "../components/AdminLayout";
 import AdminDashboard from "../pages/Dashboard";
 import ProductsPage from "../pages/ProductsPage";
-import ProductNewPage from "../pages/ProductNewPage";
-import ProductListPage from "../pages/ProductListPage"
+import AdminAddProduct from "../pages/AdminAddProduct";
 import DashboardPage from "../pages/DashboardPage";
-
 
 export default function AdminApp() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -21,14 +19,12 @@ export default function AdminApp() {
 
   return (
     <Routes>
-      <Route element={<AdminLayout />}>
+      <Route path="/" element={<AdminLayout />}>
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="products" element={<ProductsPage />} />
-        <Route path="products/new" element={<ProductNewPage />} />
-        {/* Fallback für ungültige Admin-Routen */}
-        <Route path="*" element={<Navigate to="dashboard" />} />
-        <Route path="/productslist" element={<ProductListPage />} />
-        <Route path="/admin/dashboard" element={<DashboardPage />} />
+        <Route path="products/new" element={<AdminAddProduct />} />
+        <Route path="dashboardpage" element={<DashboardPage />} />
+        {/* <Route path="*" element={<Navigate to="dashboard" />} /> */}
       </Route>
     </Routes>
   );

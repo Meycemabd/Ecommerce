@@ -1,126 +1,114 @@
-/* Grundlayout Sidebar */
+/* === Sidebar Grundlayout === */
 .sidebar-minimal {
-    width: 220px; /* Breitere Sidebar */
-    height: 100vh;
-    background: linear-gradient(180deg, #ffffff 0%, #f0f2f5 100%);
-    box-shadow: 2px 0 8px rgb(0 0 0 / 0.05);
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; Entfernt, da jetzt Text links */
-    padding: 20px 0;
-    font-family: 'Poppins', sans-serif;
-    user-select: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    overflow: hidden; /* kein Scrollen */
-  }
-  
-  /* Logo */
-  .logo {
-    font-size: 28px;
-    margin-bottom: 32px;
-    cursor: default;
-    transition: transform 0.3s ease;
-    user-select: none;
-    padding-left: 24px; /* etwas Abstand links */
-    font-weight: 700;
-    color: #2d3748;
-  }
-  
-  .logo:hover {
-    transform: scale(1.1);
-  }
-  
-  /* Navigation */
-  .nav-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 12px; /* kleinerer Abstand */
-    flex-grow: 1; /* Hauptbereich ausdehnen */
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 20px; /* Platz für Footer */
-  }
-  
-  /* Link-Gruppen (Produkte, Orders, Users) */
-  .nav-group {
-    border-top: 1px solid #e1e4ea;
-    padding-top: 16px;
-    margin-top: 16px;
-    padding-left: 24px; /* Abstand links passend */
-    padding-right: 24px;
-  }
-  
-  /* Links (Icon + Text nebeneinander) */
-  .nav-link {
-    width: 100%;
-    padding: 10px 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: #5c677d; /* grau */
-    font-weight: 600;
-    font-size: 14px;
-    text-decoration: none;
-    position: relative;
-    transition: color 0.3s ease;
-    cursor: pointer;
-    border-radius: 8px;
-  }
-  
-  .nav-link:hover,
-  .nav-link.active {
-    color: #1a73e8; /* blau */
-    background-color: #e6f0ff;
-  }
-  
-  /* Icons links */
-  .nav-link svg {
-    font-size: 24px;
-    margin-right: 14px;
-    flex-shrink: 0;
-    transition: color 0.3s ease;
-    color: inherit; /* übernimmt die Farbe vom Link */
-  }
-  
-  /* Link Text rechts, grau */
-  .link-text {
-    opacity: 1;
-    color: #5c677d;
-    user-select: none;
-    transition: color 0.3s ease;
-  }
-  
-  /* Textfarbe beim Hover und aktiv */
-  .nav-link:hover .link-text,
-  .nav-link.active .link-text {
-    color: #1a73e8;
-  }
-  
-  /* Aktive Linie links am Link */
-  .nav-link.active::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 10px;
-    height: 28px;
-    width: 4px;
-    background-color: #1a73e8;
-    border-radius: 4px;
-  }
-  
-  /* Footer Bereich */
-  .sidebar-footer {
-    width: 100%;
-    padding-bottom: 20px;
-    border-top: 1px solid #e1e4ea;
-    display: flex;
-    justify-content: center;
-    flex-shrink: 0; /* Footer schrumpft nicht */
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-  
+  width: 220px;
+  height: 100vh;
+  background: linear-gradient(180deg, #ffffff 0%, #f0f2f5 100%);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  font-family: 'Poppins', sans-serif;
+  user-select: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  overflow: hidden;
+}
+
+/* === Logo oben === */
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 32px;
+  padding-left: 24px;
+  cursor: default;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+/* === Navigation (gesamter Menübereich) === */
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+  width: 100%;
+  padding: 0 0 20px 0;
+}
+
+/* === Gruppierungen (z. B. Products, Orders, Users) === */
+.nav-group {
+  border-top: 1px solid #e1e4ea;
+  margin-top: 16px;
+  padding: 16px 24px 0 24px;
+}
+
+/* === Einzelne Navigationseinträge === */
+.nav-link {
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  color: #5c677d;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #1a73e8;
+  background-color: #e6f0ff;
+}
+
+/* === Icons im Link === */
+.nav-link svg {
+  font-size: 24px;
+  margin-right: 14px;
+  flex-shrink: 0;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+/* === Link-Text === */
+.link-text {
+  color: #5c677d;
+  transition: color 0.3s ease;
+  user-select: none;
+}
+
+.nav-link:hover .link-text,
+.nav-link.active .link-text {
+  color: #1a73e8;
+}
+
+/* === Link-Indikator (aktive Linie links) === */
+.nav-link.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  height: 28px;
+  width: 4px;
+  background-color: #1a73e8;
+  border-radius: 4px;
+}
+
+/* === Footer (z. B. Settings-Link unten) === */
+.sidebar-footer {
+  width: 100%;
+  border-top: 1px solid #e1e4ea;
+  padding: 20px 24px 20px 24px;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
