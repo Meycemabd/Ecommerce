@@ -60,20 +60,13 @@ export default function AdminSidebar() {
           </NavLink>
 
           <NavLink 
-            to="/admin/products/detail/1" 
-            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-          >
-            <FiTag />
-            <span className="link-text">Product Detail</span>
-          </NavLink>
+              to="/admin/categories" 
+              className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+            >
+              <FiTag />
+              <span className="link-text">Categories</span>
+            </NavLink>
 
-          <NavLink 
-            to="/admin/categories" 
-            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-          >
-            <FiTag />
-            <span className="link-text">Categories</span>
-          </NavLink>
         </div>
 
         {/* Orders Group */}

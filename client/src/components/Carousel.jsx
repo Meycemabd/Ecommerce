@@ -81,7 +81,7 @@ export default function Carousel() {
 
   return (
     <div className="carousel-container">
-      <Slider {...settings}>
+    <Slider {...settings}>
         {products.map((product) => (
           <div key={product.id} className="carousel-slide">
             <div className="product-card">
@@ -104,24 +104,24 @@ export default function Carousel() {
                 </button>
               </div>
               <Link to={`/product/${product.id}`} className="product-card-link">
-                <img
+              <img
                   src={product.image}
                   alt={product.title}
                   className="product-card-image"
-                  onError={(e) =>
-                    (e.target.src = "https://via.placeholder.com/300?text=No+Image")
-                  }
-                />
+                onError={(e) =>
+                  (e.target.src = "https://via.placeholder.com/300?text=No+Image")
+                }
+              />
                 <div className="product-card-content">
                   <h3 className="product-card-title">{getShortTitle(product.title)}</h3>
                   <p className="product-card-price">${product.price.toFixed(2)}</p>
                   <button className="product-card-btn primary">View Product</button>
-                </div>
-              </Link>
             </div>
-          </div>
-        ))}
-      </Slider>
+          </Link>
+            </div>
+        </div>
+      ))}
+    </Slider>
     </div>
   );
 }

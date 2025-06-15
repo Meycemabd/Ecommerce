@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MDBContainer, MDBInput } from 'mdb-react-ui-kit';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/authSlice';
 import '../styles/pagesCSS/LoginPage.css';
@@ -17,21 +17,16 @@ export default function LoginPage() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    const isUser = email === 'user@example.com' && password === '123456';
-    const isAdmin = email === 'admin@example.com' && password === 'admin123';
+    const isValid = email === 'user@example.com' && password === '123456';
 
-    if (isUser || isAdmin) {
+    if (isValid) {
       setLoading(true);
       setErrorMsg('');
 
+      // Login und Weiterleitung nach kurzer "Ladezeit"
       setTimeout(() => {
-        if (isAdmin) {
-          dispatch(login({ isAdmin: true }));
-          navigate('/admin-dashboard'); // Admin weiterleiten
-        } else {
-          dispatch(login({ isAdmin: false }));
-          navigate('/dashboard'); // User weiterleiten
-        }
+        dispatch(login()); // Redux Login
+        navigate('/dashboard');
       }, 1500);
     } else {
       setErrorMsg('Invalid email or password');
@@ -43,10 +38,7 @@ export default function LoginPage() {
       <div className="login-card shadow-sm p-4 rounded">
         <div className="text-center mb-4 logo-text">Eyou.Store</div>
 
-        <h5
-          className="text-center mb-4"
-          style={{ fontFamily: "'Poppins', sans-serif", fontWeight: '300', letterSpacing: '1px' }}
-        >
+        <h5 className="text-center mb-4" style={{ fontFamily: "'Poppins', sans-serif", letterSpacing: '1px' }}>
           Sign into your account
         </h5>
 
@@ -90,15 +82,9 @@ export default function LoginPage() {
         )}
 
         <div className="text-center mt-3">
-          <Link to="/forgot-password" className="small text-muted d-block mb-2">
-            Forgot password?
-          </Link>
-
+          <a href="#!" className="small text-muted d-block mb-2">Forgot password?</a>
           <p className="small">
-            Don't have an account?{' '}
-            <Link to="/register" style={{ color: 'var(--accent-color)' }}>
-              Register here
-            </Link>
+            Don't have an account? <a href="#!" style={{ color: 'var(--accent-color)' }}>Register here</a>
           </p>
         </div>
       </div>

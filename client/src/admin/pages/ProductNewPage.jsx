@@ -1,159 +1,105 @@
+// src/admin/pages/ProductNewPage.jsx
 import React, { useState } from "react";
 
-export default function ProductNewPage() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+const ProductNewPage = () => {
+  const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
-  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageBase64, setImageBase64] = useState(null);
 
   const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setImageFile(e.target.files[0]);
-    }
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result); // Vorschau (Data URL)
+      setImageBase64(reader.result);  // Zum Speichern im localStorage
+    };
+    reader.readAsDataURL(file);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSaveProduct = () => {
+    if (!productName || !price || !imageBase64) {
+      alert("Bitte alle Felder ausfüllen und ein Bild hochladen.");
+      return;
+    }
 
-    // Neues Produkt-Objekt erstellen
     const newProduct = {
-      id: Date.now(), // einfache ID (Zeitstempel)
-      title,
-      description,
-      price: parseFloat(price), // Preis als Zahl speichern
-      category,
-      imageFile, // Die Datei speichern wir so, für Upload später
+      id: Date.now(),
+      name: productName,
+      price: parseFloat(price),
+      image: imageBase64,
     };
 
-    // Produkte aus localStorage laden (falls vorhanden)
-    const storedProducts = JSON.parse(localStorage.getItem("products")) || [];
+    const existingProducts = JSON.parse(localStorage.getItem("products")) || [];
+    const updatedProducts = [...existingProducts, newProduct];
+    localStorage.setItem("products", JSON.stringify(updatedProducts));
 
-    // Neues Produkt anhängen
-    storedProducts.push(newProduct);
+    alert("Produkt gespeichert!");
 
-    // Produkte wieder speichern
-    localStorage.setItem("products", JSON.stringify(storedProducts));
-
-    alert("Product saved to localStorage!");
-
-    // Formular zurücksetzen
-    setTitle("");
-    setDescription("");
+    // Felder leeren
+    setProductName("");
     setPrice("");
-    setCategory("");
-    setImageFile(null);
-    e.target.reset();
+    setImagePreview(null);
+    setImageBase64(null);
   };
 
   return (
-    <div className="container mt-4">
-      <h2>Add New Product</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Title */}
-        <div className="mb-3">
-          <label htmlFor="title" className="form-label">
-            Product Title
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="title"
-            placeholder="Enter title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
+    <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md mt-8">
+      <h2 className="text-2xl font-bold mb-4">Neues Produkt hinzufügen</h2>
+
+      <div className="mb-4">
+        <label className="block mb-1 font-medium">Produktname</label>
+        <input
+          type="text"
+          value={productName}
+          onChange={(e) => setProductName(e.target.value)}
+          className="w-full border px-3 py-2 rounded"
+          placeholder="z.B. T-Shirt Basic"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block mb-1 font-medium">Preis (€)</label>
+        <input
+          type="number"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          className="w-full border px-3 py-2 rounded"
+          placeholder="z.B. 29.99"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block mb-1 font-medium">Produktbild</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="w-full"
+        />
+      </div>
+
+      {imagePreview && (
+        <div className="mb-4">
+          <p className="font-medium mb-1">Vorschau:</p>
+          <img
+            src={imagePreview}
+            alt="Vorschau"
+            className="w-48 h-48 object-cover rounded border"
           />
         </div>
+      )}
 
-        {/* Description */}
-        <div className="mb-3">
-          <label htmlFor="description" className="form-label">
-            Description
-          </label>
-          <textarea
-            className="form-control"
-            id="description"
-            rows="3"
-            placeholder="Enter description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          ></textarea>
-        </div>
-
-        {/* Price */}
-        <div className="mb-3">
-          <label htmlFor="price" className="form-label">
-            Price (€)
-          </label>
-          <input
-            type="number"
-            step="0.01"
-            className="form-control"
-            id="price"
-            placeholder="Enter price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            required
-          />
-        </div>
-
-        {/* Category */}
-        <div className="mb-3">
-          <label htmlFor="category" className="form-label">
-            Category
-          </label>
-          <select
-            className="form-select"
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            required
-          >
-            <option value="">Select category</option>
-            <option value="shirts">Shirts</option>
-            <option value="pants">Pants</option>
-            <option value="accessories">Accessories</option>
-            <option value="shoes">Shoes</option>
-            <option value="jackets">Jackets</option>
-            <option value="hats">Hats</option>
-            <option value="socks">Socks</option>
-            <option value="underwear">Underwear</option>
-            <option value="bags">Bags</option>
-          </select>
-        </div>
-
-        {/* Image Upload */}
-        <div className="mb-3">
-          <label htmlFor="image" className="form-label">
-            Upload Product Image
-          </label>
-          <input
-            className="form-control"
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={handleImageChange}
-            required
-          />
-          {imageFile && (
-            <div className="mt-3">
-              <p>Preview:</p>
-              <img
-                src={URL.createObjectURL(imageFile)}
-                alt="Preview"
-                style={{ maxWidth: "200px", maxHeight: "200px", objectFit: "cover" }}
-              />
-            </div>
-          )}
-        </div>
-
-        {/* Submit */}
-        <button type="submit" className="btn btn-primary">
-          Save Product
-        </button>
-      </form>
+      <button
+        onClick={handleSaveProduct}
+        className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800"
+      >
+        Save product
+      </button>
     </div>
   );
-}
+};
+
+export default ProductNewPage;
