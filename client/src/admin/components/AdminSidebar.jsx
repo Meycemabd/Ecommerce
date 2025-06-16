@@ -5,10 +5,7 @@ import {
   FiPlusCircle,
   FiTag,
   FiShoppingBag,
-  FiClock,
-  FiCheckCircle,
   FiUsers,
-  FiUser,
   FiBarChart2,
   FiSettings,
   FiGrid
@@ -48,72 +45,35 @@ export default function AdminSidebar() {
             className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
           >
             <FiPlusCircle />
-            <span className="link-text">Add New</span>
+            <span className="link-text">Add Product</span>
           </NavLink>
-
+            
           <NavLink 
-            to="/admin/products/edit/1" 
+            to="/admin/categories" 
             className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
           >
-            <FiSettings />
-            <span className="link-text">Edit Product</span>
-          </NavLink>
-
-          <NavLink 
-              to="/admin/categories" 
-              className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-            >
-              <FiTag />
-              <span className="link-text">Categories</span>
-            </NavLink>
-
-        </div>
-
-        {/* Orders Group */}
-        <div className="nav-group">
-          <NavLink 
-            to="/admin/orders" 
-            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-          >
-            <FiShoppingBag />
-            <span className="link-text">Orders</span>
-          </NavLink>
-
-          <NavLink 
-            to="/admin/orders/pending" 
-            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-          >
-            <FiClock />
-            <span className="link-text">Pending</span>
-          </NavLink>
-
-          <NavLink 
-            to="/admin/orders/completed" 
-            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-          >
-            <FiCheckCircle />
-            <span className="link-text">Completed</span>
+            <FiTag />
+            <span className="link-text">Categories</span>
           </NavLink>
         </div>
 
-        {/* Users Group */}
-        <div className="nav-group">
-          <NavLink 
-            to="/admin/users" 
-            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-          >
-            <FiUsers />
-            <span className="link-text">Users</span>
-          </NavLink>
+        {/* Orders */}
+        <NavLink 
+          to="/admin/orders" 
+          className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+        >
+          <FiShoppingBag />
+          <span className="link-text">Orders</span>
+        </NavLink>
 
-          <NavLink 
-            to="/admin/users/roles" 
-            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
-          >
-            <FiUser />
-            <span className="link-text">Roles</span>
-          </NavLink>
-        </div>
+        {/* Users */}
+        <NavLink 
+          to="/admin/users" 
+          className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+        >
+          <FiUsers />
+          <span className="link-text">Users</span>
+        </NavLink>
 
         {/* Reports */}
         <NavLink 

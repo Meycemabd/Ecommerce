@@ -5,10 +5,10 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './index.css';
 import { Provider } from 'react-redux';
-import { store, persistor } from './store/store';
+import { store, persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
-// Seiten & Komponenten
+// Seiten & Komponenten (Client)
 import Home from './pages/Home';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from "./pages/ProductDetailPage";
@@ -28,29 +28,29 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-      <Header setSearchQuery={setSearchQuery} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<ProductsPage searchQuery={searchQuery} />} />
-        <Route path="/product/:id" element={<ProductDetailPage />} />
+        <Header setSearchQuery={setSearchQuery} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<ProductsPage searchQuery={searchQuery} />} />
+          <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/favorites" element={<FavoritesPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/loading" element={<LoadingPage />} />
-        <Route path="/thank-you" element={<ThankYouPage />} />
-        <Route
-          path="/dashboard"
-          element={
-            localStorage.getItem("isLoggedIn") === "true" ? (
-              <DashboardPage />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route path="/login" element={<LoginPage />} />
-      </Routes>
-      <Footer />
+          <Route path="/thank-you" element={<ThankYouPage />} />
+          <Route
+            path="/dashboard"
+            element={
+              localStorage.getItem("isLoggedIn") === "true" ? (
+                <DashboardPage />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+        <Footer />
       </PersistGate>
     </Provider>
   );
