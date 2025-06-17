@@ -1,158 +1,259 @@
+/* Container */
 .product-list-container {
-    padding: 3rem;
-    background-color: #f4f4f4;
-    font-family: 'Helvetica Neue', sans-serif;
-  }
-  
-  .product-list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2.5rem;
-  }
-  
-  .product-list-header h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #1a1a1a;
-    margin: 0;
-  }
-  
-  .product-list-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-  
-  .search-input {
-    padding: 0.3rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    width: 200px;
-    font-size: 0.9rem;
-    background-color: white;
-    transition: border-color 0.2s;
-    height: 36px;
-  }
-  
-  .search-input:focus {
-    border-color: #999;
-    outline: none;
-  }
-  
-  .add-product-btn {
-    background-color: #007bff;
-    color: white;
-    padding: 0.4rem 1.2rem;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: background-color 0.2s;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .add-product-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .product-table-wrapper {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    overflow-x: auto;
-  }
-  
-  .product-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 800px;
-  }
-  
-  .product-table th {
-    background-color: #fafafa;
-    padding: 1rem;
-    text-align: left;
-    font-weight: 600;
-    color: #1a1a1a;
-    font-size: 0.95rem;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .product-table th.sortable {
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  .product-table th.sortable:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .product-table td {
-    padding: 1rem;
-    border-bottom: 1px solid #eee;
-    font-size: 0.95rem;
-    color: #333;
-  }
-  
-  .product-image {
-    width: 70px;
-    height: 70px;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-  }
-  
-  .no-image {
-    width: 70px;
-    height: 70px;
-    background-color: #f1f1f1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    color: #aaa;
-    font-size: 0.8rem;
-    border: 1px solid #ddd;
-  }
-  
-  .action-buttons {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .action-btn {
-    padding: 0.45rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1rem;
-    text-decoration: none;
-    transition: background-color 0.2s, transform 0.1s;
-  }
-  
-  .action-btn.view {
-    background-color: #27ae60;
-  }
-  
-  .action-btn.edit {
-    background-color: #f39c12;
-  }
-  
-  .action-btn.delete {
-    background-color: #e74c3c;
-  }
-  
-  .action-btn:hover {
-    opacity: 0.92;
-    transform: scale(1.03);
-  }
-  
+  padding: 3rem;
+  background-color: #f4f4f4;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+/* Header */
+.product-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.product-list-header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* Actions (Search, Buttons) */
+.product-list-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Search Input */
+.search-input {
+  padding: 0.3rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 200px;
+  font-size: 0.9rem;
+  background-color: white;
+  transition: border-color 0.2s;
+  height: 36px;
+}
+
+.search-input:focus {
+  border-color: #999;
+  outline: none;
+}
+
+/* Dropdown (Kategorie) */
+.category-select {
+  padding: 8px 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  height: 36px;
+}
+
+.category-select:hover,
+.category-select:focus {
+  border-color: #0d6efd;
+  outline: none;
+  box-shadow: 0 0 6px rgba(13, 110, 253, 0.5);
+}
+
+/* Add Product Button */
+.add-product-btn {
+  background-color: #0d6efd;
+  color: white;
+  padding: 8px 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-product-btn:hover {
+  background-color: #084cd6;
+}
+
+/* Tabelle Wrapper */
+.product-table-wrapper {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  overflow-x: auto;
+}
+
+/* Tabelle */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.product-table thead tr {
+  background-color: #fafafa;
+}
+
+.product-table th,
+.product-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+  vertical-align: middle;
+  font-size: 15px;
+}
+
+/* Sortierbare Spalten */
+.product-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.product-table th.sortable:hover {
+  background-color: #f0f0f0;
+  color: #0d6efd;
+}
+
+.product-table th.sortable::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-top-color: #ccc;
+  opacity: 0.4;
+  transition: opacity 0.3s;
+}
+
+.product-table th.sortable:hover::after {
+  opacity: 1;
+}
+
+/* Produktbild */
+.product-image {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* Kein Bild */
+.no-image {
+  width: 70px;
+  height: 70px;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: #aaa;
+  font-size: 0.8rem;
+  border: 1px solid #ddd;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  padding: 0.45rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.action-btn.view {
+  background-color: #27ae60;
+}
+
+.action-btn.view:hover {
+  opacity: 0.92;
+  transform: scale(1.03);
+}
+
+.action-btn.edit {
+  background-color: #f39c12;
+}
+
+.action-btn.edit:hover {
+  opacity: 0.92;
+  transform: scale(1.03);
+}
+
+.action-btn.delete {
+  background-color: #e74c3c;
+}
+
+.action-btn.delete:hover {
+  opacity: 0.92;
+  transform: scale(1.03);
+}
+
+/* Alternative Action Buttons (farbiger Text + Hover-Background) */
+/* Falls du sie brauchst, kannst du hier auf Wunsch umbauen: */
+.action-btn.view-alt {
+  background: none;
+  color: #0d6efd;
+  padding: 4px 6px;
+  font-size: 18px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.action-btn.view-alt:hover {
+  background-color: rgba(13, 110, 253, 0.15);
+}
+
+.action-btn.edit-alt {
+  background: none;
+  color: #198754;
+  padding: 4px 6px;
+  font-size: 18px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.action-btn.edit-alt:hover {
+  background-color: rgba(25, 135, 84, 0.15);
+}
+
+.action-btn.delete-alt {
+  background: none;
+  color: #dc3545;
+  padding: 4px 6px;
+  font-size: 18px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.action-btn.delete-alt:hover {
+  background-color: rgba(220, 53, 69, 0.15);
+}
+
+/* Keine Ergebnisse */
+.no-results {
+  text-align: center;
+  padding: 30px 0;
+  color: #777;
+  font-style: italic;
+}

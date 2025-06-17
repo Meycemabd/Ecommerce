@@ -5,7 +5,7 @@ import AdminDashboard from '../pages/Dashboard';
 import ProductListPage from '../pages/ProductListPage';
 import AdminAddProduct from '../pages/AdminAddProduct';
 import ProductDetailPage from './ProductDetailPage';
-import CategoriesPage from './CategoriesPage';
+import CategoriesPage from './Categories';
 import ProductEditPage from './ProductEditPage';
 
 export default function AdminApp() {
@@ -17,7 +17,7 @@ export default function AdminApp() {
         <Route path="products" element={<ProductListPage />} />
         <Route path="products/new" element={<AdminAddProduct />} />
         <Route path="products/edit/:id" element={<ProductEditPage />} />
-        <Route path="products/detail/:id" element={<ProductDetailPage />} />
+        <Route path="/admin/products/:id" element={<ProductDetailPage />} />
         <Route path="categories" element={<CategoriesPage />} />
         <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
       </Route>

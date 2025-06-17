@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { FiSave, FiX, FiUpload } from 'react-icons/fi';
+import { FiSave, FiX } from 'react-icons/fi';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../Styles/ProductEditPage.css';
 
 const CATEGORY_OPTIONS = [
@@ -34,12 +36,34 @@ export default function ProductEditPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const products = JSON.parse(localStorage.getItem('products')) || [];
     const updatedProducts = products.map(p =>
       p.id === id ? { ...product, id } : p
     );
+
     localStorage.setItem('products', JSON.stringify(updatedProducts));
-    navigate('/admin/products');
+
+    toast.success(
+      <div>
+        <strong>Product updated!</strong>
+        <div>Title: {product.title}</div>
+        <div>Price: €{product.price}</div>
+        <div>Category: {product.category}</div>
+      </div>,
+      {
+        position: 'top-center',
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+      }
+    );
+
+    setTimeout(() => {
+      navigate('/admin/products');
+    }, 2500);
   };
 
   const handleImageChange = (file) => {
@@ -90,7 +114,6 @@ export default function ProductEditPage() {
       </div>
 
       <form className="edit-form" onSubmit={handleSubmit}>
-
         <div className="form-group">
           <label>Product Title</label>
           <input
@@ -104,19 +127,16 @@ export default function ProductEditPage() {
 
         <div className="form-group">
           <label>Category</label>
-          <input
-            list="categories-list"
+          <select
             value={product.category}
             onChange={e => setProduct({ ...product, category: e.target.value })}
-            placeholder="Start typing or select category"
             required
-            autoComplete="off"
-          />
-          <datalist id="categories-list">
+          >
+            <option value="" disabled>-- Select Category --</option>
             {CATEGORY_OPTIONS.map(cat => (
-              <option key={cat} value={cat} />
+              <option key={cat} value={cat}>{cat}</option>
             ))}
-          </datalist>
+          </select>
         </div>
 
         <div className="form-group">
@@ -143,7 +163,6 @@ export default function ProductEditPage() {
 
         <div className="form-group">
           <label>Product Image</label>
-
           <div
             className={`drag-drop-area ${dragActive ? 'active' : ''}`}
             onDragEnter={handleDrag}
@@ -167,7 +186,6 @@ export default function ProductEditPage() {
             style={{ display: 'none' }}
           />
         </div>
-
       </form>
     </div>
   );

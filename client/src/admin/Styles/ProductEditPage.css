@@ -1,3 +1,6 @@
+* {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+}
 .product-edit-container {
   max-width: 800px;
   margin: 3rem auto;
@@ -150,5 +153,34 @@
     max-height: 150px;
     object-fit: contain;
     border-radius: 8px;
+  }
+  
+  /* Select Styling */
+  .form-group select {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    color: #444;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    appearance: none; /* Standard-Pfeil entfernen */
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg fill='%23777' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+  }
+  
+  .form-group select:hover,
+  .form-group select:focus {
+    border-color: #111;
+    outline: none;
+    color: #111;
+  }
+  
+  /* Placeholder-option (disabled) stilisieren */
+  .form-group select option[disabled] {
+    color: #aaa;
   }
   
