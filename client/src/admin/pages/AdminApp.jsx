@@ -7,6 +7,8 @@ import AdminAddProduct from '../pages/AdminAddProduct';
 import ProductDetailPage from './ProductDetailPage';
 import CategoriesPage from './Categories';
 import ProductEditPage from './ProductEditPage';
+import OrdersPage from './OrdersPage';
+
 
 export default function AdminApp() {
   return (
@@ -19,6 +21,7 @@ export default function AdminApp() {
         <Route path="products/edit/:id" element={<ProductEditPage />} />
         <Route path="/admin/products/:id" element={<ProductDetailPage />} />
         <Route path="categories" element={<CategoriesPage />} />
+        <Route path="orders" element={<OrdersPage />} />
         <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
       </Route>
     </Routes>
