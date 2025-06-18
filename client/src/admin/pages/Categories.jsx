@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiPlus, FiEdit2, FiTrash2 } from 'react-icons/fi';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../Styles/Categories.css';
 
 export default function CategoriesPage() {
@@ -18,8 +19,14 @@ export default function CategoriesPage() {
     setCategories(storedCategories);
   };
 
+  const getProductCount = (categoryName) => {
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    return products.filter(product => product.category === categoryName).length;
+  };
+
   const handleAddCategory = (e) => {
     e.preventDefault();
+    
     if (!newCategory.trim()) {
       toast.error('Category name cannot be empty');
       return;
@@ -48,11 +55,11 @@ export default function CategoriesPage() {
   };
 
   const handleDelete = (id) => {
-    const products = JSON.parse(localStorage.getItem('products')) || [];
     const category = categories.find(cat => cat.id === id);
-    
-    if (products.some(product => product.category === category.name)) {
-      toast.error('Cannot delete category with existing products');
+    const productCount = getProductCount(category.name);
+
+    if (productCount > 0) {
+      toast.error(`Cannot delete category with ${productCount} products`);
       return;
     }
 
@@ -63,14 +70,23 @@ export default function CategoriesPage() {
   };
 
   const handleEdit = (id) => {
-    setEditingId(id);
     const category = categories.find(cat => cat.id === id);
+    setEditingId(id);
     setEditValue(category.name);
   };
 
   const handleSaveEdit = (id) => {
     if (!editValue.trim()) {
       toast.error('Category name cannot be empty');
+      return;
+    }
+
+    const categoryExists = categories.some(
+      cat => cat.id !== id && cat.name.toLowerCase() === editValue.trim().toLowerCase()
+    );
+
+    if (categoryExists) {
+      toast.error('Category name already exists');
       return;
     }
 
@@ -136,16 +152,31 @@ export default function CategoriesPage() {
                 <td>{getProductCount(category.name)}</td>
                 <td>
                   <div className="action-buttons">
-                    <button className="action-btn edit" onClick={() => handleEdit(category.id)}>
+                    <button 
+                      className="action-btn edit" 
+                      onClick={() => handleEdit(category.id)}
+                      title="Edit Category"
+                    >
                       <FiEdit2 />
                     </button>
-                    <button className="action-btn delete" onClick={() => handleDelete(category.id)}>
+                    <button 
+                      className="action-btn delete" 
+                      onClick={() => handleDelete(category.id)}
+                      title="Delete Category"
+                    >
                       <FiTrash2 />
                     </button>
                   </div>
                 </td>
               </tr>
             ))}
+            {categories.length === 0 && (
+              <tr>
+                <td colSpan="4" className="no-categories">
+                  No categories found
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

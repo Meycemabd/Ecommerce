@@ -12,7 +12,7 @@
 
 .categories-header h2 {
   font-size: 1.8rem;
-  color: #1a1a1a;
+  color: #2c3e50;
   margin: 0;
 }
 
@@ -22,35 +22,44 @@
 }
 
 .category-input {
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
   border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 0.9rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
   width: 250px;
+  transition: all 0.2s;
+}
+
+.category-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  outline: none;
 }
 
 .add-category-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: #2ecc71;
+  padding: 0.75rem 1.5rem;
+  background: #3498db;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  font-size: 0.95rem;
+  transition: all 0.2s;
 }
 
 .add-category-btn:hover {
-  background-color: #27ae60;
+  background: #2980b9;
+  transform: translateY(-1px);
 }
 
 .categories-table-wrapper {
-  background-color: white;
+  background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  overflow-x: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 .categories-table {
@@ -59,23 +68,26 @@
 }
 
 .categories-table th {
-  background-color: #fafafa;
+  background: #f8f9fa;
   padding: 1rem;
   text-align: left;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #2c3e50;
+  font-size: 0.95rem;
 }
 
 .categories-table td {
   padding: 1rem;
   border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
 }
 
 .edit-input {
-  padding: 0.5rem;
-  border: 1px solid #3498db;
-  border-radius: 4px;
   width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  font-size: 0.95rem;
 }
 
 .action-buttons {
@@ -84,23 +96,50 @@
 }
 
 .action-btn {
-  padding: 0.45rem;
+  padding: 0.5rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   color: white;
-}
-
-.action-btn.edit {
-  background-color: #3498db;
-}
-
-.action-btn.delete {
-  background-color: #e74c3c;
+  transition: all 0.2s;
 }
 
 .action-btn:hover {
-  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.action-btn.edit {
+  background: #3498db;
+}
+
+.action-btn.delete {
+  background: #e74c3c;
+}
+
+.no-categories {
+  text-align: center;
+  color: #7f8c8d;
+  padding: 3rem !important;
+}
+
+@media (max-width: 768px) {
+  .categories-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .category-add-form {
+    width: 100%;
+  }
+
+  .category-input {
+    flex: 1;
+  }
+
+  .add-category-btn {
+    white-space: nowrap;
+  }
 }
