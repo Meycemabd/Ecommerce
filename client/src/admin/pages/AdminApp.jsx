@@ -9,6 +9,8 @@ import CategoriesPage from './Categories';
 import ProductEditPage from './ProductEditPage';
 import OrdersPage from './OrdersPage';
 import UserManagement from './UserManagement';
+import Statistics from '../components/Statistics';
+
 
 export default function AdminApp() {
   return (
@@ -23,7 +25,8 @@ export default function AdminApp() {
         <Route path="categories" element={<CategoriesPage />} />
         <Route path="orders" element={<OrdersPage />} />
         <Route path="users" element={<UserManagement />} />
-      
+        <Route path="statistics" element={<Statistics />} />
+
         <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
       </Route>
     </Routes>

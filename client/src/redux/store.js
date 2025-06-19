@@ -15,12 +15,14 @@ import storage from 'redux-persist/lib/storage';
 import cartReducer from './cartSlice';
 import favoritesReducer from './favoritesSlice';
 import authReducer from './authSlice';
+import statisticsReducer from './statisticsSlice'; 
 
 // Combine all reducers
 const rootReducer = combineReducers({
   cart: cartReducer,
   favorites: favoritesReducer,
   auth: authReducer,
+  statistics: statisticsReducer,
 });
 
 // Config for redux-persist

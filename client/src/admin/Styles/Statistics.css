@@ -1,0 +1,144 @@
+/* Container */
+.statistics-container {
+    padding: 2rem;
+    background-color: #f9f9f9;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* Header */
+  .statistics-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .header-content h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+  
+  .header-content p {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 0.2rem;
+  }
+  
+  /* Timeframe Selector */
+  .timeframe-selector {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .timeframe-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #333;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+  
+  .timeframe-btn:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .timeframe-btn.active {
+    background-color: #111;
+    color: #fff;
+    border-color: #111;
+  }
+  
+  /* Grid Layout */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  
+  /* Analytics Cards */
+  .analytics-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  /* Single Card */
+  .analytics-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+  
+  .analytics-card h4 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+  
+  /* Product List */
+  .product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  
+  .product-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: #333;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .product-name {
+    font-weight: 500;
+  }
+  
+  .product-sales {
+    color: #555;
+  }
+  
+  /* Growth Stats */
+  .growth-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .growth-item {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .label {
+    color: #777;
+    font-size: 0.9rem;
+  }
+  
+  .value {
+    font-weight: 600;
+    color: #111;
+  }
+  
+  /* Loading & Error */
+  .loading-spinner,
+  .error-message {
+    font-size: 1rem;
+    color: #666;
+    padding: 2rem;
+    text-align: center;
+  }
+  

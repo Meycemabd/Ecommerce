@@ -230,6 +230,7 @@
   transition: width 0.3s ease;
 }
 
+
 @media (max-width: 1024px) {
   .dashboard-grid {
     grid-template-columns: 1fr;

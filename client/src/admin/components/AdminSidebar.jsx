@@ -77,7 +77,7 @@ export default function AdminSidebar() {
 
         {/* Reports */}
         <NavLink 
-          to="/admin/reports" 
+          to="/admin/statistics" 
           className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
         >
           <FiBarChart2 />
