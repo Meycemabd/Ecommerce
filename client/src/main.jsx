@@ -1,22 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { store, persistor } from "./redux/store";
-import AppContent from './App.jsx';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter } from "react-router-dom";
-import { PersistGate } from 'redux-persist/integration/react'; 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import App from './App.jsx'; // Clientbereich
+import AdminApp from './admin/AdminApp.jsx'; // Adminbereich
+import './index.css';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-
-root.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <AppContent />
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/*" element={<App />} /> {/* Client */}
+        <Route path="/admin/*" element={<AdminApp />} /> {/* Admin */}
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );

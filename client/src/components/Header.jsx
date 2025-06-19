@@ -10,6 +10,7 @@ export default function Header({ setSearchQuery }) {
   const navigate = useNavigate();
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isAdmin = useSelector((state) => state.auth.isAdmin); // 🔥 Wichtig für Admin-Check
   const favoriteCount = useSelector((state) => state.favorites.length);
   const cartCount = useSelector((state) =>
     state.cart.reduce((total, item) => total + item.quantity, 0)
@@ -90,9 +91,17 @@ export default function Header({ setSearchQuery }) {
           </li>
 
           <li className="mx-3 text-center position-relative">
-            <Link
-              to={isLoggedIn ? '/dashboard' : '/login'}
-              className="nav-icon text-decoration-none d-flex flex-column align-items-center"
+            <button
+              onClick={() => {
+                if (!isLoggedIn) {
+                  navigate('/login');
+                } else if (isAdmin) {
+                  navigate('/admin/dashboard');
+                } else {
+                  navigate('/dashboard');
+                }
+              }}
+              className="nav-icon d-flex flex-column align-items-center bg-transparent border-0"
               aria-label="Login"
             >
               {isLoggedIn ? (
@@ -110,7 +119,7 @@ export default function Header({ setSearchQuery }) {
                 <User size={24} strokeWidth={1.5} />
               )}
               <small className="nav-label">{isLoggedIn ? 'Account' : 'Login'}</small>
-            </Link>
+            </button>
           </li>
 
           {isLoggedIn && (
