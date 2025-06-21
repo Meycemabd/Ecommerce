@@ -12,20 +12,17 @@ const authSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.isLoggedIn = true;
+      state.user = action.payload;
       localStorage.setItem('isLoggedIn', 'true');
-
-      // Admin-Status aus action.payload übernehmen
-      state.isAdmin = action.payload?.isAdmin || false;
-      localStorage.setItem('isAdmin', state.isAdmin.toString());
+      localStorage.setItem('user', JSON.stringify(action.payload));
     },
     logout: (state) => {
       state.isLoggedIn = false;
-      localStorage.setItem('isLoggedIn', 'false');
-
-      state.isAdmin = false;
-      localStorage.setItem('isAdmin', 'false');
-    },
-  },
+      state.user = null;
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('user');
+    }
+  }
 });
 
 export const { login, logout } = authSlice.actions;

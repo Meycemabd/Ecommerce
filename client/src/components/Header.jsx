@@ -1,16 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Home, ShoppingBag, Search, User, X, Heart, Check, LogOut } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../redux/authSlice';
 import "../styles/componentCSS/Header.css";
 
 export default function Header({ setSearchQuery }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
   const inputRef = useRef(null);
-  const navigate = useNavigate();
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const isAdmin = useSelector((state) => state.auth.isAdmin); // 🔥 Wichtig für Admin-Check
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
+  const user = useSelector((state) => state.auth.user);
   const favoriteCount = useSelector((state) => state.favorites.length);
   const cartCount = useSelector((state) =>
     state.cart.reduce((total, item) => total + item.quantity, 0)
@@ -25,7 +28,21 @@ export default function Header({ setSearchQuery }) {
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
 
   const handleLogout = () => {
-    navigate('/logout-loading');
+    dispatch(logout());
+    navigate('/');
+  };
+
+  const handleAccountClick = () => {
+    if (!isLoggedIn) {
+      navigate('/login');
+    } else {
+      navigate('/dashboard');
+    }
+  };
+
+  const getAccountLabel = () => {
+    if (!isLoggedIn) return 'Login';
+    return user?.role === 'admin' ? 'Admin' : 'Account';
   };
 
   return (
@@ -35,17 +52,11 @@ export default function Header({ setSearchQuery }) {
       </div>
 
       <nav className="flex-grow-1">
-        <ul
-          className={`nav-links list-unstyled d-flex align-items-center mb-0 ${
-            searchOpen ? 'search-active justify-content-center' : 'justify-content-end'
-          }`}
-        >
+        <ul className={`nav-links list-unstyled d-flex align-items-center mb-0 ${
+          searchOpen ? 'search-active justify-content-center' : 'justify-content-end'
+        }`}>
           <li className="mx-3 text-center">
-            <Link
-              to="/products"
-              className="nav-icon text-decoration-none d-flex flex-column align-items-center"
-              aria-label="Home"
-            >
+            <Link to="/products" className="nav-icon text-decoration-none d-flex flex-column align-items-center">
               <Home size={24} strokeWidth={1.5} />
               <small className="nav-label">Home</small>
             </Link>
@@ -53,9 +64,8 @@ export default function Header({ setSearchQuery }) {
 
           <li className="mx-3 text-center">
             <button
-              onClick={() => setSearchOpen((prev) => !prev)}
+              onClick={() => setSearchOpen(prev => !prev)}
               className="nav-icon d-flex flex-column align-items-center"
-              aria-label={searchOpen ? 'Close search' : 'Open search'}
             >
               {searchOpen ? <X size={24} strokeWidth={1.5} /> : <Search size={24} strokeWidth={1.5} />}
               <small className="nav-label">{searchOpen ? 'Close' : 'Search'}</small>
@@ -63,62 +73,46 @@ export default function Header({ setSearchQuery }) {
           </li>
 
           <li className="mx-3 text-center position-relative">
-            <Link
-              to="/favorites"
-              className="nav-icon text-decoration-none d-flex flex-column align-items-center"
-              aria-label="Favorites"
-            >
+            <Link to="/favorites" className="nav-icon text-decoration-none d-flex flex-column align-items-center">
               <Heart size={24} strokeWidth={1.5} />
               <small className="nav-label">Favorites</small>
               {favoriteCount > 0 && (
-                <span className="badge bg-danger text-white badge-position badge-favorites">{favoriteCount}</span>
+                <span className="badge bg-danger rounded-circle badge-position">
+                  {favoriteCount}
+                </span>
               )}
             </Link>
           </li>
 
           <li className="mx-3 text-center position-relative">
-            <Link
-              to="/cart"
-              className="nav-icon text-decoration-none d-flex flex-column align-items-center"
-              aria-label="Cart"
-            >
+            <Link to="/cart" className="nav-icon text-decoration-none d-flex flex-column align-items-center">
               <ShoppingBag size={24} strokeWidth={1.5} />
               <small className="nav-label">Cart</small>
               {cartCount > 0 && (
-                <span className="badge bg-dark text-white badge-position badge-cart">{cartCount}</span>
+                <span className="badge bg-dark rounded-circle badge-position">
+                  {cartCount}
+                </span>
               )}
             </Link>
           </li>
 
           <li className="mx-3 text-center position-relative">
             <button
-              onClick={() => {
-                if (!isLoggedIn) {
-                  navigate('/login');
-                } else if (isAdmin) {
-                  navigate('/admin/dashboard');
-                } else {
-                  navigate('/dashboard');
-                }
-              }}
+              onClick={handleAccountClick}
               className="nav-icon d-flex flex-column align-items-center bg-transparent border-0"
-              aria-label="Login"
             >
-              {isLoggedIn ? (
-                <>
-                  <User size={24} strokeWidth={1.5} />
+              <div className="position-relative">
+                <User size={24} strokeWidth={1.5} />
+                {isLoggedIn && (
                   <Check
                     size={14}
                     strokeWidth={3}
                     color="green"
-                    className="badge-checkmark"
-                    aria-hidden="true"
+                    className="position-absolute badge-checkmark"
                   />
-                </>
-              ) : (
-                <User size={24} strokeWidth={1.5} />
-              )}
-              <small className="nav-label">{isLoggedIn ? 'Account' : 'Login'}</small>
+                )}
+              </div>
+              <small className="nav-label">{getAccountLabel()}</small>
             </button>
           </li>
 
@@ -127,7 +121,6 @@ export default function Header({ setSearchQuery }) {
               <button
                 onClick={handleLogout}
                 className="nav-icon d-flex flex-column align-items-center text-danger bg-transparent border-0"
-                aria-label="Logout"
               >
                 <LogOut size={24} strokeWidth={1.5} />
                 <small className="nav-label">Logout</small>
@@ -144,7 +137,6 @@ export default function Header({ setSearchQuery }) {
           ref={inputRef}
           className="search-input form-control"
           onChange={handleSearchChange}
-          aria-label="Search products"
         />
       </div>
     </header>
