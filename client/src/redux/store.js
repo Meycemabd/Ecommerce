@@ -16,23 +16,19 @@ import cartReducer from './cartSlice';
 import favoritesReducer from './favoritesSlice';
 import authReducer from './authSlice';
 
-// Combine all reducers
 const rootReducer = combineReducers({
   cart: cartReducer,
   favorites: favoritesReducer,
   auth: authReducer,
 });
 
-// Config for redux-persist
 const persistConfig = {
   key: 'root',
   storage,
 };
 
-// Create persisted reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// Create store
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
@@ -43,5 +39,4 @@ export const store = configureStore({
     }),
 });
 
-// Create persistor
 export const persistor = persistStore(store);

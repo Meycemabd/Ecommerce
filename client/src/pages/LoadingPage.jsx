@@ -7,15 +7,17 @@ import "../styles/pagesCSS/LoadingPage.css";
 export default function LoadingPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { orderData } = location.state || {};
+
+  const redirectTo = location.state?.redirectTo || "/thank-you";
+  const orderData = location.state?.orderData;
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/thank-you", { state: { orderData } });
+      navigate(redirectTo, { state: { orderData } });
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, [navigate, orderData]);
+  }, [navigate, redirectTo, orderData]);
 
   return (
     <div className="loading-container">
@@ -23,8 +25,8 @@ export default function LoadingPage() {
         <div className="loading-spinner">
           <Loader2 size={48} className="spinner-icon" />
         </div>
-        <h2 className="loading-title">Processing Your Order</h2>
-        <p className="loading-text">Please wait while we confirm your purchase</p>
+        <h2 className="loading-title">Loading...</h2>
+        <p className="loading-text">Please wait a moment</p>
       </div>
     </div>
   );
