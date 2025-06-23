@@ -1,5 +1,5 @@
 .loading-container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,16 +8,52 @@
 
 .loading-content {
   text-align: center;
+  padding: 2rem;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
 }
 
 .loading-spinner {
-  width: 3rem;
-  height: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
   color: var(--primary-color);
 }
 
+.loading-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
 .loading-text {
-  margin-top: 1rem;
-  color: #6c757d;
-  font-size: 1.1rem;
+  color: #718096;
+  font-size: 1rem;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
 }

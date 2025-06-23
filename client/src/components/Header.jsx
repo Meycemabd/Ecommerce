@@ -28,8 +28,10 @@ export default function Header({ setSearchQuery }) {
   const handleSearchChange = (e) => setSearchQuery(e.target.value);
 
   const handleLogout = () => {
-    dispatch(logout());
-    navigate('/');
+    navigate('/logout-loading');
+    setTimeout(() => {
+      dispatch(logout());
+    }, 1000); 
   };
 
   const handleAccountClick = () => {

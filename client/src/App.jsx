@@ -20,6 +20,10 @@ import LoadingPage from "./pages/LoadingPage";
 import ThankYouPage from "./pages/ThankYouPage";
 import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
+import LogoutLoadingPage from './pages/LogoutLoadingPage';
+import LoginLoadingPage from './pages/LoginPage';
+
+
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -48,6 +52,10 @@ export default function App() {
             }
           />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/logout-loading" element={<LogoutLoadingPage />} />
+          <Route path="/login-loading" element={<LoginLoadingPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+
         </Routes>
         <Footer />
       </>
